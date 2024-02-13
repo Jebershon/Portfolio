@@ -1,0 +1,16 @@
+#root{
+  cursor: url('./Components/Asserts/color-cursor.png'),auto !important;
+}
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  background-image: url('./Components/Asserts/bg.png');
+  background-attachment: fixed;
+  background-size: cover;
+
+  scroll-behavior: smooth;
+}
+
+

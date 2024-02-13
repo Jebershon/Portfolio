@@ -1,0 +1,6 @@
+.toast-message {
+    backdrop-filter: blur(7px) saturate(180%);
+    -webkit-backdrop-filter: blur(7px) saturate(180%);
+    background-color: rgba(17, 25, 40, 0.46);
+    color: #FFFFFF;
+  }

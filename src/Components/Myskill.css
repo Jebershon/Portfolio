@@ -1,0 +1,112 @@
+.bg{
+      box-shadow: 7px 8px 15px 10px rgba(0, 0, 0, 0.2), 0px 0px 20px 0px rgba(0, 0, 0, 0.19);
+      border-radius: 50px;
+      backdrop-filter: blur(6px) saturate(200%);
+      -webkit-backdrop-filter: blur(6px) saturate(200%);
+      background-color: rgba(25, 33, 51, 0.7);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.125);
+}
+hr{
+  color: aqua;
+}
+/* ------------------------------------skill bar-------------------------------------------- */
+h3{
+  margin-bottom: 30px;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 3px red;
+}
+.num{
+  font-family: "Poppins",sans-serif;
+}
+.con{
+  padding: 50px 30px;
+  background-color: rgba(255,255,255,0.06);
+  border: 2px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  box-shadow: 0 20px 30px rgba(0,0,0,0.2);
+  backdrop-filter: blur(10px);
+}
+.con *{
+  color: #ffffff;
+}
+.skills:not(:last-child){
+  margin-bottom: 30px;
+}
+.details{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.bar{
+  position: relative;
+  background-color: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 7px 10px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
+.bar div{
+  position: relative;
+  width: 0;
+  height: 5px;
+  border-radius: 10px;
+  background-color: #badefc;
+  border: 1px solid #1c97fc;
+  box-shadow: 0 0 5px rgba(28,151,252,0.6);
+}
+#html-bar{
+  animation: html-fill 2s forwards;
+}
+@keyframes html-fill{
+  100%{
+      width: 90%;
+  }
+}
+
+#css-bar{
+  animation: css-fill 2s forwards;
+}
+@keyframes css-fill{
+  100%{
+      width: 80%;
+  }
+}
+
+#js-bar{
+  animation: js-fill 2s forwards;
+}
+@keyframes js-fill {
+  100%{
+      width: 82%;
+  }
+}
+
+#java-bar{
+  animation: java-fill 2s forwards;
+}
+@keyframes java-fill{
+  100%{
+      width: 88%;
+  }
+}
+
+#c-bar{
+  animation: c-fill 2s forwards;
+}
+@keyframes c-fill{
+  100%{
+      width: 78%;
+  }
+}
+
+#python-bar{
+  animation: python-fill 2s forwards;
+}
+@keyframes python-fill{
+  100%{
+      width: 68%;
+  }
+}
+/* -------------------------------------------------- */
