@@ -18,7 +18,7 @@ function ParticalBg() {
                 <Row>
                   <Col className="text-center" lg={12}>
                       <div>
-                        <h1><span className='intro-text'>𝒥 𝒥𝑒𝒷𝑒𝓇𝓈𝒽𝑜𝓃 𝓋𝑒𝓉𝒽𝒶 𝓈𝒾𝓃𝑔𝒽</span></h1>
+                        <h1><span className='intro-text'>J Jebershon vetha singh</span></h1>
                         <h4><span className='intro-text'>Web Developer / FullStack Developer</span></h4>
                         <p>
                           <ul class="fh5co-social-icons">
