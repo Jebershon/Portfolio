@@ -2,7 +2,6 @@ import { Download, GitHub, Instagram, LinkedIn, Twitter } from '@mui/icons-mater
 import { useEffect } from "react";
 import { Col, Row } from "react-bootstrap";
 import birds from 'vanta/src/vanta.birds';
-import './/Aboutme.css';
 import file from "./Asserts/J Jebershon vetha singh-717821f219.pdf";
 import img from './Asserts/J-Jebershon-vetha-singh-2-14-2024.png';
 import './ParticalBg.css';

@@ -3,7 +3,6 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { Col, Container, Row } from 'react-bootstrap';
 import * as Icon from 'react-bootstrap-icons';
 import { Instagram } from 'react-bootstrap-icons';
-import './/Home.css';
 import HireMe from './HireMe';
 function Footer(){
     return(

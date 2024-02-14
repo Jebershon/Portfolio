@@ -287,3 +287,101 @@ h3 {
 .custom-cursor-link {
     cursor: url('./Asserts/color-cursor.png'), auto !important;
 }
+/* ----------------------------info---------------------------- */
+.info {
+  margin: 0;
+  padding: 0;
+  width: 90%;
+  float: left;
+  font-size: 18px;
+}
+@media screen and (max-width: 768px) {
+  .info {
+    margin-bottom: 3em;
+  }
+}
+.info li {
+  width: 100%;
+  float: left;
+  list-style: none;
+  padding: 10px 0;
+}
+.info li:first-child {
+  padding-top: 0;
+}
+.info li .first-block {
+  width: 40%;
+  display: inline-block;
+  float: left;
+  font-weight: bold;
+}
+.info li .second-block {
+  width: 60%;
+  display: inline-block;
+}
+
+.fh5co-social-icons {
+  margin: 0;
+  padding: 0;
+}
+.fh5co-social-icons li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: -moz-inline-stack;
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+}
+.fh5co-social-icons li a {
+  display: -moz-inline-stack;
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+  color: #FF9000;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.fh5co-social-icons li a i {
+  font-size: 20px;
+}
+
+.transform{
+  transition: transform .4s;
+}
+.transform:hover{
+  transform: scale(1.5);
+}
+
+#fh5co-about .fh5co-social-icons {
+  margin: 0;
+  padding: 0;
+}
+#fh5co-about .fh5co-social-icons li {
+  padding: 0;
+  list-style: none;
+  display: -moz-inline-stack;
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+}
+#fh5co-about .fh5co-social-icons li a {
+  display: -moz-inline-stack;
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+  color: #fff;
+  background: #2F3C4F;
+  padding: 10px 10px 2px 10px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  border-radius: 2px;
+}
+#fh5co-about .fh5co-social-icons li a i {
+  font-size: 20px;
+}
+#fh5co-about .fh5co-social-icons li a:hover {
+  background: #FF9000;
+}
+/* --------------------------------------------------------- */
