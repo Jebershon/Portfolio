@@ -15,7 +15,7 @@ function Contact(){
                 <Col sm={12}>
                 <div>
                     <Card className='Map bg' style={{marginTop:"12px",marginBottom:"12px",marginLeft:"12px",marginRight:"12px"}}>
-                        <h2>Address Map</h2>
+                        <center><h2>Address Map</h2></center>
                         <hr/>
                     <MarkersMap/>
                     </Card>

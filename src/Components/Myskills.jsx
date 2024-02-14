@@ -7,7 +7,7 @@ function Myskills(){
         <Container className="bg mt-3 mb-3">
         <Row>
           <Col lg={12}>
-          <h2>MY Skills</h2>
+          <center><h2>MY Skills</h2></center>
           <hr/>
           <Container className="mt-5 mb-5">
           <Row xs={1} md={2} className="g-4">
