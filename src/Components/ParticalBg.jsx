@@ -1,9 +1,10 @@
-import { GitHub, Instagram, LinkedIn, Twitter } from '@mui/icons-material';
+import { Download, GitHub, Instagram, LinkedIn, Twitter } from '@mui/icons-material';
 import { useEffect } from "react";
 import { Col, Row } from "react-bootstrap";
 import birds from 'vanta/src/vanta.birds';
 import './/Aboutme.css';
 import file from "./Asserts/J Jebershon vetha singh-717821f219.pdf";
+import img from './Asserts/J-Jebershon-vetha-singh-2-14-2024.png';
 import './ParticalBg.css';
 function ParticalBg() {
   useEffect(()=>{
@@ -18,8 +19,9 @@ function ParticalBg() {
                 <Row>
                   <Col className="text-center" lg={12}>
                       <div>
-                        <h1><span className='intro-text'>J Jebershon vetha singh</span></h1>
-                        <h4><span className='intro-text'>Web Developer / FullStack Developer</span></h4>
+                        {/* <h1><span className='intro-text'>J Jebershon vetha singh</span></h1> */}
+                        <img className='img-fill' src={img} height={100}/>
+                        <h3 class="neonText intro-text">Web Developer / FullStack Developer</h3>
                         <p>
                           <ul class="fh5co-social-icons">
                             <li className='transform'><a className='custom-cursor-link' href="https://twitter.com/jebershon"><i><Twitter/></i></a></li>
@@ -28,6 +30,7 @@ function ParticalBg() {
                             <li className='transform'><a className='custom-cursor-link' href="https://github.com/Jebershon"><i><GitHub/></i></a></li>
                           </ul>
                         </p>
+                        <br/>
                               <a
                               href={file}
                               download="J Jebershon vetha singh"
@@ -36,7 +39,7 @@ function ParticalBg() {
                               className='custom-cursor-link'
                               >
                               <button className='bton custom-cursor-button'>
-                                <p>Download CV</p>
+                                <p><Download/>Download CV</p>
                               </button>
                               </a>
 

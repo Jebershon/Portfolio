@@ -18,7 +18,7 @@ function Home(){
     // Simulate loading time of 5 seconds
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1);
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -70,13 +70,14 @@ function Home(){
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                   <Nav className="me-auto nav-underline">
-                    <Nav.Link className = "custom-cursor-link" href="#Home">Home</Nav.Link>
-                    <Nav.Link className = "custom-cursor-link" href="#Aboutme">Aboutme</Nav.Link>
-                    <Nav.Link className = "custom-cursor-link" href="#skills">My Skills</Nav.Link>
-                    <Nav.Link className = "custom-cursor-link" href="#projects">My Projects</Nav.Link>
+                    <center><Nav.Link className = "custom-cursor-link" href="#Home">Home</Nav.Link></center>
+                    <center><Nav.Link className = "custom-cursor-link" href="#Aboutme">Aboutme</Nav.Link></center>
+                    <center><Nav.Link className = "custom-cursor-link" href="#skills">My Skills</Nav.Link></center>
+                    <center><Nav.Link className = "custom-cursor-link" href="#projects">My Projects</Nav.Link></center>
                   </Nav>
                   <Nav>
-                    <Nav.Link className = "custom-cursor-link mt-3" href="#Contactus">Contact us</Nav.Link>
+                    <br/>
+                    <center><Nav.Link className = "custom-cursor-link" href="#Contactus">Contact us</Nav.Link></center>
                   </Nav>
                 </Navbar.Collapse>
             </Navbar>

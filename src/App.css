@@ -1,7 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Caudex:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 .App {
-  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 500;
-  font-size: medium;
+  font-family: "Caudex", serif;
+  font-weight: 400;
   font-style: normal;
 }

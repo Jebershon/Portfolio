@@ -26,6 +26,62 @@
       font-size: 30px;
     }
   }
+  /* Default width for the image */
+.img-fill {
+  width: 600px;
+}
+
+/* Adjust width for smaller screens (e.g., phones) */
+@media (max-width: 700px) {
+  .img-fill {
+      max-width: 400px; /* Maximum width for smaller screens */
+  }
+}
+
+/* Adjust width for larger screens (e.g., desktops) */
+@media (min-width: 701px) {
+  .img-fill {
+      max-width: 700px; /* Maximum width for larger screens */
+  }
+}
+
+.neonText {
+  color: #fff;
+  text-shadow:
+      0 0 7px #fff,
+      0 0 10px #fff,
+      0 0 21px #fff,
+      0 0 42px #5271ff,
+      0 0 82px #5271ff,
+      0 0 92px #5271ff,
+      0 0 102px #5271ff,
+      0 0 151px #5271ff;
+}
+
+h3 {
+  animation: flicker 1.5s infinite alternate;     
+}
+
+@keyframes pulsate {
+    
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+
+    text-shadow:
+    0 0 4px #fff,
+    0 0 11px #fff,
+    0 0 19px #fff,
+    0 0 40px #0fa,
+    0 0 80px #0fa,
+    0 0 90px #0fa,
+    0 0 100px #0fa,
+    0 0 150px #0fa;
+
+}
+
+20%, 24%, 55% {        
+    text-shadow: none;
+}    
+}
 /* ------------------------------------------ */
 .bton {
   
