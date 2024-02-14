@@ -72,7 +72,7 @@ function Footer(){
                     </Col>
                     <Col lg={3}>
                         <br/>
-                            <div>
+                            <div id='hireme'>
                             <HireMe/>
                             </div>
                     </Col>

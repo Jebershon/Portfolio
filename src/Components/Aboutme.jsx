@@ -1,5 +1,5 @@
 import { GitHub, Instagram, LinkedIn, Twitter } from '@mui/icons-material';
-import { Container } from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
 import './/Aboutme.css';
 function Aboutme(){
     return(
@@ -16,6 +16,7 @@ function Aboutme(){
 						<li><span class="first-block">Phone:</span><span class="second-block">93426 29075</span></li>
 						<li><span class="first-block">Email:</span><span class="second-block">jebershon100@gmail.com</span></li>
 						<li><span class="first-block">Address:</span><span class="second-block">11,Silver Nagar,Tvs Nagar,Coimbatore,Tamil Nadu 641025</span></li>
+						<center><Button href="#hireme">Hire me</Button></center>
 					</ul>
 				</div>
 				<div class="col-md-8">
