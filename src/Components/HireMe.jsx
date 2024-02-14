@@ -65,7 +65,7 @@ function HireMe(){
             <ToastContainer position="bottom-center" />
             {showDiv ? (
                 <div>
-                    <h6 className="text-uppercase fw-bold">Contact me.</h6>
+                    <h6 className="text-uppercase fw-bold">Hire me.</h6>
                     <form>
                         <div className="mb-3">
                             <label htmlFor="exampleFormControlInput1" className="form-label">UserName</label>
