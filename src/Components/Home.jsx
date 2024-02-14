@@ -77,7 +77,7 @@ function Home(){
                   </Nav>
                   <Nav>
                     <br/>
-                    <center><Nav.Link className = "custom-cursor-link" href="#Contactus">Contact us</Nav.Link></center>
+                    <center><Nav.Link className = "custom-cursor-link" href="#Contactus">Contact me</Nav.Link></center>
                   </Nav>
                 </Navbar.Collapse>
             </Navbar>
