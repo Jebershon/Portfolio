@@ -28,7 +28,7 @@ function MyProjects(){
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer>
-                            <Button class="btn" href="https://jebershon.github.io/Task-Manager.github.io/">Click me..</Button>
+                            <Button class="btn custom-cursor-button" href="https://jebershon.github.io/Task-Manager.github.io/">Click me..</Button>
                         </Card.Footer>
                     </Card>
                 </Col>
@@ -45,7 +45,7 @@ function MyProjects(){
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer>
-                            <Button class="btn" href="https://jebershon-react-blog.netlify.app/">Click me..</Button>
+                            <Button class="btn custom-cursor-button" href="https://jebershon-react-blog.netlify.app/">Click me..</Button>
                         </Card.Footer>
                     </Card>
                 </Col>
@@ -62,7 +62,7 @@ function MyProjects(){
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer>
-                            <Button class="btn" href="https://jebershon.github.io/TaskScheduler.github.io/">Click me..</Button>
+                            <Button class="btn custom-cursor-button" href="https://jebershon.github.io/TaskScheduler.github.io/">Click me..</Button>
                         </Card.Footer>
                     </Card>
                 </Col>
@@ -81,7 +81,7 @@ function MyProjects(){
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer>
-                            <Button class="btn" href="https://jebershon.github.io/Library_jebershon.github.io/">Click me..</Button>
+                            <Button class="btn custom-cursor-button" href="https://jebershon.github.io/Library_jebershon.github.io/">Click me..</Button>
                         </Card.Footer>
                     </Card>
                 </Col>
@@ -97,7 +97,7 @@ function MyProjects(){
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer>
-                            <Button class="btn" href="https://jebershon.github.io/Cartoon.github.io/">Click me..</Button>
+                            <Button class="btn custom-cursor-button" href="https://jebershon.github.io/Cartoon.github.io/">Click me..</Button>
                         </Card.Footer>
                     </Card>
                 </Col>
@@ -113,7 +113,7 @@ function MyProjects(){
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer>
-                            <Button class="btn" href="https://jebershon.github.io/calculator_jebershon.github.io/">Click me..</Button>
+                            <Button class="btn custom-cursor-button" href="https://jebershon.github.io/calculator_jebershon.github.io/">Click me..</Button>
                         </Card.Footer>
                     </Card>
                 </Col>
@@ -133,7 +133,7 @@ function MyProjects(){
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer>
-                            <Button class="btn" href="https://culinarydelights.vercel.app/">Click me..</Button>
+                            <Button class="btn custom-cursor-button" href="https://culinarydelights.vercel.app/">Click me..</Button>
                         </Card.Footer>
                     </Card>
                 </Col>

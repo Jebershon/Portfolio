@@ -71,13 +71,13 @@ function HireMe(){
             onChange={(e) => setMessage(e.target.value)}
             />
             </div>
-            <Button type='button' onClick={(e)=>{handleSubmit()}} variant='outline-warning'>Send Mail</Button>
+            <Button type='button' onClick={(e)=>{handleSubmit()}} variant='outline-warning' className='custom-cursor-button'>Send Mail</Button>
             </form>
             </div>)
             :(
               <div>
                 <img src={Recived} alt="Recieved Successfully" width={300} height={300}></img>
-                <Button onClick={()=>setShowDiv(true)} variant='outline-warning'>Send Again</Button>
+                <Button onClick={()=>setShowDiv(true)} variant='outline-warning' className='custom-cursor-button'>Send Again</Button>
               </div>
             )}
         </div>

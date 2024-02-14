@@ -161,5 +161,9 @@
     }
   }
 .margin-aboutme{
-  margin-top: 620px;
+  margin-top: 720px;
+}
+.custom-cursor-button,
+.custom-cursor-link {
+    cursor: url('./Asserts/color-cursor.png'), auto !important;
 }

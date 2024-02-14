@@ -364,6 +364,13 @@
   .fh5co-social-icons li a i {
     font-size: 20px;
   }
+
+  .transform{
+    transition: transform .4s;
+  }
+  .transform:hover{
+    transform: scale(1.5);
+  }
   
   #fh5co-about .fh5co-social-icons {
     margin: 0;

@@ -36,6 +36,11 @@
     --bs-btn-disabled-border-color: cyan;
     --bs-gradient: none;
   }
+  .custom-cursor-button,
+.custom-cursor-link {
+    cursor: url('./Asserts/color-cursor.png'), auto !important;
+}
+
   /* ----------------------------------------------- */
   .img-hover-zoom {
     overflow: hidden; /* [1.2] Hide the overflowing of child elements */
@@ -69,6 +74,7 @@
     border: 0;
     text-transform: uppercase;
     box-shadow: 10px 10px 20px rgba(0, 0, 0, .6);
+    cursor: url('./Asserts/color-cursor.png'), auto !important;
     clip-path: polygon(
               /* Top-left */
               0% var(--curve-size),

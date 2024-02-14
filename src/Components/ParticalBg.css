@@ -5,7 +5,7 @@
     width: 100%;
     background-position-x: center;
     background-position-y: center;
-    height: 600px;
+    height: 700px;
     overflow: hidden;
     align-items: center;
     justify-content: center;
@@ -26,170 +26,208 @@
       font-size: 30px;
     }
   }
+/* ------------------------------------------ */
+.bton {
+  
+  position: relative;
+  padding: 0;
+  width: 135px;
+  height: 65px;
+  background: transparent;
+  font-size: 17px;
+  border: 1px solid #ffffff1c;
+  border-radius: 8px;
+  box-shadow: inset 0 0 10px #ffffff1c;
+}
 
-  .game-btn {
-    position: relative;
-    width: 11em;
-    height: 4em;
-    outline: none;
-    transition: 0.1s;
-    background-color: transparent;
-    border: none;
-    font-size: 13px;
-    font-weight: bold;
-    color: #ddebf0;
+.bton::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 135px;
+  height: 65px;
+  background: radial-gradient(circle at 100% -50%, #ffffff69 45%, #d4d4d44f 60%, #ffffff36 2%);
+  /* background-size: 200%; */
+  background-repeat: no-repeat;
+  filter: opacity(.3) blur(.3em);
+  
+}
+
+.bton::after {
+  content: "";
+  position: absolute;
+  top: 120%;
+  left: 0;
+  transform: perspective(1.5em) rotateX(35deg) scale(1, .6);
+  height: 100%;
+  width: 100%;
+  background-color: aqua;
+  filter: blur(2em);
+  opacity: 0;
+  pointer-events: none;
+  
+}
+
+.bton p {
+  
+  display: inline-block;
+  width: 135px;
+  line-height: 65px;
+  font-size: 17px;
+  font-weight: 900;
+  color: aqua;
+  filter: blur(.02em);
+  z-index: 5;
+}
+.bton:hover {
+  
+  filter: blur(.05em);
+  animation: lightBox 1s ease-in-out forwards;
+}
+
+.bton:hover::after {
+  animation: light 1s ease-in-out forwards;
+}
+
+.bton:hover p {
+  animation: lightText 1s ease-in-out forwards;
+}
+
+@keyframes lightBox {
+  0% {
+    border: 1px solid aqua;
+    box-shadow: 0 0 5px 0px aqua, inset 0 0 10px aqua;
   }
-  
-  #clip {
-    --color: #FF9000;
-    position: absolute;
-    top: 0;
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
-    border: 5px double var(--color);
-    box-shadow: inset 0px 0px 15px #FF9000;
-    -webkit-clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+
+  20% {
+    border: 1px solid aqua;
+    box-shadow: none;
   }
-  
-  .arrow {
-    position: absolute;
-    transition: 0.2s;
-    background-color: #FF9000;
-    top: 35%;
-    width: 11%;
-    height: 30%;
+
+  30% {
+    border: 1px solid aqua;
+    box-shadow: 0 0 10px 0px aqua, inset 0 0 15px aqua;
   }
-  
-  #leftArrow {
-    left: -13.5%;
-    -webkit-clip-path: polygon(100% 0, 100% 100%, 0 50%);
+
+  38% {
+    border: 1px solid aqua;
+    box-shadow: none;
   }
-  
-  #rightArrow {
-    -webkit-clip-path: polygon(100% 49%, 0 0, 0 100%);
-    left: 102%;
+
+  45% {
+    border: 1px solid aqua;
+    box-shadow: 0 0 15px 0px aqua, inset 0 0 20px aqua;
   }
-  
-  .game-btn:hover #rightArrow {
-    background-color: #27c39f;
-    left: -15%;
-    animation: 0.6s ease-in-out both infinite alternate rightArrow8;
+
+  50% {
+    border: 1px solid aqua;
+    box-shadow: none;
   }
-  
-  .game-btn:hover #leftArrow {
-    background-color: #27c39f;
-    left: 103%;
-    animation: 0.6s ease-in-out both infinite alternate leftArrow8;
+
+  53% {
+    border: 1px solid aqua;
+    box-shadow: 0 0 15px 0px aqua, inset 0 0 25px aqua;
   }
-  
-  .corner {
-    position: absolute;
-    width: 4em;
-    height: 4em;
-    background-color: #fb5b53;
-    box-shadow: inset 1px 1px 8px #fb5b53;
-    transform: scale(1) rotate(45deg);
-    transition: 0.2s;
+
+  65% {
+    border: 1px solid aqua;
+    box-shadow: none;
   }
-  
-  #rightTop {
-    top: -1.98em;
-    left: 91%;
+
+  100% {
+    border: 1px solid aqua;
+    box-shadow: 0 0 15px 0px aqua, inset 0 0 25px aqua;
   }
-  
-  #leftTop {
-    top: -1.96em;
-    left: -3.0em;
+}
+
+@keyframes light {
+  0% {
+    opacity: .7;
   }
-  
-  #leftBottom {
-    top: 2.10em;
-    left: -2.15em;
+
+  20% {
+    opacity: 0;
   }
-  
-  #rightBottom {
-    top: 45%;
-    left: 88%;
+
+  30% {
+    opacity: .7;
   }
-  
-  .game-btn:hover #leftTop {
-    animation: 0.1s ease-in-out 0.05s both changeColor8,
-    0.2s linear 0.4s both lightEffect8;
+
+  38% {
+    opacity: 0;
   }
-  
-  .game-btn:hover #rightTop {
-    animation: 0.1s ease-in-out 0.15s both changeColor8,
-    0.2s linear 0.4s both lightEffect8;
+
+  45% {
+    opacity: .7;
   }
-  
-  .game-btn:hover #rightBottom {
-    animation: 0.1s ease-in-out 0.25s both changeColor8,
-    0.2s linear 0.4s both lightEffect8;
+
+  50% {
+    opacity: 0;
   }
-  
-  .game-btn:hover #leftBottom {
-    animation: 0.1s ease-in-out 0.35s both changeColor8,
-    0.2s linear 0.4s both lightEffect8;
+
+  53% {
+    opacity: .7;
   }
-  
-  .game-btn:hover .corner {
-    transform: scale(1.25) rotate(45deg);
+
+  65% {
+    opacity: 0;
   }
-  
-  .game-btn:hover #clip {
-    animation: 0.2s ease-in-out 0.55s both greenLight8;
-    --color: #27c39f;
+
+  100% {
+    opacity: .7;
   }
-  
-  @keyframes changeColor8 {
-    from {
-      background-color: #2781c3;
-    }
-  
-    to {
-      background-color: #27c39f;
-    }
+}
+
+@keyframes lightText {
+  0% {
+    color: #27c39f;
+    text-shadow: 0 0 5px #fbfd7b8a;
   }
-  
-  @keyframes lightEffect8 {
-    from {
-      box-shadow: 1px 1px 5px #27c39f;
-    }
-  
-    to {
-      box-shadow: 0 0 2px #27c39f;
-    }
+
+  20% {
+    color: #27c39f;
+    text-shadow: none;
   }
-  
-  @keyframes greenLight8 {
-    from {
-    }
-  
-    to {
-      box-shadow: inset 0px 0px 32px #27c39f;
-    }
+
+  30% {
+    color: #27c39f;
+    text-shadow: 0 0 10px #fbfd7b8a;
   }
-  
-  @keyframes leftArrow8 {
-    from {
-      transform: translate(0px);
-    }
-  
-    to {
-      transform: translateX(10px);
-    }
+
+  38% {
+    color: #27c39f;
+    text-shadow: none;
   }
-  
-  @keyframes rightArrow8 {
-    from {
-      transform: translate(0px);
-    }
-  
-    to {
-      transform: translateX(-10px);
-    }
+
+  45% {
+    color: #27c39f;
+    text-shadow: 0 0 15px #fbfd7b8a;
   }
-  
-  
-  
+
+  50% {
+    color: #27c39f;
+    text-shadow: none;
+  }
+
+  53% {
+    color: #27c39f;
+    text-shadow: 0 0 15px #fbfd7b8a;
+  }
+
+  65% {
+    color: #27c39f;
+    text-shadow: none;
+  }
+
+  100% {
+    color: #27c39f;
+    text-shadow: 0 0 15px #fbfd7b8a;
+  }
+}
+/* --------------------------------------------------- */
+.custom-cursor-button,
+.custom-cursor-link {
+    cursor: url('./Asserts/color-cursor.png'), auto !important;
+}

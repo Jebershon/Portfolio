@@ -1,6 +1,7 @@
 .leaflet-container {
     height: 400px;
     width: 100%;
+    cursor: url('/src/Components/Asserts/color-cursor.png'), auto !important;
   }
   .chip {
     display: inline-block;

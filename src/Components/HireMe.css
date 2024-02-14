@@ -4,3 +4,7 @@
     background-color: rgba(17, 25, 40, 0.46);
     color: #FFFFFF;
   }
+  .custom-cursor-button,
+.custom-cursor-link {
+    cursor: url('./Asserts/color-cursor.png'), auto !important;
+}

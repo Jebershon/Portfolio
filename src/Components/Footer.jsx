@@ -5,7 +5,6 @@ import * as Icon from 'react-bootstrap-icons';
 import { Instagram } from 'react-bootstrap-icons';
 import './/Home.css';
 import HireMe from './HireMe';
-import { useState } from 'react';
 function Footer(){
     return(
         <div>
@@ -14,19 +13,19 @@ function Footer(){
                     <div class="me-5 d-none d-lg-block">
                     <span>Get connected with me on social networks:</span>
                     </div>                <div>
-                    <a href="https://maps.app.goo.gl/3XZXAsz2SnyprNLs6" class="me-4 text-reset">
+                    <a href="https://maps.app.goo.gl/3XZXAsz2SnyprNLs6" class="me-4 text-reset custom-cursor-link">
                     <Icon.GeoAltFill/>
                     </a>
-                    <a href="https://instagram.com/jebxson?igshid=NzZlODBkYWE4Ng==" class="me-4 text-reset">
+                    <a href="https://instagram.com/jebxson?igshid=NzZlODBkYWE4Ng==" class="me-4 text-reset custom-cursor-link">
                     <Instagram/>
                     </a>
                     <a class="me-4 text-reset">
                     <Icon.Whatsapp/>
                     </a>
-                    <a href="https://www.linkedin.com/in/jebershon-vetha-singh/" class="me-4 text-reset">
+                    <a href="https://www.linkedin.com/in/jebershon-vetha-singh/" class="me-4 text-reset custom-cursor-link">
                     <LinkedInIcon/>
                     </a>
-                    <a href="https://github.com/Jebershon" class="me-4 text-reset">
+                    <a href="https://github.com/Jebershon" class="me-4 text-reset custom-cursor-link">
                     <GitHubIcon/>
                     </a>
                     </div>
@@ -58,16 +57,16 @@ function Footer(){
                             <div>
                             <h6 class="text-uppercase fw-bold">Tools</h6>
                             <p>
-                                <a href="https://code.visualstudio.com/" class="text-reset">VSCode</a>
+                                <a href="https://code.visualstudio.com/" class="text-reset custom-cursor-link">VSCode</a>
                             </p>
                             <p>
-                                <a href="https://azure.microsoft.com/en-in" class="text-reset">Azure</a>
+                                <a href="https://azure.microsoft.com/en-in" class="text-reset custom-cursor-link">Azure</a>
                             </p>
                             <p>
-                                <a href="https://www.eclipse.org/downloads/" class="text-reset">Eclipse</a>
+                                <a href="https://www.eclipse.org/downloads/" class="text-reset custom-cursor-link">Eclipse</a>
                             </p>
                             <p>
-                                <a href="https://www.bloodshed.net/" class="text-reset">Dev C++</a>
+                                <a href="https://www.bloodshed.net/" class="text-reset custom-cursor-link">Dev C++</a>
                             </p>
                             </div>
                     </Col>
@@ -80,9 +79,9 @@ function Footer(){
                 </Row>
                 </Container>
                 <br/>
-                <div class="text-center" style={{backgroundColor:'rgba(0, 0, 0, 0.05)'}}>
+                <div class="text-center custom-cursor-link" style={{backgroundColor:'rgba(0, 0, 0, 0.05)'}}>
                     © 2021 Copyright: &nbsp;
-                <a class="text-reset fw-bold" href="https://github.com/Jebershon/jebershon.github.io">J Jebershon vetha singh</a>
+                <a class="text-reset fw-bold custom-cursor-link" href="https://github.com/Jebershon/jebershon.github.io">J Jebershon vetha singh</a>
                 </div>
             </footer>
         </div>

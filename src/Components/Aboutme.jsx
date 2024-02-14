@@ -31,10 +31,10 @@ function Aboutme(){
                     </p>
 					<p>
 						<ul class="fh5co-social-icons">
-							<li><a href="https://twitter.com/jebershon"><i><Twitter/></i></a></li>
-							<li><a href="https://instagram.com/jebxson?igshid=NzZlODBkYWE4Ng=="><i><Instagram/></i></a></li>
-							<li><a href="https://www.linkedin.com/in/jebershon-vetha-singh/"><i><LinkedIn/></i></a></li>
-							<li><a href="https://github.com/Jebershon"><i><GitHub/></i></a></li>
+							<li className='transform'><a className='custom-cursor-link' href="https://twitter.com/jebershon"><i><Twitter/></i></a></li>
+							<li className='transform'><a className='custom-cursor-link' href="https://instagram.com/jebxson?igshid=NzZlODBkYWE4Ng=="><i><Instagram/></i></a></li>
+							<li className='transform'><a className='custom-cursor-link' href="https://www.linkedin.com/in/jebershon-vetha-singh/"><i><LinkedIn/></i></a></li>
+							<li className='transform'><a className='custom-cursor-link' href="https://github.com/Jebershon"><i><GitHub/></i></a></li>
 						</ul>
 					</p>
 				</div>

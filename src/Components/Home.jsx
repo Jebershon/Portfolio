@@ -66,17 +66,17 @@ function Home(){
             <>
             <Navbar  collapseOnSelect expand="lg" className='nav-bg' fixed='top' data-bs-theme="dark">
             <div class="progrss"></div>
-                <Navbar.Brand href="#Home" className='brnd'>Portfolio</Navbar.Brand>
+                <Navbar.Brand href="#Home" className='brnd custom-cursor-link'>Portfolio</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                   <Nav className="me-auto nav-underline">
-                    <Nav.Link href="#Home">Home</Nav.Link>
-                    <Nav.Link href="#Aboutme">Aboutme</Nav.Link>
-                    <Nav.Link href="#skills">My Skills</Nav.Link>
-                    <Nav.Link href="#projects">My Projects</Nav.Link>
+                    <Nav.Link className = "custom-cursor-link" href="#Home">Home</Nav.Link>
+                    <Nav.Link className = "custom-cursor-link" href="#Aboutme">Aboutme</Nav.Link>
+                    <Nav.Link className = "custom-cursor-link" href="#skills">My Skills</Nav.Link>
+                    <Nav.Link className = "custom-cursor-link" href="#projects">My Projects</Nav.Link>
                   </Nav>
                   <Nav>
-                    <Nav.Link href="#Contactus" className='mt-3'>Contact us</Nav.Link>
+                    <Nav.Link className = "custom-cursor-link mt-3" href="#Contactus">Contact us</Nav.Link>
                   </Nav>
                 </Navbar.Collapse>
             </Navbar>
@@ -87,7 +87,7 @@ function Home(){
 
             <IconButton
             id="back"
-            className={isVisible ? 'show' : ''}
+            className={isVisible ? 'show custom-cursor-link' : ''}
             onClick={scrollToTop}
             style={{ display: isVisible ? 'block' : 'none' }}
             ><KeyboardArrowUpIcon /></IconButton>
