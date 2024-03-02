@@ -23,12 +23,12 @@ function Aboutme(){
                     <h2>Hello There!</h2>
                     <p className='para'>
                         'Self-motivated, hard-working individual looking for a
-                        responsible position to acquire knowledge , where I can
+                        responsible position to acquire knowledge, where I can
                         use my skills to contribute to the success of the
                         Association.Greetings! I'm a results-oriented professional passionate about technology, 
-                        showcasing expertise in diverse projects like Task Manager, Blog Management Tool, Task Scheduler, 
+                        showcasing expertise in diverse projects like Task Managers, Blog Management Tools, Task Scheduler, 
                         Personal Library, Cartoon Hub, Simple Calculator, and CulinaryDelights. With a BTECH in Information Technology, 
-                        I'm adept in Data Structures and the MERN stack, eager to contribute to innovative projects.'
+                        I'm adept in Data Structures and the MERN stack, eager to contribute to innovative projects.' 
                     </p>
 					<p>
 						<ul class="fh5co-social-icons">
