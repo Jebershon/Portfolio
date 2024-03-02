@@ -17,8 +17,8 @@ function ParticalBg() {
                 <Row>
                   <Col className="text-center" lg={12}>
                       <div>
-                         <h1><span className='intro-text'>J Jebershon vetha singh</span></h1>
-                         <h4 class="intro-text">Web Developer / FullStack Developer</h4>
+                         <h1><span className='intro-text'>I'm Jebershon vetha singh</span></h1>
+                         <h4 class="intro-text">FullStack Web Developer & Designer</h4>
                         <p>
                           <ul class="fh5co-social-icons">
                             <li className='transform'><a className='custom-cursor-link' href="https://twitter.com/jebershon"><i><Twitter/></i></a></li>
