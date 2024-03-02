@@ -3,7 +3,7 @@ import { Button, Container } from 'react-bootstrap';
 import './/Aboutme.css';
 function Aboutme(){
     return(
-    <div>
+    <div loading="lazy">
     <Container className='mt-3 mb-3 About'>
                 <center><h2 className='p-2 mt-2'>About me</h2></center>
                 <hr/>

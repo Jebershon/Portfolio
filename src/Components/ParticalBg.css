@@ -84,9 +84,8 @@ h3 {
 }
 /* ------------------------------------------ */
 .bton {
-  
-  position: relative;
   padding: 0;
+  position: relative;
   width: 135px;
   height: 65px;
   background: transparent;
@@ -127,7 +126,6 @@ h3 {
 }
 
 .bton p {
-  
   display: inline-block;
   width: 135px;
   line-height: 65px;

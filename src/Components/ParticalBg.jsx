@@ -37,7 +37,7 @@ function ParticalBg() {
                               rel="noreferrer"
                               className='custom-cursor-link'
                               >
-                              <button className='bton custom-cursor-button'>
+                              <button className='bton custom-cursor-button' >
                                 <p><Download/>Download CV</p>
                               </button>
                               </a>
