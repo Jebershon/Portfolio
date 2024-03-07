@@ -1,7 +1,7 @@
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { IconButton } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { Navbar } from 'react-bootstrap';
+import { Container, Navbar } from 'react-bootstrap';
 import Nav from 'react-bootstrap/Nav';
 import ".//Home.css";
 import Aboutme from './Aboutme';
@@ -66,6 +66,7 @@ function Home(){
             <>
             <Navbar  collapseOnSelect expand="lg" className='nav-bg' fixed='top' data-bs-theme="dark">
             <div class="progrss"></div>
+                <Container>
                 <Navbar.Brand href="#Home" className='brnd custom-cursor-link'>Portfolio</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
@@ -80,6 +81,7 @@ function Home(){
                     <center><Nav.Link className = "custom-cursor-link" href="#Contactus">Contact me</Nav.Link></center>
                   </Nav>
                 </Navbar.Collapse>
+                </Container>
             </Navbar>
             
             <br id="Home" />
