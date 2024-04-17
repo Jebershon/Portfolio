@@ -33,7 +33,7 @@ function Footer(){
                     <Row>
                     <Col lg={3}>
                         <br/>
-                            <h6 class="text-uppercase fw-bold">Personal Portfolio</h6>
+                            <h6 class="text-uppercase fw-bold m-3">Personal Portfolio</h6>
                             <p>
                             Welcome to our website, where every visitor is valued and appreciated.I leverage ChatGPT wisely to enhance organizational efficiency, fostering innovative solutions and streamlined workflows.
                             </p>
@@ -41,7 +41,7 @@ function Footer(){
                     <Col>
                     <br/>
                         <div>
-                        <h6 class="text-uppercase fw-bold">Skills</h6>
+                        <h6 class="text-uppercase fw-bold m-3">Skills</h6>
                             <p>JavaScript</p>
                             <p>React</p>
                             <p>Node.js</p>
@@ -54,7 +54,7 @@ function Footer(){
                     <Col>
                         <br/>
                             <div>
-                            <h6 class="text-uppercase fw-bold">Tools</h6>
+                            <h6 class="text-uppercase fw-bold m-3">Tools</h6>
                             <p>
                                 <a href="https://code.visualstudio.com/" class="text-reset custom-cursor-link">VSCode</a>
                             </p>

@@ -11,7 +11,7 @@ function MyProjects(){
          return(
             <Container className="bg mt-3 mb-3">
 
-                <center><h2>My Projects</h2></center>
+                <center><h2 className='p-2 mt-2'>My Projects</h2></center>
 
                 <hr/>
 

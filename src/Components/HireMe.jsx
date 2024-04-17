@@ -65,7 +65,7 @@ function HireMe(){
             <ToastContainer position="bottom-center" />
             {showDiv ? (
                 <div>
-                    <h6 className="text-uppercase fw-bold">Hire me.</h6>
+                    <h6 className="text-uppercase fw-bold m-3">Hire me.</h6>
                     <form>
                         <div className="mb-3">
                             <label htmlFor="exampleFormControlInput1" className="form-label">UserName</label>
@@ -88,7 +88,7 @@ function HireMe(){
                                 onChange={(e) => setMessage(e.target.value)}
                             />
                         </div>
-                        <Button type='button' onClick={handleSubmit} variant='outline-warning' className='custom-cursor-button'>Send Mail</Button>
+                        <Button type='button' onClick={handleSubmit} variant='outline-warning' className='custom-cursor-button res'>Send Mail</Button>
                     </form>
                 </div>
             ) : (

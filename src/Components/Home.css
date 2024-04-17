@@ -1,6 +1,7 @@
-    .progrss {
-    height: 2px;
+  .progrss {
+    height: 3px;
     width: 0%;
+    z-index: 3;
     background-color: #fff;
     position: fixed;
     top: 0;
@@ -34,7 +35,57 @@
     -webkit-backdrop-filter: blur(11px) saturate(180%);
     background-color: rgba(17, 27, 47, 0.86);
     color: white;
+    z-index: 1;
   }
+  .bottom-nav{
+    display: none;
+  }
+  @media screen and (max-width : 800px) {
+    .back{
+      display: none;
+    }
+    .nav-bg{
+      display: none;
+    }
+    .position{
+      display: flex;
+      justify-content: center;
+    }
+    .bottom-nav{
+      width: fit-content;
+      height: fit-content;
+      padding: 10px;
+      bottom: 10px;
+      border-top-right-radius: 100%;
+      border-top-left-radius: 100%;
+      z-index: 2;
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      position: fixed;
+      flex-direction: row;
+      backdrop-filter: blur(6px) saturate(180%);
+      -webkit-backdrop-filter: blur(60px) saturate(180%);
+      background-color: rgba(17, 25, 40, 0.26);
+    }
+    .ico{
+      border-radius: 50%;
+      margin: 3px;
+      position: relative;
+      background-color: rgba(255, 0, 0, 0.747);
+      backdrop-filter: blur(12px) saturate(180%);
+    }
+    .in{
+      display: flex;
+      justify-content: center;
+      padding: 1px;
+  }
+  .ico:hover{
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    background-color: rgba(0, 0, 0, 0.801);
+  }
+}
   .bg{
     box-shadow: 7px 8px 15px 10px rgba(0, 0, 0, 0.2), 0px 0px 20px 0px rgba(0, 0, 0, 0.19);
       border-radius: 50px;
@@ -160,9 +211,6 @@
       transform: rotate(-315deg);
     }
   }
-.margin-aboutme{
-  margin-top: 820px;
-}
 .custom-cursor-button,
 .custom-cursor-link {
     cursor: url('./Asserts/color-cursor.png'), auto !important;

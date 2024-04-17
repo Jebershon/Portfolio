@@ -1,8 +1,7 @@
-import { Download, GitHub, Instagram, LinkedIn, Twitter } from '@mui/icons-material';
+import { GitHub, Instagram, LinkedIn, Twitter } from '@mui/icons-material';
 import { useEffect } from "react";
 import { Col, Row } from "react-bootstrap";
 import birds from 'vanta/src/vanta.birds';
-import file from "./Asserts/J Jebershon vetha singh-717821f219.pdf";
 import './ParticalBg.css';
 function ParticalBg() {
   useEffect(()=>{
@@ -13,12 +12,12 @@ function ParticalBg() {
   },[]);
   return (
     <div>
-      <div className='bg-part' id='vanta'>
+      <div className='bg-part mb-3' id='vanta'>
                 <Row>
-                  <Col className="text-center" lg={12}>
-                      <div>
-                         <h1><span className='intro-text'>I'm Jebershon vetha singh</span></h1>
-                         <h4 class="intro-text">FullStack Web Developer & Designer</h4>
+                  <Col lg={12}>
+                      <div className='intro-text'>
+                         <h1><span>I'm Jebershon vetha singh</span></h1>
+                         <h4>FullStack Web Developer & Designer</h4>
                         <p>
                           <ul class="fh5co-social-icons">
                             <li className='transform'><a className='custom-cursor-link' href="https://twitter.com/jebershon"><i><Twitter/></i></a></li>
@@ -27,19 +26,6 @@ function ParticalBg() {
                             <li className='transform'><a className='custom-cursor-link' href="https://github.com/Jebershon"><i><GitHub/></i></a></li>
                           </ul>
                         </p>
-                        <br/>
-                              <a
-                              href={file}
-                              download="J Jebershon vetha singh"
-                              target="_blank"
-                              rel="noreferrer"
-                              className='custom-cursor-link'
-                              >
-                              <button className='bton custom-cursor-button' >
-                                <p><Download/>Resume</p>
-                              </button>
-                              </a>
-
                       </div>
                   </Col>
                 </Row>

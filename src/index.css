@@ -6,11 +6,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  background-image: url('./Components/Asserts/bg.png');
+  background-image: url('./Components/Asserts/bg-1.png');
   background-attachment: fixed;
   background-size: cover;
 
   scroll-behavior: smooth;
+  font-family: monospace;
 }
 
 

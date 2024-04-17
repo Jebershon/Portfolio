@@ -5,11 +5,11 @@ import { Container, Navbar } from 'react-bootstrap';
 import Nav from 'react-bootstrap/Nav';
 import ".//Home.css";
 import Aboutme from './Aboutme';
-import Contact from './Contact.jsx';
 import Footer from './Footer.jsx';
 import MyProjects from './MyProjects';
 import Myskills from './Myskills';
 import ParticalBg from './ParticalBg.jsx';
+import { ContactPage, ContactsRounded, HomeOutlined, Inventory2Outlined, LeaderboardOutlined, Person, PhoneAndroidOutlined } from '@mui/icons-material';
 function Home(){
   const [isVisible, setIsVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -64,8 +64,17 @@ function Home(){
             </center>
           ) : (
             <>
-            <Navbar  collapseOnSelect expand="lg" className='nav-bg' fixed='top' data-bs-theme="dark">
             <div class="progrss"></div>
+            <div className='position'>
+              <div className='bottom-nav sim'>
+                  <div className='ico' style={{bottom:"10px"}}><a href='#Home' className='m-3 in'><HomeOutlined style={{color:"white"}}/></a></div>
+                  <div className='ico' style={{bottom:"30px"}}><a href="#Aboutme" className='m-3 in'><Person style={{color:"white"}}/></a></div>
+                  <div className='ico' style={{bottom:"40px"}}><a href="#skills" className='m-3 in'><LeaderboardOutlined style={{color:"white"}}/></a></div>
+                  <div className='ico' style={{bottom:"30px"}}><a href="#projects" className='m-3 in'><Inventory2Outlined style={{color:"white"}}/></a></div>
+                  <div className='ico' style={{bottom:"10px"}}><a href="#Contactus" className='m-3 in'><PhoneAndroidOutlined style={{color:"white"}}/></a></div>
+              </div>
+            </div>
+            <Navbar  collapseOnSelect expand="lg" className='nav-bg' fixed='top' data-bs-theme="dark">
                 <Container>
                 <Navbar.Brand href="#Home" className='brnd custom-cursor-link'>Portfolio</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -88,12 +97,14 @@ function Home(){
 
             <ParticalBg/>
 
+            <div className='back'>
             <IconButton
             id="back"
             className={isVisible ? 'show custom-cursor-link' : ''}
             onClick={scrollToTop}
             style={{ display: isVisible ? 'block' : 'none' }}
             ><KeyboardArrowUpIcon /></IconButton>
+            </div>
 
             <div className='margin-aboutme' id='Aboutme'>
             <Aboutme/>
@@ -108,8 +119,6 @@ function Home(){
             </div>
 
             <div id='Contactus'>
-            <Contact/>
-            <br/>
             <Footer/>
             </div>
             </>

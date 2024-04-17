@@ -1,10 +1,11 @@
 import { GitHub, Instagram, LinkedIn, Twitter } from '@mui/icons-material';
 import { Button, Container } from 'react-bootstrap';
+import file from "./Asserts/J Jebershon vetha singh-717821f219.pdf";
 import './/Aboutme.css';
 function Aboutme(){
     return(
     <div loading="lazy">
-    <Container className='mt-3 mb-3 About'>
+    <Container className='mb-3 About'>
                 <center><h2 className='p-2 mt-2'>About me</h2></center>
                 <hr/>
 
@@ -31,12 +32,16 @@ function Aboutme(){
                         I'm adept in Data Structures and the MERN stack, eager to contribute to innovative projects.' 
                     </p>
 					<p>
-						<ul class="fh5co-social-icons">
-							<li className='transform'><a className='custom-cursor-link' href="https://twitter.com/jebershon"><i><Twitter/></i></a></li>
-							<li className='transform'><a className='custom-cursor-link' href="https://instagram.com/jebxson?igshid=NzZlODBkYWE4Ng=="><i><Instagram/></i></a></li>
-							<li className='transform'><a className='custom-cursor-link' href="https://www.linkedin.com/in/jebershon-vetha-singh/"><i><LinkedIn/></i></a></li>
-							<li className='transform'><a className='custom-cursor-link' href="https://github.com/Jebershon"><i><GitHub/></i></a></li>
-						</ul>
+                        <a
+                              href={file}
+                              download="J Jebershon vetha singh"
+                              target="_blank"
+                              rel="noreferrer"
+                              className='custom-cursor-link'
+                              style={{textDecoration:"none"}}
+                              >
+							 <Button>Download Cv</Button>
+                        </a>
 					</p>
 				</div>
 			</div>
