@@ -118,35 +118,35 @@ function Myskills(){
                     <h3 style={{color:"aqua",fontVariant:"all-small-caps"}}><Diversity2Outlined/> interpersonal skills</h3>
                     <center>
                     <Row lg={4} className="m-3 justify-content-center">
-                    <Card className="m-3 bg">
+                    <Card className="m-3 bg" data-aos="flip-left" data-aos-duration="2000">
                         <div class="details">
                             <center><img src="https://img.icons8.com/?size=160&id=0dbdoPcVxc3N&format=png" alt="image ref" width={100} height={100}></img></center>
                             <h6 style={{color:"orange"}}>Adaptation to Technology</h6>
                             <p>Staying up-to-date with the latest technologies and advancements in your field ensures that you can quickly adapt to new tools and systems as they emerge.</p>
                         </div>
                     </Card>
-                    <Card className="m-3 bg">
+                    <Card className="m-3 bg" data-aos="flip-left" data-aos-duration="2000">
                         <div class="details">
                         <center><img src="https://img.icons8.com/?size=160&id=65174&format=png" alt="image ref" width={100} height={100}></img></center>
                             <h6 style={{color:"orange"}}>Creativity and Innovation</h6>
                             <p>Approaching challenges with an open mind and looking for unconventional solutions can lead to innovative ideas that can set you apart.</p>
                         </div>
                     </Card>
-                    <Card className="m-3 bg">
+                    <Card className="m-3 bg" data-aos="flip-left" data-aos-duration="2000">
                         <div class="details">
                         <center><img src="https://img.icons8.com/?size=160&id=64478&format=png" alt="image ref" width={100} height={100}></img></center>
                             <h6 style={{color:"orange"}}>Effective Communication</h6>
                             <p>Listening carefully to others' perspectives helps you understand their needs and tailor your communication accordingly.</p>
                         </div>
                     </Card>
-                    <Card className="m-3 bg">
+                    <Card className="m-3 bg" data-aos="flip-left" data-aos-duration="2000">
                         <div class="details">
                         <center><img src="https://img.icons8.com/?size=160&id=113644&format=png" alt="image ref" width={100} height={100}></img></center>   
                             <h6 style={{color:"orange"}}>Time Management</h6>
                             <p>Knowing how to prioritize tasks based on importance and urgency helps you manage your time more effectively and meet deadlines.</p>
                         </div>
                     </Card>
-                    <Card className="m-3 bg">
+                    <Card className="m-3 bg" data-aos="flip-left" data-aos-duration="2000">
                         <div class="details">
                            <center><img src="https://img.icons8.com/?size=128&id=fvm3GrKsY12i&format=png" alt="image ref" width={100} height={100}></img></center>
                             <h6 style={{color:"orange"}}>Collaboration and Teamwork</h6>

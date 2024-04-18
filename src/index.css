@@ -13,5 +13,17 @@ body {
   scroll-behavior: smooth;
   font-family: monospace;
 }
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f184; 
+}
+::-webkit-scrollbar-thumb {
+  background: #0dcee4; 
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #0cccd67e; 
+}
 
 
