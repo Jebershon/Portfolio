@@ -16,6 +16,9 @@ import github from './Asserts/icons8-github-96.png';
 import postman from './Asserts/postman.png';
 import figma from './Asserts/icons8-figma-96.png';
 import azure from './Asserts/icons8-azure-96.png';
+import next from './Asserts/icons8-nextjs-96.png';
+import typescript from './Asserts/icons8-typescript-96.png';
+
 import { CodeOutlined, DeveloperModeOutlined, Diversity2Outlined } from "@mui/icons-material";
 function Myskills(){
     return(
@@ -28,7 +31,7 @@ function Myskills(){
           <Row className="mb-2">
           <Card className="con" data-aos="zoom-in">
           <h3 style={{color:"aqua",fontVariant:"all-small-caps"}}><DeveloperModeOutlined/> Technical</h3>
-          <Carousel>
+          <Carousel interval={2000}>
             <Carousel.Item>
             <div className="flex" style={{display:"flex",flexDirection:"row",flexWrap:"wrap",justifyContent:"center"}}>
                     <div className="tool">
@@ -63,10 +66,15 @@ function Myskills(){
                     <span class="tooltiptext" style={{color:"#38bcd1"}}>React</span>
                     <img src={react} alt="react" width={96} height={96} className="m-5"></img>
                     </div>
+
+                    <div className="tool">
+                    <span class="tooltiptext" style={{color:"white"}}>NextJs</span>
+                    <img src={next} alt="NextJs" width={96} height={96} className="m-5"></img>
+                    </div>
                    
                     <div className="tool">
-                    <span class="tooltiptext" style={{color:"#6c19ff"}}>Bootstrap</span>
-                    <img src={boot} alt="Bootstrap" width={96} height={96} className="m-5"></img>
+                    <span class="tooltiptext" style={{color:"gray"}}>Typescript</span>
+                    <img src={typescript} alt="Typescript" width={96} height={96} className="m-5"></img>
                     </div>
                     
                     <div className="tool">
@@ -76,13 +84,10 @@ function Myskills(){
                     
                     <div className="tool">
                     <span class="tooltiptext" style={{color:"#ffce14"}}>Python</span>
-                    <img src={python} alt="Python" className="m-5"></img>
+                    <img src={python} alt="Python" width={96} height={96} className="m-5"></img>
                     </div>
                    
-                    <div className="tool">
-                    <span class="tooltiptext" style={{color:"#57ac46"}}>MongoDB</span>
-                    <img src={mongodb} alt="MongoDB" width={96} height={96} className="m-5"></img>
-                    </div>
+                    
             </div>       
             </Carousel.Item>
             <Carousel.Item>
@@ -100,12 +105,17 @@ function Myskills(){
 
                     <div className="tool">
                     <span class="tooltiptext" style={{color:"orange"}}>Postman</span>
-                    <img src={postman} alt="Postman" className="m-5"></img>
+                    <img src={postman} alt="Postman" className="m-5" width={96} height={96}></img>
                     </div>
                    
                     <div className="tool">
                     <span class="tooltiptext" style={{color:"#039be5"}}>Azure</span>
                     <img src={azure} alt="Azure" width={96} height={96} className="m-5"></img>
+                    </div>
+
+                    <div className="tool">
+                    <span class="tooltiptext" style={{color:"#57ac46"}}>MongoDB</span>
+                    <img src={mongodb} alt="MongoDB" width={96} height={96} className="m-5"></img>
                     </div>
            </div>
             </center>

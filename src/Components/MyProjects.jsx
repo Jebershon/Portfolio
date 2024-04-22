@@ -16,19 +16,19 @@ function MyProjects(){
                 <hr/>
 
                 <Row xs={1} md={3} className="g-4">
-                <Col>
+                <Col className="mb-2">
                     <Card className="h-100 card-bg">
-                        <div className='img-hover-zoom'>
-                        <Card.Img variant="top" src={Task} height={200} alt="Task Manager Ref" className='ig'/>
+                    <div className='img-hover-zoom'>
+                        <Card.Img variant="top" src={Ecom} height={200} alt="Culinary Delights ref" className='ig'/>
                         </div>
                         <Card.Body>
-                            <Card.Title>Task Manager</Card.Title>
+                            <Card.Title>Culinary Delights</Card.Title>
                             <Card.Text>
-                                The Personal To-Do List Application is designed to be your digital companion in staying on top of your tasks, helping you prioritize, organize, and accomplish your to-dos with ease
+                                Culinary Delights: Uniting culinary excellence with tech innovation. Explore recipes, order groceries seamlessly, and access nutritional insights.
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer>
-                            <Button class="btn custom-cursor-button" href="https://jebershon.github.io/Task-Manager.github.io/">Click me..</Button>
+                            <Button class="btn custom-cursor-button" href="https://culinarydelights.vercel.app/">Click me..</Button>
                         </Card.Footer>
                     </Card>
                 </Col>
@@ -36,7 +36,8 @@ function MyProjects(){
                 <Col>
                     <Card className="h-100 card-bg">
                     <div className='img-hover-zoom'>
-                        <Card.Img variant="top" src={Blog} height={200} alt="Blog Management Ref" className='ig'/>
+                        {/* <Card.Img variant="top" src={Blog} height={200} alt="Blog Management Ref" className='ig'/> */}
+                        <iframe src="https://jebershon-react-blog.netlify.app/" style={{width:"100%"}} height={200} title="Blog Management"></iframe>
                         </div>
                         <Card.Body>
                             <Card.Title>Blog Management Tool</Card.Title>
@@ -53,22 +54,24 @@ function MyProjects(){
                 <Col>
                     <Card className="h-100 card-bg">
                     <div className='img-hover-zoom'>
-                        <Card.Img variant="top" src={Task_Scheduler} height={200} alt="Task Scheduler Ref" className='ig'/>
+                        {/* <Card.Img variant="top" src={Task_Scheduler} height={200} alt="TaskFlow Ref" className='ig'/> */}
+                        <iframe src="https://jebershon.github.io/TaskFlow/" style={{width:"100%"}} height={200} title="TaskFlow"></iframe>
                         </div>
                         <Card.Body>
-                            <Card.Title>Task scheduler</Card.Title>
+                            <Card.Title>TaskFlow</Card.Title>
                             <Card.Text>
                                 The Simple Task Scheduler Application project aims to offer a hassle-free and efficient tool for individuals seeking a basic yet effective solution for managing their daily tasks.
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer>
-                            <Button class="btn custom-cursor-button" href="https://jebershon.github.io/TaskScheduler.github.io/">Click me..</Button>
+                            <Button class="btn custom-cursor-button" href="https://github.com/Jebershon/TaskFlow">View webpage</Button>
                         </Card.Footer>
                     </Card>
                 </Col>
                 </Row>
                 <br/>
-                <Row xs={1} md={3} className="g-4">
+
+                <Row xs={1} md={3} className="g-4 justify-content-center">
                 <Col>
                     <Card className="h-100 card-bg">
                     <div className='img-hover-zoom'>
@@ -85,26 +88,12 @@ function MyProjects(){
                         </Card.Footer>
                     </Card>
                 </Col>
+
                 <Col>
-                    <Card className="h-100 card-bg">
+                    <Card className="h-100 card-bg"> 
                     <div className='img-hover-zoom'>
-                        <Card.Img variant="top" src={Cart} height={200} alt="Cartoon Hub ref" className='ig'/>
-                        </div>
-                        <Card.Body>
-                            <Card.Title>Cartoon Hub</Card.Title>
-                            <Card.Text>
-                                The Cartoon Hub Webpage Management System is an all-encompassing solution crafted to streamline the organization, presentation, and exploration of your favorite cartoons.
-                            </Card.Text>
-                        </Card.Body>
-                        <Card.Footer>
-                            <Button class="btn custom-cursor-button" href="https://jebershon.github.io/Cartoon.github.io/">Click me..</Button>
-                        </Card.Footer>
-                    </Card>
-                </Col>
-                <Col>
-                    <Card className="h-100 card-bg">
-                    <div className='img-hover-zoom'>
-                        <Card.Img variant="top" src={Calc} height={200} alt="Calculator ref" className='ig'/>
+                        {/* <Card.Img variant="top" src={Calc} height={200} alt="Calculator ref" className='ig'/> */}
+                        <iframe src="https://jebershon.github.io/calculator_jebershon.github.io/" style={{width:"100%"}} height={200} title="Calculator"></iframe>
                         </div>
                         <Card.Body>
                             <Card.Title>Calculator</Card.Title>
@@ -119,27 +108,6 @@ function MyProjects(){
                 </Col>
             </Row>
             <br/>
-            <Row xs={1} md={3} className="g-4">
-            <Col></Col>
-            <Col className="mb-2">
-                    <Card className="h-100 card-bg">
-                    <div className='img-hover-zoom'>
-                        <Card.Img variant="top" src={Ecom} height={200} alt="Culinary Delights ref" className='ig'/>
-                        </div>
-                        <Card.Body>
-                            <Card.Title>Culinary Delights</Card.Title>
-                            <Card.Text>
-                                Culinary Delights: Uniting culinary excellence with tech innovation. Explore recipes, order groceries seamlessly, and access nutritional insights.
-                            </Card.Text>
-                        </Card.Body>
-                        <Card.Footer>
-                            <Button class="btn custom-cursor-button" href="https://culinarydelights.vercel.app/">Click me..</Button>
-                        </Card.Footer>
-                    </Card>
-                </Col>
-                <Col></Col>
-            </Row>
-
     </Container>
     );
 }
