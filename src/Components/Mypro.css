@@ -72,7 +72,7 @@
     padding: .5em 1.5em;
     font-size: 17px;
     border: 0;
-    text-transform: uppercase;
+    font-variant: small-caps;
     box-shadow: 10px 10px 20px rgba(0, 0, 0, .6);
     cursor: url('./Asserts/color-cursor.png'), auto !important;
     clip-path: polygon(
@@ -176,3 +176,11 @@
   .btn:where(:hover, :focus) {
     color: #fff;
   }
+  /* ---------------------------------------------------------------------------------- */
+  .footer{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-self: flex-end;
+  }
+  

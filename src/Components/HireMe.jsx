@@ -6,12 +6,23 @@ import 'react-toastify/dist/ReactToastify.css';
 import Recived from './Asserts/Developer discussing different options.gif';
 import './HireMe.css';
 
+function Loader(){
+    return(
+        <>
+       <div class="loader">
+        <div></div>
+        <div></div>
+       </div>
+        </>
+    );
+}
 function HireMe(){
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
     const [showDiv, setShowDiv] = useState(true);
-    
+    const [load,setLoad] = useState(false);
+
     const handleSuccess = () => {
         toast.success('Email sent successfully!');
         setName('');
@@ -19,17 +30,25 @@ function HireMe(){
         setMessage('');
         setShowDiv(false);
     }
-
+    function isValidEmail(em) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        console.log(emailRegex.test(em));
+        return emailRegex.test(em);
+    }
     const handleValidation = () => {
-        if (name.trim() === '' || email.trim() === '' || message.trim() === '') {
-            toast.error("Fill All the fields");
+        if (name.trim() === '' || email.trim() === '' || message.trim() === '' || isValidEmail(email) != true) {
+            toast.error("Fill All the fields properly");
             return false; // Exit early if any field is empty
         }
-        return true;
+        else{
+            return true;
+        }
     }
 
     const handleSubmit = () => {
+        setLoad(true);
         if (!handleValidation()) {
+            setLoad(false);
             return;
         }
         // Your EmailJS service ID, template ID, and Public Key
@@ -48,8 +67,10 @@ function HireMe(){
         emailjs.send(serviceId, templateId, templateParams, publicKey)
             .then((response) => {
                 handleSuccess();
+                setLoad(false);
             })
             .catch((error) => {
+                setLoad(false);
                 console.error('Error sending email:', error);
             });
     }
@@ -79,6 +100,7 @@ function HireMe(){
                             <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="Enter Email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
+                                required
                             />
                         </div>
                         <div className="mb-3">
@@ -88,7 +110,9 @@ function HireMe(){
                                 onChange={(e) => setMessage(e.target.value)}
                             />
                         </div>
-                        <Button type='button' onClick={handleSubmit} variant='outline-warning' className='custom-cursor-button res'>Send Mail</Button>
+                        <div>
+                            {load ? <center><Loader/></center> : <Button type='button' onClick={handleSubmit} variant='outline-warning' className='custom-cursor-button res'>Send Mail</Button>}
+                        </div>
                     </form>
                 </div>
             ) : (
