@@ -1,186 +1,187 @@
-.bg{
-    box-shadow: 7px 8px 15px 10px rgba(0, 0, 0, 0.2), 0px 0px 20px 0px rgba(0, 0, 0, 0.19);
-      border-radius: 50px;
-      backdrop-filter: blur(6px) saturate(200%);
-      -webkit-backdrop-filter: blur(6px) saturate(200%);
-      background-color: rgba(25, 33, 51, 0.7);
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.125);
-  }
-  .card-bg{
-      box-shadow: 7px 8px 15px 10px rgba(0, 0, 0, 0.2), 0px 0px 20px 0px rgba(0, 0, 0, 0.19);
-      backdrop-filter: blur(6px) saturate(200%);
-      -webkit-backdrop-filter: blur(6px) saturate(200%);
-      background-color: rgba(25, 33, 51, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.125);
-      color: aqua;
-      text-shadow: 2px 2px 3px red;
-  }
-  h2{
-    color: aqua;
-    text-shadow: 2px 2px 3px red;
-  }
-  .btn-outline-warning {
-    --bs-btn-color: cyan;
-    --bs-btn-border-color: cyan;
-    --bs-btn-hover-color: #000;
-    --bs-btn-hover-bg: cyan;
-    --bs-btn-hover-border-color: cyan;
-    --bs-btn-focus-shadow-rgb: 255, 193, 7;
-    --bs-btn-active-color: #000;
-    --bs-btn-active-bg: rgba(0, 255, 255, 0.408);
-    --bs-btn-active-border-color: cyan;
-    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-    --bs-btn-disabled-color: cyan;
-    --bs-btn-disabled-bg: transparent;
-    --bs-btn-disabled-border-color: cyan;
-    --bs-gradient: none;
-  }
-  .custom-cursor-button,
-.custom-cursor-link {
-    cursor: url('./Asserts/color-cursor.png'), auto !important;
+/* ========== Projects section – matches app theme + scroll + unique card ========== */
+.projects-section {
+  position: relative;
 }
 
-  /* ----------------------------------------------- */
-  .img-hover-zoom {
-    overflow: hidden; /* [1.2] Hide the overflowing of child elements */
-  }
-  
-  /* [2] Transition property for smooth transformation of images */
-  .img-hover-zoom .ig {
-    transition: transform .5s ease;
-  }
-  
-  /* [3] Finally, transforming the image when container gets hovered */
-  .img-hover-zoom:hover .ig {
-    transform: scale(1.3);
-  }
-  /* ------------------------------------------------------------------------ */
-  .btn {
-    --border-color: linear-gradient(-45deg, #FB9B4A, rgb(172,44,60), aqua);
-    --border-width: .125em;
-    --curve-size: .5em;
-    --blur: 30px;
-    --bg: #080312;
-    --color: #afffff;
-    color: var(--color);
-      /* use position: relative; so that BG is only for .btn */
-    position: relative;
-    isolation: isolate;
-    display: inline-grid;
-    place-content: center;
-    padding: .5em 1.5em;
-    font-size: 17px;
-    border: 0;
-    font-variant: small-caps;
-    box-shadow: 10px 10px 20px rgba(0, 0, 0, .6);
-    cursor: url('./Asserts/color-cursor.png'), auto !important;
-    clip-path: polygon(
-              /* Top-left */
-              0% var(--curve-size),
-  
-              var(--curve-size) 0,
-              /* top-right */
-              100% 0,
-              100% calc(100% - var(--curve-size)),
-  
-              /* bottom-right 1 */
-              calc(100% - var(--curve-size)) 100%,
-              /* bottom-right 2 */
-              0 100%);
-    transition: color 250ms;
-  }
-  
-  .btn::after,
-  .btn::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-  }
-  
-  .btn::before {
-    background: var(--border-color);
-    background-size: 300% 300%;
-    animation: move-bg7234 5s ease infinite;
-    z-index: -2;
-  }
-  
-  @keyframes move-bg7234 {
-    0% {
-      background-position: 31% 0%
-    }
-  
-    50% {
-      background-position: 70% 100%
-    }
-  
-    100% {
-      background-position: 31% 0%
-    }
-  }
-  
-  .btn::after {
-    background: var(--bg);
-    z-index: -1;
-    clip-path: polygon(
-              /* Top-left */
-              var(--border-width) 
-              calc(var(--curve-size) + var(--border-width) * .5),
-  
-              calc(var(--curve-size) + var(--border-width) * .5) var(--border-width),
-  
-              /* top-right */
-              calc(100% - var(--border-width)) 
-              var(--border-width),
-  
-              calc(100% - var(--border-width)) 
-              calc(100% - calc(var(--curve-size) + var(--border-width) * .5)),
-  
-              /* bottom-right 1 */
-              calc(100% - calc(var(--curve-size) + var(--border-width) * .5)) calc(100% - var(--border-width)),
-              /* bottom-right 2 */
-              var(--border-width) calc(100% - var(--border-width)));
-    transition: clip-path 500ms;
-  }
-  
-  .btn:where(:hover, :focus)::after {
-    clip-path: polygon(
-                  /* Top-left */
-                  calc(100% - var(--border-width)) 
-  
-                  calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)),
-      
-                  calc(100% - var(--border-width))
-  
-                  var(--border-width),
-      
-                  /* top-right */
-                  calc(100% - var(--border-width))
-  
-                   var(--border-width),
-      
-                  calc(100% - var(--border-width)) 
-  
-                  calc(100% - calc(var(--curve-size) + var(--border-width) * .5)),
-      
-                  /* bottom-right 1 */
-                  calc(100% - calc(var(--curve-size) + var(--border-width) * .5)) 
-                  calc(100% - var(--border-width)),
-  
-                  /* bottom-right 2 */
-                  calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5))
-                  calc(100% - var(--border-width)));
-    transition: 200ms;
-  }
-  
-  .btn:where(:hover, :focus) {
-    color: #fff;
-  }
-  /* ---------------------------------------------------------------------------------- */
-  .footer{
-    margin-top: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-self: flex-end;
-  }
-  
+.projects-container {
+  position: relative;
+}
+
+.projects-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.projects-title {
+  color: aqua;
+  text-shadow: 2px 2px 3px red;
+  padding: 0.5rem 0 0.25rem;
+  margin: 0;
+}
+
+.projects-title-underline {
+  width: 80px;
+  height: 3px;
+  margin: 0.5rem auto 0;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.8), transparent);
+  border-radius: 2px;
+}
+
+/* ---------- Container (same as rest of app) ---------- */
+.bg {
+  box-shadow: 7px 8px 15px 10px rgba(0, 0, 0, 0.2), 0px 0px 20px 0px rgba(0, 0, 0, 0.19);
+  border-radius: 12px;
+  backdrop-filter: blur(6px) saturate(200%);
+  -webkit-backdrop-filter: blur(6px) saturate(200%);
+  background-color: rgba(25, 33, 51, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.125);
+}
+
+/* ---------- Project cards: theme + unique hover/scroll feel ---------- */
+.project-card {
+  box-shadow: 7px 8px 15px 10px rgba(0, 0, 0, 0.2), 0px 0px 20px 0px rgba(0, 0, 0, 0.19);
+  backdrop-filter: blur(6px) saturate(200%);
+  -webkit-backdrop-filter: blur(6px) saturate(200%);
+  background-color: rgba(25, 33, 51, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  color: aqua;
+  text-shadow: 2px 2px 3px red;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.25s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    7px 14px 28px rgba(0, 0, 0, 0.3),
+    0 0 24px rgba(0, 255, 255, 0.15);
+  border-color: rgba(0, 255, 255, 0.35);
+}
+
+.card-bg .card-title {
+  color: aqua;
+  text-shadow: 2px 2px 3px red;
+}
+
+.card-bg .card-text {
+  color: rgba(255, 255, 255, 0.88);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.project-card-image {
+  overflow: hidden;
+  border-radius: 12px 12px 0 0;
+}
+
+.project-card-image .ig {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.img-hover-zoom:hover .ig {
+  transform: scale(1.12);
+}
+
+.card-bg .card-footer {
+  background-color: rgba(17, 27, 47, 0.5);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ---------- Buttons (same clip-path gradient as app) ---------- */
+.footer {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.btn {
+  --border-color: linear-gradient(-45deg, #FB9B4A, rgb(172, 44, 60), aqua);
+  --border-width: 0.125em;
+  --curve-size: 0.5em;
+  --blur: 30px;
+  --bg: #080312;
+  --color: #afffff;
+  color: var(--color);
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.5em 1.5em;
+  font-size: 17px;
+  border: 0;
+  font-variant: small-caps;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.6);
+  cursor: url('./Asserts/color-cursor.png'), auto !important;
+  clip-path: polygon(
+    0% var(--curve-size),
+    var(--curve-size) 0,
+    100% 0,
+    100% calc(100% - var(--curve-size)),
+    calc(100% - var(--curve-size)) 100%,
+    0 100%
+  );
+  transition: color 0.25s ease;
+  text-decoration: none;
+}
+
+.btn::after,
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.btn::before {
+  background: var(--border-color);
+  background-size: 300% 300%;
+  animation: move-bg 5s ease infinite;
+  z-index: -2;
+}
+
+@keyframes move-bg {
+  0% { background-position: 31% 0%; }
+  50% { background-position: 70% 100%; }
+  100% { background-position: 31% 0%; }
+}
+
+.btn::after {
+  background: var(--bg);
+  z-index: -1;
+  clip-path: polygon(
+    var(--border-width) calc(var(--curve-size) + var(--border-width) * 0.5),
+    calc(var(--curve-size) + var(--border-width) * 0.5) var(--border-width),
+    calc(100% - var(--border-width)) var(--border-width),
+    calc(100% - var(--border-width)) calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)),
+    calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)) calc(100% - var(--border-width)),
+    var(--border-width) calc(100% - var(--border-width))
+  );
+  transition: clip-path 0.5s ease;
+}
+
+.btn:where(:hover, :focus)::after {
+  clip-path: polygon(
+    calc(100% - var(--border-width)) calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)),
+    calc(100% - var(--border-width)) var(--border-width),
+    calc(100% - var(--border-width)) var(--border-width),
+    calc(100% - var(--border-width)) calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)),
+    calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)) calc(100% - var(--border-width)),
+    calc(100% - var(--border-width) * 0.5) calc(100% - var(--border-width))
+  );
+}
+
+.btn:where(:hover, :focus) {
+  color: #fff;
+}
+
+.custom-cursor-button,
+.custom-cursor-link {
+  cursor: url('./Asserts/color-cursor.png'), auto !important;
+}
