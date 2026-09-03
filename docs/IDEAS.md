@@ -59,53 +59,19 @@ Intern** in `data/overrides.json`.
 
 ---
 
-## Project shortlist
+## Project shortlist — decided
 
-Recommendation, ranked, with evidence from repo metadata.
+**Six featured + one collection entry.** Locked 2026-09-03, full reasoning and
+evidence in **[PROJECTS.md](PROJECTS.md)**.
 
-### Tier 1 — lead with these
-| Project | Stack | Why |
-|---|---|---|
-| **WidgetForge** (frontend + server) | TypeScript, Node/Express, LLM APIs | The headline — and **stronger than the repo description suggests**. It's not a scaffolder, it's *"describe your Mendix widget in plain English and it generates TSX, XML and a ready-to-deploy package"*, with **multi-provider AI (OpenAI, Gemini, Anthropic)**, BYOK, live build logs and a manual mode. Plus the build pipeline: npm runners, XML/JSX sanitisation, CSS injection into MPK artifacts. ⚠️ frontend returns 200 (checked 2026-09-03) but the **Railway backend was on a trial** — needs a functional test, not just a ping |
-| **mxtest-cli** | JS, Docker, Playwright | Zero-config build/run/test for Mendix. Containerisation + E2E + CLI ergonomics — the trio that reads as "can own CI" |
-| **rapid-reporter** ⚑ | Chrome/Edge MV3 | One-click bug reports with screenshot, console, network, DOM. MIT, useful outside its origin, demos in ten seconds |
-| **mcp-redmine-rd** ⚑ | Python, MCP | Tickets *and their screenshots* into Claude Code, plus a ticket→verified-fix skill. Most current work, most in-demand skill here |
+WidgetForge · react-native-airfob · mcp-redmine-rd · mxtest-cli ·
+ECO-Bot/Env_Monitor · rapid-reporter, plus the 12-widget Mendix library as a
+single entry.
 
-### Tier 2 — depth and range
-| Project | Stack | Why |
-|---|---|---|
-| **react-native-airfob** | Kotlin, React Native | BLE tap-and-go behind one JS API, shipped with a working mock so the chain runs pre-licence. That mock is a genuinely senior decision worth writing about |
-| **Env_Monitor** | JS, IoT | IoT automated tractor — and **peer-reviewed**. *ECO-Bot: Autonomous Agricultural Data Collection Robot*, [IEEE Xplore 11414537](https://ieeexplore.ieee.org/document/11414537), 9 Mar 2026. A citable IEEE paper is the single strongest credential on the whole profile. Promote it toward tier 1 and lead the entry with the paper, not the repo. Live demo |
-| **MovieVerse** | React, Spring Boot | One consumer-facing product; keeps the Spring Boot claim honest. Live demo. Swap for **Voxel** (4 ★) if you prefer its design |
-| **MendixFileChecker** | Python, Tkinter | Desktop MPK scanner with CSV/JSON export. Third language, third platform, same instinct |
-
-### Tier 3 — one entry, never twelve cards
-The Mendix widget library: Carousel Container, CarouselCharts, PagetoPDF,
-BarCode, CompactText, FileUpload, NativeImageViewer, NativeImageUploader,
-CustomWebView, PWA SwipeRefresh, audioTextSync, Apryse WebViewer.
-
-"Twelve production widgets" is a strong signal. Twelve thin cards dilute the
-four above and turn the page into a scroll.
-
-### Cut
-Calculator · TaskFlow · Blog Management · Culinary Delights · todo_List · Quiz ·
-Library · TaskScheduler · StudentManagement · Sample-Javascript · Cartoon
-
-Culinary Delights is the one that stings — 34 MB of real work with a live demo.
-But it's the college capstone, and next to WidgetForge it drags the framing back
-to "recent graduate." If it stays, it belongs in a small "earlier work" list at
-the bottom, not the featured grid.
-
-### The employer question
-⚑ Four candidates were built for RapidData and name internal systems —
-`mcp-redmine-rd` and `AutomatedBugFix` both reference `tracker.rapiddata.com`.
-Already public on GitHub, but a portfolio *markets* them, which is different.
-
-Suggested: informal OK from your manager, and rewrite the descriptions to drop
-internal hostnames and ticket references either way. The engineering is just as
-impressive described generically as "a bug tracker." That's what the
-`confidential` flag in `projects.json` is for — render with detail withheld
-rather than dropping the project.
+Two draft picks were cut after probing the repos properly: repo `size` from the
+GitHub API counts assets and build output, so MendixDependencyCheckerGUI
+(1,621 KB, but 40% TeX and 1% Python) and AutomatedBugFix (8 KB of actual code)
+were both far smaller than they looked.
 
 ---
 
