@@ -109,28 +109,20 @@ rather than dropping the project.
 
 ---
 
-## Themes
+## Themes — decided
 
-Four directions, live previews in the
-[brief](https://claude.ai/code/artifact/07974c8e-a9a8-4cba-ad93-5f0503511c4f).
+**Composite of all three: Aurora + Lattice + Prism, in light and dark.**
+Chosen 2026-09-03. Full spec in **[THEME.md](THEME.md)**.
 
-| | Technique | GPU | Effort | Read |
-|---|---|---|---|---|
-| **Lattice** ★ | InstancedMesh, ~1,600 cells | Low | 2–3 d | Systems, grids, build output |
-| **Aurora** | Fullscreen fBm shader | Very low | 1–2 d | Current dev-tool house style |
-| **Swarm** | 16k GPU points, additive | Medium | 4–5 d | Highest wow; common on portfolios |
-| **Prism** | Transmission + dispersion | High | 5–7 d | Design studio more than engineer |
+Short version: not three effects on a page, but one scene of three layers where
+Prism's transmission material refracts the Aurora and Lattice behind it — so the
+expensive layer becomes a lens onto the cheap ones instead of a third cost.
+Scroll staging means only the hero renders all three.
 
-**Recommend Lattice.** It's the only one that's *about* your work rather than
-decorating it, and it clears the performance budget without argument. Mixing is
-fine — Lattice in the hero with a single Prism object on the contact section
-spends the expensive effect in exactly one place.
-
-Implementation note for whichever wins: `InstancedMesh` per-instance colour needs
-`setColorAt()` **without** `vertexColors: true` on the material. Setting
-`vertexColors` makes the shader look for a geometry `color` attribute that
-BoxGeometry doesn't have, which zeroes every instance colour to black. Cost me a
-debugging pass on the previews.
+Implementation note kept from the preview build: `InstancedMesh` per-instance
+colour needs `setColorAt()` **without** `vertexColors: true` on the material.
+Setting `vertexColors` makes the shader look for a geometry `color` attribute
+that BoxGeometry doesn't have, which zeroes every instance colour to black.
 
 ---
 

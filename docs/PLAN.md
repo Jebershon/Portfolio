@@ -34,6 +34,19 @@ Details in [AUDIT.md](AUDIT.md).
 
 ## Phases
 
+| # | Phase | Status |
+|---|---|---|
+| 00 | Freeze | ✅ done |
+| 01 | Harvest | ✅ done |
+| 02 | Data layer | ⬜ next |
+| 03 | Curate and write the projects | ⬜ |
+| 04 | Scaffold + dual-theme design system | ⬜ needs the stack decision |
+| 05 | Composite scene — 05a Aurora, 05b Lattice, 05c Prism | ⬜ |
+| 06 | Theme parity for the 3D | ⬜ |
+| 07 | Content, contact, polish | ⬜ |
+| 08 | Ship | ⬜ |
+
+
 ### 00 — Freeze ✅ done
 Branch `rebuild/v7` created off `dbd4056`. `main` untouched, live deployment
 unaffected. Optional: tag the fallback point.
@@ -42,7 +55,7 @@ unaffected. Optional: tag the fallback point.
 git tag -a v6.2-legacy dbd4056 -m "Portfolio v6.2 — last CRA build before v7 rebuild"
 ```
 
-### 01 — Harvest 🔄 waiting on the archive
+### 01 — Harvest ✅ done
 Raw source material only, no interpretation yet.
 
 - ✅ `scripts/sync-github.mjs` → `data/_generated/github.json` — **56 repos**
@@ -104,27 +117,62 @@ short recordings for anything with a live demo.
 
 Highest-leverage writing on the site, and mostly your input rather than mine.
 
-### 04 — Scaffold, no 3D
-Vite + React + TypeScript. Design tokens, type scale, routing, layout,
-accessibility baseline, everything reading from `/data`.
+### 04 — Scaffold + dual-theme design system, no 3D
+Vite + React + TypeScript. Routing, layout, accessibility baseline, everything
+reading from `/data`.
 
-Ends with a complete, fast, entirely boring portfolio that already beats what's
-live now.
+**The theming happens here, not later.** Both palettes are defined as CSS custom
+properties in this phase, with the three-state toggle (System / Light / Dark)
+working across the whole DOM. The 3D layer reads its colours from those same
+properties in phase 05, so if theming is bolted on afterwards the shaders end up
+with hardcoded hexes and two sources of truth.
+
+Ends with a complete, fast, entirely boring portfolio — **in both themes** —
+that already beats what's live now.
 
 > **Why this order.** The 3D has to be an enhancement, not a dependency. If the
 > site is only good with WebGL running, it's broken for every recruiter on a
 > locked-down laptop or a mid-range phone.
 
-### 05 — Build the chosen theme
-React Three Fiber + drei, code-split so the 3D loads after first paint. Ships
-with a `prefers-reduced-motion` static fallback, a reduced mobile tier, and a
-graceful path when WebGL is unavailable. Held to the budget below.
+### 05 — The composite scene, one layer at a time
+Spec: [THEME.md](THEME.md). React Three Fiber + drei, code-split so the 3D loads
+after first paint.
 
-### 06 — Content, contact, polish
+Built and **measured** in three stages rather than all at once, so a layer that
+blows the budget gets caught when it's cheap to drop rather than at the end:
+
+- **05a — Aurora.** The ground and the palette. Cheapest layer, biggest
+  atmospheric return. Ships with the tier C static fallback so the degradation
+  path exists from day one rather than being retrofitted.
+- **05b — Lattice.** Structure and cursor response, composited into the aurora.
+  This is the layer that carries the positioning.
+- **05c — Prism.** One glass object, refracting the two layers behind it. The
+  expensive one, and the one most likely to be cut on mobile.
+
+> **Gate after each stage.** Frame cost measured on a mid-range Android profile,
+> not desktop. If a layer can't hold its budget, it ships at a lower tier or
+> doesn't ship. Aurora and Lattice are each independently shippable — Prism is
+> the only optional one.
+
+### 06 — Theme parity for the 3D
+Light mode is where WebGL themes usually fall apart, so it gets its own pass
+rather than being assumed.
+
+Per-layer palette work from [THEME.md](THEME.md#per-layer-adjustments): aurora
+switches from additive to multiply-style blending, lattice heat becomes
+saturation instead of brightness, and prism gains iridescence plus an
+attenuation tint so it doesn't vanish on a pale ground. Uniform cross-fade on
+theme change, no renderer teardown.
+
+> **Gate.** Both themes screenshotted side by side at every breakpoint. Neither
+> is allowed to look like the afterthought.
+
+### 07 — Content, contact, polish
 Case-study pages, current resume download, contact form with keys in env vars
-and the EmailJS domain allow-list configured, OG images, sitemap, favicons, 404.
+and the EmailJS domain allow-list configured, OG images (one per theme), sitemap,
+favicons, 404.
 
-### 07 — Ship
+### 08 — Ship
 Lighthouse against the budget, cross-browser and real-device check, deploy,
 repoint the domain. Legacy build stays reachable for a week.
 
@@ -140,16 +188,33 @@ Hard gates, checked on throttled mobile before shipping.
 | Metric | Target | Today |
 |---|---|---|
 | LCP, 4G mobile | < 2.0 s | — |
-| Initial JS (gzip) | < 120 KB | — |
+| Initial JS (gzip), no 3D | < 120 KB | — |
+| 3D chunk (gzip), lazy | < 180 KB | — |
 | Total page weight | < 900 KB | 2,123 KB |
-| Lighthouse accessibility | 100 | — |
+| Lighthouse accessibility | 100, **both themes** | — |
+
+**Frame budget**, measured per layer on a mid-range Android profile. Phase 05
+gates on these individually — a layer that misses its number ships at a lower
+tier or doesn't ship:
+
+| Layer | Budget | Notes |
+|---|---|---|
+| Aurora | ≤ 2 ms | One fullscreen shader. Should be nearly free |
+| Lattice | ≤ 3 ms | ~1,600 instances, one draw call |
+| Prism | ≤ 5 ms | Transmission costs an extra scene pass. The risky one |
+| **Hero total** | **≤ 10 ms** | Leaves 6 ms of the 16.7 ms frame for everything else |
 
 - 3D never blocks first paint. The 1,000 ms artificial spinner does not come with us.
-- Every scene has three tiers: full desktop, reduced mobile, static image for
-  reduced-motion or missing WebGL. Auto-downgrade below 45 fps for two seconds.
+- Three tiers per [THEME.md](THEME.md#performance-tiers). Demotion is one-way
+  within a session — a page that oscillates between quality levels while you
+  scroll is worse than one that just picks the lower tier.
 - The site is **fully usable with WebGL disabled** — not degraded, complete.
+- **Both themes are first-class.** Every gate is checked twice. Light mode is
+  where WebGL themes normally fall apart, so it gets equal scrutiny, not a
+  glance at the end.
 - Images as AVIF with WebP fallback, sized to their layout box.
 - Keyboard navigable end to end, visible focus, skip link. Canvases `aria-hidden`.
+- Theme switch never re-initialises the renderer — uniforms cross-fade instead.
 
 ---
 

@@ -8,7 +8,8 @@ folder is for planning, decisions and reference material only.
 | [PLAN.md](PLAN.md) | The phased rebuild plan, current status, and the gates between phases |
 | [AUDIT.md](AUDIT.md) | Findings from the v6.2 codebase and live-deployment audit |
 | [DATA-SOURCES.md](DATA-SOURCES.md) | Where profile data comes from, what we have, what's still missing |
-| [IDEAS.md](IDEAS.md) | Theme directions, project shortlist, positioning questions |
+| [THEME.md](THEME.md) | The chosen visual system: composite 3D scene, light/dark palettes, perf tiers |
+| [IDEAS.md](IDEAS.md) | Project shortlist, positioning, open questions |
 
 ## Conventions
 
