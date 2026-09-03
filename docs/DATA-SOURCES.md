@@ -10,7 +10,7 @@ Where every fact on the new site comes from. Updated 2026-09-03.
 | **Apify LinkedIn scrape** | **Collected — primary source** | `data/_generated/linkedin.json`. 22 certifications, 5 projects, 45 skills, 3 roles, IEEE publication. Supersedes the two below |
 | LinkedIn profile PDF | Collected | `data/_raw/linkedin-profile.pdf` — summary view, now redundant |
 | LinkedIn public page | Partially collected | `data/_raw/linkedin-public-scrape.md` — one page before the auth wall |
-| LinkedIn full archive | **Optional now** | Only remaining value is `Shares.csv` (post history). See below |
+| LinkedIn full archive | **Dropped** | Superseded by the Apify scrape. Reasoning under *Routes we didn't take* |
 | Current resume | **Missing** | The one in `src/Components/Asserts/` is the college version (roll no. `717821f219`) |
 | Headshot | **Missing** | Optional, only if we want one on the site |
 
@@ -52,13 +52,15 @@ The PDF listed five. Highlights not previously known:
 |---|---|---|---|
 | Software Engineer | RapidData | Full-time, on-site | Jun 2025 – present |
 | Trainee Software Engineer | RapidData | Full-time, on-site | Jul 2024 – Jun 2025 |
-| *(no title on LinkedIn)* | PG Softwares | **Internship**, hybrid | Jul 2022 – Aug 2023 |
+| Web Development Intern | PG Softwares | **Internship**, hybrid | Jul 2022 – Aug 2023 |
 
 PG Softwares is tagged **Internship**, which settles the positioning question —
 see [IDEAS.md](IDEAS.md#how-much-experience-to-claim).
 
-⚠️ The PG Softwares entry has **no job title** — the company name was entered in
-the position field. Needs one by hand in `experience.json`.
+The PG Softwares entry had **no job title** on LinkedIn (the company name sits
+in the position field). Set to *Web Development Intern* in `data/overrides.json`
+and confirmed by Jebershon on 2026-09-03 — corrections go there, not into
+`data/_generated/`, so they survive the next sync.
 
 ### Genuinely empty
 Honors, courses, languages, volunteering, patents, organizations, recommendations
@@ -129,54 +131,21 @@ Databases · Data Warehousing · Data Transformation
 
 ---
 
-## What the PDF left out, and how to get it
+## Routes we didn't take
 
-The "Save to PDF" export is a **summary view**. It deliberately omits several
-sections and truncates others. Missing:
+Recorded so we don't relitigate it.
 
-- **Projects** — the whole section
-- **Publications** — everything except the title
-- **Certifications** — issue dates, issuing organisations, credential IDs and URLs
-- **Skills** — only the top 3 of what is usually 30–50
-- Honors & awards, courses, languages, volunteering, recommendations, endorsements
-- Any media or attachments on experience entries
+**LinkedIn's official data export** (`download-my-data`). Was the plan until the
+Apify scrape landed and covered every section. Its one remaining advantage was
+`Shares.csv` — your full post history, which is where the WidgetForge detail
+came from. Judged not worth a 24-hour wait plus a CSV parser to maintain, so
+`scripts/parse-linkedin-export.mjs` was written, tested, then **removed on
+2026-09-03**. It's in git history at `9f456f6` if the post archive ever matters.
 
-### The fix: LinkedIn's official data export
-
-This is the complete, structured, terms-compliant route, and it returns exactly
-the sections you asked about — as CSV files, one per section.
-
-1. Go to **[linkedin.com/mypreferences/d/download-my-data](https://www.linkedin.com/mypreferences/d/download-my-data)**
-   (or *Me → Settings & Privacy → Data Privacy → Get a copy of your data*)
-2. Choose **"Download larger data archive"** — the *"Want something in
-   particular?"* option is a trimmed subset. The full archive takes up to 24 hours
-   but is the one that contains everything below
-3. LinkedIn emails a download link; unzip into `data/_raw/linkedin-export/`
-4. Run `node scripts/parse-linkedin-export.mjs`
-
-**Decided 2026-09-03:** full archive over the subset, and over scraping. An
-authenticated scraper needs the `li_at` session cookie, which is the pattern
-LinkedIn restricts and bans accounts for — a bad trade against an account with
-2K followers while job-hunting. The archive is also *more* complete than a
-scraper could be: it's LinkedIn's own database dump rather than a rendering of it.
-
-The files that matter:
-
-| File | Feeds |
-|---|---|
-| `Profile.csv` | headline, summary, industry |
-| `Positions.csv` | `experience.json` |
-| `Education.csv` | `education.json` |
-| `Certifications.csv` | `education.json` — with dates, issuers, credential URLs |
-| `Projects.csv` | cross-referenced against `projects.json` |
-| `Publications.csv` | ECO-Bot detail |
-| `Skills.csv` | `skills.json` — the full list, not just the top 3 |
-| `Shares.csv` | **every post you've written** — the source of the WidgetForge detail |
-| `Honors.csv` `Courses.csv` `Languages.csv` `Recommendations_Received.csv` | timeline and social proof |
-
-The parser skips files containing other people's data (Connections, messages,
-contacts, ad targeting) and never writes them to output, since
-`data/_generated/` is committed.
+**An authenticated scraper.** Needs the `li_at` session cookie, which is the
+pattern LinkedIn restricts and bans accounts for. Bad trade against an account
+with 1,700 followers while job-hunting. Apify runs on its own infrastructure and
+sidesteps that exposure.
 
 ### What we tried instead, and how far it got — 2026-09-03
 

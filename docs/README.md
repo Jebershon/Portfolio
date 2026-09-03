@@ -17,6 +17,9 @@ folder is for planning, decisions and reference material only.
 - **Open questions live at the bottom of each doc** under `## Open`.
 - `data/_raw/` is gitignored. It holds personal source material (LinkedIn export,
   resume) that shouldn't be in a public repo.
+- **Never hand-edit `data/_generated/`.** It is overwritten on every sync.
+  Corrections belong in `data/overrides.json`, which the parsers re-apply on each
+  run and report in `_overridesApplied`.
 
 ## Branch
 

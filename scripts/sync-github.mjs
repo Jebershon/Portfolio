@@ -6,20 +6,7 @@
  * file instead of having them typed into JSX. Re-run it whenever you want the
  * site to catch up with reality.
  *
- *   node scripts/sync-github.mjs
- *   node scripts/sync-github.mjs --user Jebershon --languages
- *
- * Options
- *   --user <login>   GitHub user            (default: Jebershon)
- *   --languages      also fetch the per-repo language breakdown. Costs one
- *                    request per repo, so it needs GITHUB_TOKEN in practice.
- *   --include-forks  keep forked repos      (default: dropped)
- *   --out <path>     output file            (default: data/_generated/github.json)
- *
- * Auth is optional. Unauthenticated you get 60 requests/hour, which is enough
- * for the default run but not for --languages. To raise it to 5,000:
- *   export GITHUB_TOKEN=ghp_...        (bash)
- *   $env:GITHUB_TOKEN = "ghp_..."      (PowerShell)
+ * Run with --help for options.
  */
 
 import { writeFile, mkdir } from "node:fs/promises";
@@ -46,6 +33,21 @@ function parseArgs(argv) {
   }
   return opts;
 }
+
+const USAGE = `
+sync-github.mjs — snapshot every public repo into data/_generated/github.json
+
+  node scripts/sync-github.mjs
+  node scripts/sync-github.mjs --user Jebershon --languages
+
+  --user <login>   GitHub user                    (default: Jebershon)
+  --languages      per-repo language byte breakdown; one request per repo,
+                   so it needs GITHUB_TOKEN in practice
+  --include-forks  keep forked repos              (default: dropped)
+  --out <path>     output file (default: data/_generated/github.json)
+
+Auth is optional: 60 requests/hour anonymous, 5,000 with GITHUB_TOKEN set.
+`.trim();
 
 const token = process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
 
@@ -112,14 +114,7 @@ function shape(r) {
 
 async function main() {
   const opts = parseArgs(process.argv.slice(2));
-  if (opts.help) {
-    console.log(
-      String(await import("node:fs").then((fs) => fs.readFileSync(fileURLToPath(import.meta.url), "utf8")))
-        .split("*/")[0]
-        .replace(/^#!.*\n/, "")
-    );
-    return;
-  }
+  if (opts.help) { console.log(USAGE); return; }
 
   console.log(`Syncing github.com/${opts.user}${token ? " (authenticated)" : " (anonymous, 60 req/hr)"}`);
 

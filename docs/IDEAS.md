@@ -54,9 +54,8 @@ at RapidData, and list PG Softwares in the timeline as the internship it was.
 Claiming "3+ years" would fold an internship into a full-time count, which is
 exactly the kind of thing an interviewer checks.
 
-⚠️ That entry has **no job title** on LinkedIn — the company name sits in the
-position field. Needs a real one written by hand; "Web Development Intern"
-matches the description.
+Resolved: the entry had no job title on LinkedIn, now set to **Web Development
+Intern** in `data/overrides.json`.
 
 ---
 

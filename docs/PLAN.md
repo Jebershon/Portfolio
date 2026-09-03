@@ -54,10 +54,11 @@ Raw source material only, no interpretation yet.
   `scripts/parse-linkedin-apify.mjs`. 22 certifications, 5 projects, 45 skills,
   3 roles, and the **IEEE publication**. Cross-checked against LinkedIn's own
   `sectionTotals` — only gap is 45 skills vs 47 reported
-- ✅ `scripts/parse-linkedin-export.mjs` — tested against a fixture, kept for the
-  archive if it arrives
-- ⬜ LinkedIn full archive — **now optional.** Its only remaining value is
-  `Shares.csv` (post history), since Apify covered every profile section
+- ✅ `data/overrides.json` — hand-authored corrections re-applied on every sync,
+  so a re-scrape never clobbers them
+- ✂️ LinkedIn CSV-export parser **removed** — the Apify scrape covers every
+  section, so it was dead code. See *Routes we didn't take* in
+  [DATA-SOURCES.md](DATA-SOURCES.md)
 - ⬜ Current resume → `data/_raw/`
 
 > **Caution for phase 03.** GitHub stars invert the ranking we want:
@@ -77,10 +78,18 @@ data/
   skills.json       grouped, with years + evidence pointing at real repos
   projects.json     the tiered catalogue
   meta.json         SEO, OG, resume path, lastSynced
-  _generated/
-    github.json     written by sync-github.mjs, never hand-edited
+  overrides.json    ✅ hand-authored fixes layered onto _generated/
+  _generated/       ✅ machine-written, never hand-edited
+    github.json       sync-github.mjs
+    linkedin.json     parse-linkedin-apify.mjs
   _raw/             source material (gitignored)
 ```
+
+The three-layer split is the point: `_raw/` is what we were given, `_generated/`
+is what the scripts derive from it and will happily overwrite, and everything
+else is authored by hand. `overrides.json` is the seam — corrections to scraped
+data live there and get re-applied on every sync, so nothing hand-fixed is ever
+lost to a re-run.
 
 `skills.json` carries **evidence**, not self-assessed percentages. "TypeScript,
 2 years" is a claim; "TypeScript — see `widgetforge-server`" is a citation.

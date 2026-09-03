@@ -1,0 +1,15 @@
+{
+  "_note": "Hand-authored corrections applied on top of scraped data. Everything in data/_generated/ is machine-written and gets overwritten on every sync, so fixes belong HERE, not there. Applied by scripts/parse-linkedin-apify.mjs.",
+
+  "experience": {
+    "PG Softwares": {
+      "title": "Web Development Intern",
+      "_why": "LinkedIn has the company name in the position field, leaving no job title. Inferred from the role description (responsive design, web apps in HTML/CSS/MySQL/Java, e-commerce customisation) and confirmed by Jebershon on 2026-09-03 as an internship."
+    }
+  },
+
+  "skills": {
+    "_note": "45 of 47 skills came through the scrape. If the two missing ones matter, add them here as a list under `add`.",
+    "add": []
+  }
+}
