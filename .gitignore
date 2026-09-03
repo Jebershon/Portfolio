@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# raw profile source material (personal data — LinkedIn export, resume)
+/data/_raw
