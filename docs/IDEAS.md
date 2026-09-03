@@ -48,10 +48,15 @@ You described yourself as "2 years experience." LinkedIn says more:
 | RapidData — Trainee Software Engineer | Jul 2024 – Jun 2025 | 1 y |
 | PG Softwares | Jul 2022 – Aug 2023 | 1 y 2 m |
 
-**2 years 3 months** at RapidData. PG Softwares overlaps your degree, so it reads
-as internship or part-time work — including it gets you to "3+ years" but invites
-the question. My instinct: lead with **2+ years professional**, list PG Softwares
-in the timeline without inflating the headline number. Your call.
+**Settled 2026-09-03.** The Apify scrape tags PG Softwares as **Internship**
+(hybrid), so there's no judgement call left: lead with **2+ years professional**
+at RapidData, and list PG Softwares in the timeline as the internship it was.
+Claiming "3+ years" would fold an internship into a full-time count, which is
+exactly the kind of thing an interviewer checks.
+
+⚠️ That entry has **no job title** on LinkedIn — the company name sits in the
+position field. Needs a real one written by hand; "Web Development Intern"
+matches the description.
 
 ---
 
@@ -71,7 +76,7 @@ Recommendation, ranked, with evidence from repo metadata.
 | Project | Stack | Why |
 |---|---|---|
 | **react-native-airfob** | Kotlin, React Native | BLE tap-and-go behind one JS API, shipped with a working mock so the chain runs pre-licence. That mock is a genuinely senior decision worth writing about |
-| **Env_Monitor** | JS, IoT | IoT automated tractor. **Backed by a real publication** — *ECO-Bot: Autonomous Agricultural Data Collection Robot*. The only non-tooling project, and the one people remember. Live demo |
+| **Env_Monitor** | JS, IoT | IoT automated tractor — and **peer-reviewed**. *ECO-Bot: Autonomous Agricultural Data Collection Robot*, [IEEE Xplore 11414537](https://ieeexplore.ieee.org/document/11414537), 9 Mar 2026. A citable IEEE paper is the single strongest credential on the whole profile. Promote it toward tier 1 and lead the entry with the paper, not the repo. Live demo |
 | **MovieVerse** | React, Spring Boot | One consumer-facing product; keeps the Spring Boot claim honest. Live demo. Swap for **Voxel** (4 ★) if you prefer its design |
 | **MendixFileChecker** | Python, Tkinter | Desktop MPK scanner with CSV/JSON export. Third language, third platform, same instinct |
 
@@ -127,6 +132,23 @@ Implementation note for whichever wins: `InstancedMesh` per-instance colour need
 `vertexColors` makes the shader look for a geometry `color` attribute that
 BoxGeometry doesn't have, which zeroes every instance colour to black. Cost me a
 debugging pass on the previews.
+
+---
+
+### Your LinkedIn Projects section has the same problem as the site
+
+The scrape shows only five projects listed, and **every one is college-era**:
+Culinary Delights, Env_Monitor, MovieVerse, Personal Portfolio, Voxel. Four are
+tagged *"Associated with Karpagam College of Engineering"*.
+
+None of WidgetForge, mxtest-cli, rapid-reporter or mcp-redmine-rd appears. So
+the staleness isn't a portfolio problem — it's a **profile-wide** one, and fixing
+only the site leaves the same wrong story on the channel recruiters actually
+search. Worth updating both.
+
+One reclassification: **Voxel is tagged "Associated with PG Softwares"**, so it
+was internship work, not a personal project. Frame it as client work — that's a
+stronger claim, not a weaker one.
 
 ---
 

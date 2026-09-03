@@ -50,10 +50,14 @@ Raw source material only, no interpretation yet.
 - ✅ LinkedIn profile PDF → `data/_raw/linkedin-profile.pdf`
 - ✅ LinkedIn public page → `data/_raw/linkedin-public-scrape.md` — one page
   before the auth wall; yielded 2 unlisted certs and the real WidgetForge story
-- ✅ `scripts/parse-linkedin-export.mjs` — written and tested against a fixture,
-  ready for the archive
-- ⏳ **LinkedIn full archive requested — up to 24h.** Unzip into
-  `data/_raw/linkedin-export/`, then run the parser
+- ✅ **Apify LinkedIn scrape** → `data/_generated/linkedin.json` via
+  `scripts/parse-linkedin-apify.mjs`. 22 certifications, 5 projects, 45 skills,
+  3 roles, and the **IEEE publication**. Cross-checked against LinkedIn's own
+  `sectionTotals` — only gap is 45 skills vs 47 reported
+- ✅ `scripts/parse-linkedin-export.mjs` — tested against a fixture, kept for the
+  archive if it arrives
+- ⬜ LinkedIn full archive — **now optional.** Its only remaining value is
+  `Shares.csv` (post history), since Apify covered every profile section
 - ⬜ Current resume → `data/_raw/`
 
 > **Caution for phase 03.** GitHub stars invert the ranking we want:

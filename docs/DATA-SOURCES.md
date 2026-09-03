@@ -7,11 +7,67 @@ Where every fact on the new site comes from. Updated 2026-09-03.
 | Source | State | Notes |
 |---|---|---|
 | GitHub (public API) | **Collected** | 59 repos: languages, sizes, descriptions, topics, stars, homepages, push dates |
-| LinkedIn profile PDF | **Collected** | `data/_raw/linkedin-profile.pdf` — experience, education, certs, publication title |
-| LinkedIn public page | **Partially collected** | `data/_raw/linkedin-public-scrape.md` — one page before the auth wall. Yielded 2 certs and the real WidgetForge story |
-| LinkedIn full export | **Not yet requested** | The only way to get Projects, Publications detail, and the full Skills list. See below |
+| **Apify LinkedIn scrape** | **Collected — primary source** | `data/_generated/linkedin.json`. 22 certifications, 5 projects, 45 skills, 3 roles, IEEE publication. Supersedes the two below |
+| LinkedIn profile PDF | Collected | `data/_raw/linkedin-profile.pdf` — summary view, now redundant |
+| LinkedIn public page | Partially collected | `data/_raw/linkedin-public-scrape.md` — one page before the auth wall |
+| LinkedIn full archive | **Optional now** | Only remaining value is `Shares.csv` (post history). See below |
 | Current resume | **Missing** | The one in `src/Components/Asserts/` is the college version (roll no. `717821f219`) |
 | Headshot | **Missing** | Optional, only if we want one on the site |
+
+---
+
+## Apify scrape — 2026-09-03
+
+`node scripts/parse-linkedin-apify.mjs` → `data/_generated/linkedin.json`.
+Everything the PDF and the public page were missing.
+
+**Verified against LinkedIn's own `sectionTotals`.** One gap: 45 skills scraped
+against 47 reported. Everything else matches exactly.
+
+### The find: the publication is real and citable
+
+**ECO-Bot: Autonomous Agricultural Data Collection Robot** — published in
+**IEEE Xplore**, 9 March 2026:
+<https://ieeexplore.ieee.org/document/11414537>
+
+A verifiable IEEE paper is a stronger credential than anything else on the
+profile, and it backs `Env_Monitor` with peer review rather than a README.
+
+### 22 certifications, 18 with verifiable credential URLs
+
+The PDF listed five. Highlights not previously known:
+
+- **Mendix Rapid Developer** (Sep 2024) + **Mendix Intermediate Developer**
+  (Jan 2026) — the "2× Mendix Certified" claim, now with dates
+- **Apigee API Platform** — Google Cloud Skills Boost, Apr 2026
+- **Meta Front-End Developer** — Feb 2024
+- **Snowflake** data warehousing, **Qlik** ×2, **Microsoft Applied Skills (C#)** —
+  all Jul 2026, so actively certifying right now
+- HackerRank ×6 (SQL, React, JavaScript, Java, CSS, Problem Solving), NPTEL IoT,
+  MongoDB, AWS Prompt Engineering, Azure Fundamentals
+
+### Employment, settled
+
+| Role | Company | Type | Period |
+|---|---|---|---|
+| Software Engineer | RapidData | Full-time, on-site | Jun 2025 – present |
+| Trainee Software Engineer | RapidData | Full-time, on-site | Jul 2024 – Jun 2025 |
+| *(no title on LinkedIn)* | PG Softwares | **Internship**, hybrid | Jul 2022 – Aug 2023 |
+
+PG Softwares is tagged **Internship**, which settles the positioning question —
+see [IDEAS.md](IDEAS.md#how-much-experience-to-claim).
+
+⚠️ The PG Softwares entry has **no job title** — the company name was entered in
+the position field. Needs one by hand in `experience.json`.
+
+### Genuinely empty
+Honors, courses, languages, volunteering, patents, organizations, recommendations
+— all zero in `sectionTotals`. Not scrape failures; those sections are unused.
+
+### Skills — 45 of 47
+Top five: **Java · React.js · Node.js · Apigee API Management · Mendix Platform**.
+Notable that the profile already carries *Large Language Models (LLM)*, *Prompt
+Engineering* and *Prompt Design*, which supports the AI-tooling positioning.
 
 ---
 
