@@ -154,17 +154,12 @@ h2{font-family:var(--serif); font-variation-settings:"opsz" 96; font-weight:600;
 .ledger{list-style:none; margin:0; padding:0}
 .ledger li{
   display:grid; grid-template-columns:52px 1fr; gap:6px 20px; align-items:baseline;
-  padding:24px 0; border-bottom:1px solid var(--line-soft); position:relative; cursor:default;
-  transition:padding-left .3s cubic-bezier(.2,.7,.1,1);
+  padding:24px 0; border-bottom:1px solid var(--line-soft); position:relative;
 }
 @media(min-width:900px){.ledger li{grid-template-columns:52px 1.1fr 1.4fr auto; gap:0 32px}}
-.ledger li::before{content:""; position:absolute; left:0; bottom:-1px; height:1px; width:0; background:var(--forge); transition:width .5s cubic-bezier(.2,.7,.1,1)}
-.ledger li:hover{padding-left:10px}
-.ledger li:hover::before{width:100%}
-.ledger .n{font-family:var(--mono); font-size:11px; color:var(--muted); letter-spacing:.06em}
-.ledger .name{font-family:var(--serif); font-variation-settings:"opsz" 72; font-weight:600; font-size:clamp(22px,2.4vw,30px); line-height:1.05; letter-spacing:-.02em; color:var(--ink); transition:color .2s}
-.ledger li:hover .name{color:var(--forge)}
-.ledger .desc{font-size:15px; color:var(--ink-2); max-width:46ch; grid-column:2}
+.ledger .n{font-family:var(--mono); font-size:11px; color:var(--muted); letter-spacing:.06em; position:relative; transition:color .4s cubic-bezier(.2,.7,.1,1)}
+.ledger .name{font-family:var(--serif); font-variation-settings:"opsz" 72; font-weight:600; font-size:clamp(22px,2.4vw,30px); line-height:1.05; letter-spacing:-.02em; color:var(--ink); justify-self:start; transition:color .45s cubic-bezier(.2,.7,.1,1), transform .45s cubic-bezier(.2,.7,.1,1)}
+.ledger .desc{font-size:15px; color:var(--ink-2); max-width:46ch; grid-column:2; transition:color .45s cubic-bezier(.2,.7,.1,1)}
 @media(min-width:900px){.ledger .desc{grid-column:auto}}
 .ledger .spec{font-family:var(--mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); grid-column:2}
 @media(min-width:900px){.ledger .spec{grid-column:auto; text-align:right; white-space:nowrap}}
@@ -209,14 +204,31 @@ footer{padding:64px 0 46px; border-top:1px solid var(--line); position:relative}
 .stack dd{margin:0; padding:16px 0; border-top:1px solid var(--line-soft); color:var(--ink); font-size:15.5px; line-height:1.7}
 @media(max-width:640px){.stack dt{padding:14px 0 2px; border-top:1px solid var(--line-soft)} .stack dd{padding:0 0 14px; border-top:0}}
 
-/* ---------- tools: a lighter ledger where each row links out to GitHub ---------- */
+/* ---------- Projects (client work): a forge->steel ink wash and a forge rail on hover ---------- */
+#work .ledger li > *{position:relative; z-index:1}
+#work .ledger li::before{content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+  background:linear-gradient(90deg, color-mix(in srgb, var(--forge) 13%, transparent) 0%, color-mix(in srgb, var(--steel) 8%, transparent) 44%, transparent 80%);
+  transform:scaleX(0); transform-origin:left; transition:transform .55s cubic-bezier(.2,.7,.1,1)}
+#work .ledger li::after{content:""; position:absolute; left:-1px; top:14%; width:2px; height:0; background:var(--forge); transition:height .55s cubic-bezier(.2,.7,.1,1)}
+#work .ledger li:hover::before,#work .ledger li:focus-within::before{transform:scaleX(1)}
+#work .ledger li:hover::after,#work .ledger li:focus-within::after{height:72%}
+#work .ledger li:hover .name,#work .ledger li:focus-within .name{color:var(--forge); transform:translateX(8px)}
+#work .ledger li:hover .desc,#work .ledger li:focus-within .desc{color:var(--ink)}
+
+/* ---------- Side projects (open source): arrow-travel hover; each row links to GitHub ---------- */
 #tools .ledger li{cursor:pointer}
-.ledger .go{font-family:var(--mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); text-decoration:none; white-space:nowrap; grid-column:2; transition:color .2s}
+.ledger .go{font-family:var(--mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); text-decoration:none; white-space:nowrap; grid-column:2; transition:color .45s cubic-bezier(.2,.7,.1,1), opacity .45s cubic-bezier(.2,.7,.1,1), transform .45s cubic-bezier(.2,.7,.1,1)}
 @media(min-width:900px){.ledger .go{grid-column:auto; text-align:right; align-self:center}}
-.ledger li:hover .go{color:var(--forge)}
 .ledger a.go::after{content:""; position:absolute; inset:0} /* the whole row is the link */
-.ledger .go .arrow{display:inline-block; transition:transform .2s}
-.ledger li:hover .go .arrow{transform:translate(2px,-2px)}
+.ledger .go .arrow{display:inline-block}
+/* the leading number swaps for a forge arrow */
+#tools .ledger .n::before{content:"\2192"; position:absolute; left:0; color:var(--forge); opacity:0; transform:translateX(-5px); transition:opacity .4s cubic-bezier(.2,.7,.1,1), transform .4s cubic-bezier(.2,.7,.1,1)}
+#tools .ledger li:hover .n,#tools .ledger li:focus-within .n{color:transparent}
+#tools .ledger li:hover .n::before,#tools .ledger li:focus-within .n::before{opacity:1; transform:translateX(0)}
+#tools .ledger li:hover .name,#tools .ledger li:focus-within .name{color:var(--forge); transform:translateX(12px)}
+/* the GitHub label rests faint, then glides in */
+#tools .ledger .go{opacity:.4; transform:translateX(-8px)}
+#tools .ledger li:hover .go,#tools .ledger li:focus-within .go{opacity:1; transform:translateX(0); color:var(--forge)}
 
 /* ---------- credentials: achievements above a grid of certification chips ---------- */
 .awards{list-style:none; margin:0 0 48px; padding:0; max-width:900px}
