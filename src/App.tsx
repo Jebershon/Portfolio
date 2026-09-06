@@ -11,6 +11,7 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import { useTheme } from "./hooks/useTheme";
 import { useReveal } from "./hooks/useReveal";
+import { useSmoothScroll } from "./hooks/useSmoothScroll";
 
 export default function App() {
   // Bumping paletteKey tells the canvas to re-read the CSS palette after a theme change.
@@ -19,6 +20,7 @@ export default function App() {
   const { choice, setChoice } = useTheme(onPaletteChange);
 
   useReveal();
+  useSmoothScroll();
 
   return (
     <>

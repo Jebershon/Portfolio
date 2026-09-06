@@ -186,8 +186,19 @@ h2{font-family:var(--serif); font-variation-settings:"opsz" 96; font-weight:600;
 .avail::before{content:""; width:7px; height:7px; border-radius:50%; background:var(--forge); box-shadow:0 0 0 0 var(--forge); animation:pulse 2.4s ease-out infinite}
 @keyframes pulse{70%{box-shadow:0 0 0 9px transparent}100%{box-shadow:0 0 0 0 transparent}}
 
-footer{padding:26px 0 70px; border-top:1px solid var(--line); position:relative}
-.foot-in{display:flex; flex-wrap:wrap; gap:8px 26px; justify-content:space-between; position:relative; z-index:1}
+footer{padding:64px 0 46px; border-top:1px solid var(--line); position:relative}
+.foot-top,.foot-base{position:relative; z-index:1}
+.foot-top{display:grid; grid-template-columns:1fr; gap:38px 60px; padding-bottom:42px}
+@media(min-width:720px){.foot-top{grid-template-columns:1.5fr 1fr}}
+.foot-brand .brand{font-size:15px}
+.foot-brand p{margin:14px 0 0; color:var(--ink-2); max-width:32ch; font-size:15px; font-weight:500}
+.foot-cols{display:grid; grid-template-columns:1fr 1fr; gap:28px}
+.foot-col{display:flex; flex-direction:column; gap:12px}
+.foot-h{font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-bottom:2px}
+.foot-col a{font-family:var(--mono); font-size:12.5px; letter-spacing:.03em; color:var(--ink-2); text-decoration:none; width:fit-content; transition:color .2s, padding-left .2s}
+.foot-col a:hover{color:var(--forge); padding-left:4px}
+.foot-base{display:flex; flex-wrap:wrap; gap:8px 26px; justify-content:space-between; padding-top:24px; border-top:1px solid var(--line-soft)}
+.foot-base span{font-family:var(--mono); font-size:11px; letter-spacing:.04em; text-transform:uppercase; color:var(--muted)}
 
 /* ---------- stack: grouped skills, category label beside its tools ---------- */
 .stack{display:grid; grid-template-columns:auto 1fr; margin:0; max-width:980px}
@@ -222,8 +233,15 @@ footer{padding:26px 0 70px; border-top:1px solid var(--line); position:relative}
 .certs li i::before{content:"\00B7"; color:var(--line); margin:0 6px}
 .certs .more{border-style:dashed; color:var(--muted)}
 
+/* ---------- Lenis smooth scroll ---------- */
+.lenis,.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}
+.lenis.lenis-stopped{overflow:hidden}
+
 @media(prefers-reduced-motion:reduce){
   *{animation-duration:.01ms!important; transition-duration:.01ms!important}
   [data-reveal]{opacity:1; transform:none}
   h1 .w{opacity:1; transform:none}
+  html{scroll-behavior:auto}
 }

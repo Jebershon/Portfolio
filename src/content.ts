@@ -132,5 +132,19 @@ export const contact = {
   availability: `${profile.location} — open to interesting problems`,
 };
 
-// ── footer ──
-export const footer = [`© ${profile.name} 2026`, "Built with React + Three.js", profile.location];
+// ── footer: a tagline, navigation, and the ways to connect ──
+export const footer = {
+  tagline: "Full-stack Mendix developer building enterprise apps end to end.",
+  columns: [
+    { head: "Navigate", links: nav },
+    {
+      head: "Connect",
+      links: [
+        { label: "Email", href: `mailto:${profile.email}` },
+        { label: "GitHub", href: profile.socials.github },
+        { label: "LinkedIn", href: profile.socials.linkedin },
+      ],
+    },
+  ],
+  meta: [`© ${profile.name} 2026`, "Built with React + Three.js", profile.location],
+};
