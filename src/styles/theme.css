@@ -209,9 +209,9 @@ footer{padding:64px 0 46px; border-top:1px solid var(--line); position:relative}
 #work .ledger li::before{content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
   background:linear-gradient(90deg, color-mix(in srgb, var(--forge) 13%, transparent) 0%, color-mix(in srgb, var(--steel) 8%, transparent) 44%, transparent 80%);
   transform:scaleX(0); transform-origin:left; transition:transform .55s cubic-bezier(.2,.7,.1,1)}
-#work .ledger li::after{content:""; position:absolute; left:-14px; top:14%; width:2px; height:0; background:var(--forge); transition:height .55s cubic-bezier(.2,.7,.1,1)}
+#work .ledger li::after{content:""; position:absolute; left:0; right:0; bottom:-1px; height:1px; background:var(--forge); transform:scaleX(0); transform-origin:left; transition:transform .55s cubic-bezier(.2,.7,.1,1)}
 #work .ledger li:hover::before,#work .ledger li:focus-within::before{transform:scaleX(1)}
-#work .ledger li:hover::after,#work .ledger li:focus-within::after{height:72%}
+#work .ledger li:hover::after,#work .ledger li:focus-within::after{transform:scaleX(1)}
 #work .ledger li:hover .name,#work .ledger li:focus-within .name{color:var(--forge); transform:translateX(8px)}
 #work .ledger li:hover .desc,#work .ledger li:focus-within .desc{color:var(--ink)}
 
