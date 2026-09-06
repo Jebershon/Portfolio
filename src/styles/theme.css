@@ -154,7 +154,7 @@ h2{font-family:var(--serif); font-variation-settings:"opsz" 96; font-weight:600;
 .ledger{list-style:none; margin:0; padding:0}
 .ledger li{
   display:grid; grid-template-columns:52px 1fr; gap:6px 20px; align-items:baseline;
-  padding:24px 0; border-bottom:1px solid var(--line-soft); position:relative;
+  padding:30px 0; border-bottom:1px solid var(--line-soft); position:relative;
 }
 @media(min-width:900px){.ledger li{grid-template-columns:52px 1.1fr 1.4fr auto; gap:0 32px}}
 .ledger .n{font-family:var(--mono); font-size:11px; color:var(--muted); letter-spacing:.06em; position:relative; transition:color .4s cubic-bezier(.2,.7,.1,1)}
@@ -207,7 +207,7 @@ footer{padding:64px 0 46px; border-top:1px solid var(--line); position:relative}
 /* ---------- Projects (client work): a forge->steel ink wash and a forge rail on hover ---------- */
 #work .ledger li > *{position:relative; z-index:1}
 #work .ledger li::before{content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
-  background:linear-gradient(90deg, var(--wash) 0%, transparent 62%);
+  background:linear-gradient(90deg, transparent 0%, var(--wash) 12%, transparent 64%);
   transform:scaleX(0); transform-origin:left; transition:transform .55s cubic-bezier(.2,.7,.1,1)}
 #work .ledger li::after{content:""; position:absolute; left:0; right:0; bottom:-1px; height:1px; background:var(--forge); transform:scaleX(0); transform-origin:left; transition:transform .55s cubic-bezier(.2,.7,.1,1)}
 #work .ledger li:hover::before,#work .ledger li:focus-within::before{transform:scaleX(1)}
