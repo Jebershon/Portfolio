@@ -203,9 +203,11 @@ export function createForgeScene(canvas: HTMLCanvasElement) {
     color: cur.ink,
     opacity: 0.9,
     depthWrite: false,
+    depthTest: false, // the tilted lattice pokes in front of it; draw the monogram over it regardless
   });
   const monogram = new THREE.Mesh(new THREE.PlaneGeometry(9, 4.5), monogramMat);
   monogram.position.set(2.4, 0.8, -1.6);
+  monogram.renderOrder = 1; // above the lattice, below the liquid
   scene.add(monogram);
 
   const liquidUniforms = {
@@ -318,6 +320,7 @@ export function createForgeScene(canvas: HTMLCanvasElement) {
     }),
   );
   liquid.position.set(3.6, 0.5, 2);
+  liquid.renderOrder = 2; // always in front of the monogram
   scene.add(liquid);
 
   // ── pointer + scroll input ──
@@ -524,7 +527,7 @@ export function createForgeScene(canvas: HTMLCanvasElement) {
       liquidUniforms.uDark.value = cur.dark;
       liquidUniforms.uSteps.value = tier === "A" ? 64 : 40;
       liquid.scale.setScalar(liquid.userData.size * (0.5 + stage.liquid * 0.5));
-      monogramMat.opacity = (0.9 - 0.2 * (1 - cur.dark)) * stage.liquid; // firmer so the lattice does not read through it
+      monogramMat.opacity = (0.97 - 0.07 * (1 - cur.dark)) * stage.liquid; // opaque enough that the lattice does not read through the letters
       monogramMat.color.copy(cur.ink);
     }
 
