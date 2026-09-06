@@ -3,7 +3,7 @@
  * shapes the components render, and holds the presentation-only copy (the headline,
  * section labels, footer). Components read from here and never touch the raw data.
  */
-import { profile, experience, education, skills, projects } from "./data";
+import { profile, experience, education, skills, projects, meta } from "./data";
 
 const monthNames = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
@@ -129,6 +129,7 @@ export const contact = {
   lead: { before: "Let's ", em: "build", after: " something." },
   email: profile.email,
   emailHref: `mailto:${profile.email}`,
+  resumeHref: meta.resume,
   availability: `${profile.location} — open to interesting problems`,
 };
 
@@ -143,6 +144,7 @@ export const footer = {
         { label: "Email", href: `mailto:${profile.email}` },
         { label: "GitHub", href: profile.socials.github },
         { label: "LinkedIn", href: profile.socials.linkedin },
+        { label: "Résumé", href: meta.resume },
       ],
     },
   ],

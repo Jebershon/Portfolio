@@ -18,7 +18,7 @@ export default function Footer() {
             <nav key={col.head} className="foot-col">
               <span className="foot-h">{col.head}</span>
               {col.links.map((l) => {
-                const external = l.href.startsWith("http");
+                const external = l.href.startsWith("http") || l.href.endsWith(".pdf");
                 return (
                   <a
                     key={l.label}

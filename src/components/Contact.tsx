@@ -14,6 +14,9 @@ export default function Contact() {
             <a className="cta" href={contact.emailHref}>
               {contact.email} <span>→</span>
             </a>
+            <a className="cta" href={contact.resumeHref} target="_blank" rel="noreferrer">
+              View résumé <span>↗</span>
+            </a>
             <span className="avail mono">{contact.availability}</span>
           </div>
         </div>
