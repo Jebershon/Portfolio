@@ -3,7 +3,10 @@ import ForgeCanvas from "./components/ForgeCanvas";
 import Nav from "./components/Nav";
 import Hero from "./components/Hero";
 import Work from "./components/Work";
+import Stack from "./components/Stack";
+import Tools from "./components/Tools";
 import Path from "./components/Path";
+import Credentials from "./components/Credentials";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import { useTheme } from "./hooks/useTheme";
@@ -24,7 +27,10 @@ export default function App() {
         <Nav theme={choice} onTheme={setChoice} />
         <Hero />
         <Work />
+        <Stack />
+        <Tools />
         <Path />
+        <Credentials />
         <Contact />
         <Footer />
       </div>

@@ -66,7 +66,7 @@ nav{position:fixed; top:0; left:0; right:0; z-index:20; mix-blend-mode:normal}
 .nav-in{display:flex; align-items:center; justify-content:space-between; height:64px}
 .brand{font-family:var(--mono); font-size:12px; color:var(--ink); letter-spacing:.04em; text-decoration:none}
 .brand b{color:var(--forge); font-weight:500}
-.nav-links{display:none; gap:28px}
+.nav-links{display:none; gap:22px}
 @media(min-width:800px){.nav-links{display:flex}}
 .nav-links a{font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color .2s}
 .nav-links a:hover{color:var(--forge)}
@@ -91,7 +91,7 @@ h1 em{font-style:italic; font-weight:600; color:var(--forge)}
 h1 .w{display:inline-block; opacity:0; transform:translateY(.35em); animation:rise .9s cubic-bezier(.2,.7,.1,1) forwards}
 h1 .w:nth-child(1){animation-delay:.05s} h1 .w:nth-child(2){animation-delay:.14s}
 h1 .w:nth-child(3){animation-delay:.23s} h1 .w:nth-child(4){animation-delay:.32s}
-h1 .w:nth-child(5){animation-delay:.41s} h1 .w:nth-child(6){animation-delay:.5s}
+h1 .w:nth-child(5){animation-delay:.41s} h1 .w:nth-child(6){animation-delay:.5s} h1 .w:nth-child(7){animation-delay:.59s}
 @keyframes rise{to{opacity:1; transform:none}}
 .lede{font-size:clamp(17px,1.6vw,21px); line-height:1.55; color:var(--ink-2); max-width:44ch; margin:0 0 40px}
 
@@ -159,8 +159,8 @@ h2{font-family:var(--serif); font-variation-settings:"opsz" 96; font-weight:600;
 .ledger li:hover .name{color:var(--forge)}
 .ledger .desc{font-size:15px; color:var(--ink-2); max-width:46ch; grid-column:2}
 @media(min-width:900px){.ledger .desc{grid-column:auto}}
-.ledger .spec{font-family:var(--mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); grid-column:2; white-space:nowrap}
-@media(min-width:900px){.ledger .spec{grid-column:auto; text-align:right}}
+.ledger .spec{font-family:var(--mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); grid-column:2}
+@media(min-width:900px){.ledger .spec{grid-column:auto; text-align:right; white-space:nowrap}}
 .ledger .spec i{font-style:normal; color:var(--line); margin:0 8px}
 
 /* ---------- build log ---------- */
@@ -183,6 +183,39 @@ h2{font-family:var(--serif); font-variation-settings:"opsz" 96; font-weight:600;
 
 footer{padding:26px 0 70px; border-top:1px solid var(--line)}
 .foot-in{display:flex; flex-wrap:wrap; gap:8px 26px; justify-content:space-between}
+
+/* ---------- stack: grouped skills, category label beside its tools ---------- */
+.stack{display:grid; grid-template-columns:auto 1fr; margin:0; max-width:980px}
+@media(max-width:640px){.stack{grid-template-columns:1fr}}
+.stack dt{font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--forge); padding:16px 32px 16px 0; border-top:1px solid var(--line-soft); align-self:start}
+.stack dd{margin:0; padding:16px 0; border-top:1px solid var(--line-soft); color:var(--ink); font-size:15.5px; line-height:1.7}
+@media(max-width:640px){.stack dt{padding:14px 0 2px; border-top:1px solid var(--line-soft)} .stack dd{padding:0 0 14px; border-top:0}}
+
+/* ---------- tools: a lighter ledger where each row links out to GitHub ---------- */
+#tools .ledger li{cursor:pointer}
+.ledger .go{font-family:var(--mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); text-decoration:none; white-space:nowrap; grid-column:2; transition:color .2s}
+@media(min-width:900px){.ledger .go{grid-column:auto; text-align:right; align-self:center}}
+.ledger li:hover .go{color:var(--forge)}
+.ledger a.go::after{content:""; position:absolute; inset:0} /* the whole row is the link */
+.ledger .go .arrow{display:inline-block; transition:transform .2s}
+.ledger li:hover .go .arrow{transform:translate(2px,-2px)}
+
+/* ---------- credentials: achievements above a grid of certification chips ---------- */
+.awards{list-style:none; margin:0 0 48px; padding:0; max-width:900px}
+.awards li{display:grid; grid-template-columns:128px 1fr; gap:0 22px; padding:16px 0; border-bottom:1px solid var(--line-soft); align-items:baseline}
+@media(max-width:640px){.awards li{grid-template-columns:1fr; gap:4px}}
+.awards .k{font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--forge)}
+.awards .m{color:var(--ink); font-weight:500}
+.awards .m a{color:var(--ink); text-decoration:none; border-bottom:1px solid var(--line); transition:color .2s, border-color .2s}
+.awards .m a:hover{color:var(--forge); border-color:var(--forge)}
+.certs-head{font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin:0 0 16px}
+.certs{display:flex; flex-wrap:wrap; gap:10px 12px; max-width:940px; padding:0; list-style:none}
+.certs li{font-family:var(--mono); font-size:11.5px; color:var(--ink-2); border:1px solid var(--line); border-radius:3px; padding:7px 11px; transition:border-color .2s, color .2s}
+.certs li:hover{border-color:var(--forge); color:var(--ink)}
+.certs li b{color:var(--ink); font-weight:500}
+.certs li i{font-style:normal; color:var(--muted)}
+.certs li i::before{content:"\00B7"; color:var(--line); margin:0 6px}
+.certs .more{border-style:dashed; color:var(--muted)}
 
 @media(prefers-reduced-motion:reduce){
   *{animation-duration:.01ms!important; transition-duration:.01ms!important}

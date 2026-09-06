@@ -12,10 +12,10 @@
     "linkedin": "https://www.linkedin.com/in/jebershon-vetha-singh",
     "portfolio": "https://jebershonvethasingh.vercel.app"
   },
-  "summary": "I build enterprise applications and the internal tooling that speeds up the teams around them — Mendix widgets, a browser-based widget generator, test CLIs, and AI-assisted developer tools. IEEE-published in IoT.",
+  "summary": "I'm a full-stack Mendix developer at RapidData. I take enterprise apps from the domain model to the App Store — microflows and pages up top, React, Java and Node underneath, wired to Apigee and GCP.",
   "stats": [
     { "label": "Experience", "value": "2+ yrs" },
-    { "label": "Public repos", "value": "56" },
+    { "label": "Public repos", "value": "59" },
     { "label": "Certifications", "value": "22" },
     { "label": "Mendix widgets", "value": "12" }
   ]

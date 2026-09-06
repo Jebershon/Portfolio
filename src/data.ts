@@ -42,18 +42,26 @@ export interface Degree {
   end: string;
 }
 
-export interface Project {
+// Enterprise work delivered for a client. No public links (proprietary).
+export interface ClientProject {
   slug: string;
   name: string;
-  tier: number;
+  client: string;
+  featured?: boolean;
   oneLiner: string;
   stack: string[];
   type: string;
-  year: number;
-  status: string;
+  role: string;
+}
+
+// Open-source side project, linked to its GitHub repo.
+export interface Tool {
+  slug: string;
+  name: string;
+  oneLiner: string;
+  stack: string[];
+  type: string;
   links: { demo?: string; repo?: string; paper?: string };
-  employer: boolean;
-  confidential: boolean;
 }
 
 export const profile = profileJson as Profile;
@@ -65,7 +73,8 @@ export const education = educationJson as {
 };
 export const skills = skillsJson as { groups: { name: string; items: string[] }[]; top: string[] };
 export const projects = projectsJson as {
-  featured: Project[];
+  clients: ClientProject[];
+  tools: Tool[];
   collection: { name: string; oneLiner: string; count: number; examples: string[] };
   publication: { title: string; venue: string; date: string; url: string };
 };

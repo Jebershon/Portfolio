@@ -1,9 +1,9 @@
 {
-  "_note": "Grouped skills. 'evidence' points at a repo or project that proves it, rather than a self-assessed level.",
+  "_note": "Grouped skills, rendered as the Stack section. Sourced from data/_generated/linkedin.json and the resume; edit here. 'top' is a short highlight list, not currently rendered.",
   "groups": [
     {
-      "name": "Low-Code",
-      "items": ["Mendix", "Microflows & nanoflows", "Pluggable widgets", "Native & hybrid mobile", "Java actions"]
+      "name": "Low-Code / Mendix",
+      "items": ["Mendix", "Microflows & nanoflows", "Pluggable widgets", "Native & hybrid mobile", "Java actions", "Studio Pro"]
     },
     {
       "name": "Languages",
@@ -11,7 +11,7 @@
     },
     {
       "name": "Frontend",
-      "items": ["React", "React Native", "HTML5", "CSS3", "Three.js"]
+      "items": ["React", "React Native", "HTML5", "CSS3", "Bootstrap", "Three.js"]
     },
     {
       "name": "Backend",
@@ -19,12 +19,20 @@
     },
     {
       "name": "Cloud & Integration",
-      "items": ["Google Cloud", "Apigee", "GCP Application Integration", "Azure", "Jira API", "Oracle Fusion API", "Microsoft Graph"]
+      "items": ["Google Cloud", "Apigee", "GCP Application Integration", "Azure", "Jira API", "Oracle Fusion API", "Microsoft Graph", "OAuth/JWT"]
     },
     {
-      "name": "AI & Tooling",
-      "items": ["MCP servers", "LLM APIs (OpenAI, Gemini, Anthropic)", "Docker", "Playwright", "Git", "CI pipelines"]
+      "name": "DevOps & Automation",
+      "items": ["Docker", "Jenkins", "CI pipelines", "Puppeteer (form automation)", "Playwright", "Git"]
+    },
+    {
+      "name": "Mobile",
+      "items": ["iOS & Android deployment", "Apple & Google Wallet", "Push notifications"]
+    },
+    {
+      "name": "AI & Media",
+      "items": ["MCP servers", "LLM APIs (OpenAI, Gemini, Anthropic)", "FFmpeg", "YOLOv5", "WebGazer"]
     }
   ],
-  "top": ["Mendix", "React", "Node.js", "Apigee", "Java"]
+  "top": ["Mendix", "React", "Java", "Node.js", "Docker", "Apigee"]
 }

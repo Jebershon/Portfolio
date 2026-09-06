@@ -14,9 +14,11 @@ export default function Work() {
             <span className="mono">{featured.kicker}</span>
             <h3>{featured.name}</h3>
             <p>{featured.blurb}</p>
-            <a className="cta" href={featured.ctaHref}>
-              {featured.ctaLabel} <span>→</span>
-            </a>
+            {featured.ctaHref && (
+              <a className="cta" href={featured.ctaHref}>
+                {featured.ctaLabel} <span>→</span>
+              </a>
+            )}
           </div>
           <dl className="spec">
             {featured.spec.map((s) => (
