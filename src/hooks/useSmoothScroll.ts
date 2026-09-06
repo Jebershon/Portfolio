@@ -7,7 +7,8 @@ export function useSmoothScroll() {
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const lenis = new Lenis({ duration: 1.15, wheelMultiplier: 0.9 });
+    // Low lerp = more glide/inertia on the wheel; scrollTo below uses a long, soft duration.
+    const lenis = new Lenis({ lerp: 0.07, wheelMultiplier: 0.9 });
 
     let raf = 0;
     const loop = (time: number) => {
@@ -24,7 +25,7 @@ export function useSmoothScroll() {
       const target = document.querySelector(href);
       if (!target) return;
       e.preventDefault();
-      lenis.scrollTo(target as HTMLElement, { offset: -8 });
+      lenis.scrollTo(target as HTMLElement, { offset: -8, duration: 1.7 });
     };
     document.addEventListener("click", onClick);
 

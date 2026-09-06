@@ -501,7 +501,7 @@ export function createForgeScene(canvas: HTMLCanvasElement) {
     auroraUniforms.uDark.value = cur.dark;
     auroraUniforms.uIntensity.value = stage.aurora;
     const aurTarget = t - aurLastMove < 1.0 ? 1 : 0;
-    auroraUniforms.uHover.value += (aurTarget - auroraUniforms.uHover.value) * (1 - Math.exp(-dt * 1.8));
+    auroraUniforms.uHover.value += (aurTarget - auroraUniforms.uHover.value) * (1 - Math.exp(-dt * 1.1));
     scene.background = cur.ground;
 
     // Keep the lattice quiet so it never competes with the text (extra calm on paper).
@@ -521,8 +521,8 @@ export function createForgeScene(canvas: HTMLCanvasElement) {
 
     if (liquid.visible) {
       liquidUniforms.uTime.value = t;
-      liquidUniforms.uPointer.value.lerp(ptrTarget, 1 - Math.exp(-dt * 3.2));
-      liquidUniforms.uPntStr.value += (ptrNear - liquidUniforms.uPntStr.value) * (1 - Math.exp(-dt * 2.4));
+      liquidUniforms.uPointer.value.lerp(ptrTarget, 1 - Math.exp(-dt * 2.0));
+      liquidUniforms.uPntStr.value += (ptrNear - liquidUniforms.uPntStr.value) * (1 - Math.exp(-dt * 1.5));
       liquidUniforms.uIntensity.value = stage.liquid;
       liquidUniforms.uDark.value = cur.dark;
       liquidUniforms.uSteps.value = tier === "A" ? 64 : 40;
