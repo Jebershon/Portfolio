@@ -77,9 +77,11 @@ nav{position:fixed; top:0; left:0; right:0; z-index:20; mix-blend-mode:normal}
 
 /* ---------- hero ---------- */
 .hero{min-height:100vh; display:grid; align-content:end; padding:120px 0 40px; position:relative}
-/* A soft pool of ground colour behind the hero copy, kept off the prism on the right. */
-.hero .wrap::before{content:""; position:absolute; inset:-40px -60px; z-index:-1; pointer-events:none;
-  background:radial-gradient(ellipse 66% 82% at 20% 56%, color-mix(in srgb, var(--ground) 88%, transparent) 0%, color-mix(in srgb, var(--ground) 55%, transparent) 52%, transparent 100%)}
+/* The field is vivid at the top of the hero (headline + liquid), then fades straight down
+   into the same 74% ground veil the sections use, reaching it by the hero's bottom edge. So
+   the hero merges into the page below with no visible seam — the fade happens within the hero. */
+.hero::before{content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+  background:linear-gradient(180deg, transparent 0%, transparent 28%, color-mix(in srgb, var(--ground) 74%, transparent) 80%, color-mix(in srgb, var(--ground) 74%, transparent) 100%)}
 .spec-top{display:flex; flex-wrap:wrap; gap:8px 28px; margin-bottom:28px}
 .spec-top span::before{content:"\2014  "; color:var(--forge)}
 h1{
@@ -105,7 +107,7 @@ h1 .w:nth-child(5){animation-delay:.41s} h1 .w:nth-child(6){animation-delay:.5s}
 @media(max-width:719px){.spec-strip div:nth-child(3){padding-left:0; border-left:0}}
 .spec-strip dt{font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin:0 0 6px}
 .spec-strip dd{margin:0; font-family:var(--serif); font-variation-settings:"opsz" 72; font-size:30px; line-height:1; color:var(--ink); font-weight:600; letter-spacing:-.02em}
-.scroll-cue{position:absolute; right:0; bottom:44px; display:none; align-items:center; gap:10px}
+.scroll-cue{position:absolute; right:0; bottom:44px; display:none; align-items:center; gap:10px; z-index:1}
 @media(min-width:800px){.scroll-cue{display:flex}}
 .scroll-cue i{display:block; width:1px; height:44px; background:var(--line); position:relative; overflow:hidden}
 .scroll-cue i::after{content:""; position:absolute; left:0; top:-100%; width:100%; height:100%; background:var(--forge); animation:drip 2.2s ease-in-out infinite}
@@ -113,13 +115,12 @@ h1 .w:nth-child(5){animation-delay:.41s} h1 .w:nth-child(6){animation-delay:.5s}
 
 /* ---------- sections ---------- */
 section{padding:118px 0; position:relative}
-/* The field stays vivid only at the hero. Everything below carries a uniform veil of the
-   ground colour — every section plus the footer — so the whole lower page is one calm,
-   continuous ground with no bright bands at the joins. The field fades in once, just below
-   the hero (the #work override); it never re-emerges lower down. */
+/* Everything below the hero carries a uniform veil of the ground colour — every section plus
+   the footer — so the whole lower page is one calm, continuous ground with no bright bands at
+   the joins. The single fade from vivid field to veil happens inside the hero (.hero::before),
+   which ends at this same 74% level, so the hero joins seamlessly and the field never re-emerges. */
 section:not(.hero)::before, footer::before{content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
   background:color-mix(in srgb, var(--ground) 74%, transparent)}
-#work::before{background:linear-gradient(180deg, transparent 0%, color-mix(in srgb, var(--ground) 74%, transparent) 9%, color-mix(in srgb, var(--ground) 74%, transparent) 100%)}
 section > .wrap{position:relative; z-index:1}
 .sec-head{display:grid; grid-template-columns:auto 1fr; gap:24px 40px; align-items:end; margin-bottom:56px; padding-bottom:22px; border-bottom:1px solid var(--line)}
 .sec-idx{
