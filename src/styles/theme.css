@@ -62,7 +62,7 @@ a{color:inherit}
 .mono b{color:var(--ink); font-weight:500}
 
 /* ---------- nav ---------- */
-nav{position:fixed; top:0; left:0; right:0; z-index:20; mix-blend-mode:normal}
+.shell > nav{position:fixed; top:0; left:0; right:0; z-index:20; mix-blend-mode:normal}
 .nav-in{display:flex; align-items:center; justify-content:space-between; height:64px}
 .brand{font-family:var(--mono); font-size:12px; color:var(--ink); letter-spacing:.04em; text-decoration:none}
 .brand b{color:var(--forge); font-weight:500}
