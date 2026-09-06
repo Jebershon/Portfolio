@@ -1,5 +1,6 @@
 import { brand, nav } from "../content";
 import ThemeToggle from "./ThemeToggle";
+import { useActiveSection } from "../hooks/useActiveSection";
 import type { ThemeChoice } from "../hooks/useTheme";
 
 export default function Nav({
@@ -9,6 +10,7 @@ export default function Nav({
   theme: ThemeChoice;
   onTheme: (next: ThemeChoice) => void;
 }) {
+  const active = useActiveSection(nav.map((item) => item.href.slice(1)));
   return (
     <nav>
       <div className="wrap nav-in">
@@ -19,7 +21,11 @@ export default function Nav({
         </a>
         <div className="nav-links">
           {nav.map((item) => (
-            <a key={item.href} href={item.href}>
+            <a
+              key={item.href}
+              href={item.href}
+              aria-current={active === item.href.slice(1) ? "true" : undefined}
+            >
               {item.label}
             </a>
           ))}

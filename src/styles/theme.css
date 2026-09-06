@@ -70,6 +70,8 @@ a{color:inherit}
 @media(min-width:800px){.nav-links{display:flex}}
 .nav-links a{font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color .2s}
 .nav-links a:hover{color:var(--forge)}
+/* The section you're viewing glows a slight forge orange. */
+.nav-links a[aria-current="true"]{color:var(--forge); text-shadow:0 0 14px color-mix(in srgb, var(--forge) 55%, transparent)}
 .toggle{display:flex; gap:2px; padding:2px; border:1px solid var(--line); border-radius:3px; background:color-mix(in srgb, var(--ground) 70%, transparent); backdrop-filter:blur(10px)}
 .toggle button{font-family:var(--mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase; padding:5px 9px; border:0; border-radius:2px; background:transparent; color:var(--muted); cursor:pointer; transition:background .2s, color .2s}
 .toggle button:hover{color:var(--ink)}
