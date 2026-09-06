@@ -9,6 +9,7 @@ folder is for planning, decisions and reference material only.
 | [AUDIT.md](AUDIT.md) | Findings from the v6.2 codebase and live-deployment audit |
 | [DATA-SOURCES.md](DATA-SOURCES.md) | Where profile data comes from, what we have, what's still missing |
 | [THEME.md](THEME.md) | The chosen visual system: composite 3D scene, light/dark palettes, perf tiers |
+| [ORIGINALITY.md](ORIGINALITY.md) | Whether anyone else uses this design — ingredient by ingredient, with sources |
 | [PROJECTS.md](PROJECTS.md) | The six featured projects, why each earns its slot, and what was cut |
 | [IDEAS.md](IDEAS.md) | Positioning and open questions |
 

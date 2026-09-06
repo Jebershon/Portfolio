@@ -40,8 +40,8 @@ Details in [AUDIT.md](AUDIT.md).
 | 01 | Harvest | ✅ done |
 | 02 | Data layer | ⬜ next |
 | 03 | Curate and write the projects | ⬜ |
-| 04 | Scaffold + dual-theme design system | ⬜ needs the stack decision |
-| 05 | Composite scene — 05a Aurora, 05b Lattice, 05c Prism | ⬜ |
+| 04 | Scaffold + dual-theme design system | ⬜ design LOCKED; ready to start |
+| 05 | Composite scene — 05a Aurora, 05b Lattice, 05c Liquid | ⬜ |
 | 06 | Theme parity for the 3D | ⬜ |
 | 07 | Content, contact, polish | ⬜ |
 | 08 | Ship | ⬜ |
@@ -146,13 +146,14 @@ blows the budget gets caught when it's cheap to drop rather than at the end:
   path exists from day one rather than being retrofitted.
 - **05b — Lattice.** Structure and cursor response, composited into the aurora.
   This is the layer that carries the positioning.
-- **05c — Prism.** One glass object, refracting the two layers behind it. The
-  expensive one, and the one most likely to be cut on mobile.
+- **05c — Liquid.** One raymarched zero-gravity water blob, pointer-reactive and
+  anchored top-right. The expensive one (an SDF raymarch loop), and the one most
+  likely to be cut on mobile.
 
 > **Gate after each stage.** Frame cost measured on a mid-range Android profile,
 > not desktop. If a layer can't hold its budget, it ships at a lower tier or
-> doesn't ship. Aurora and Lattice are each independently shippable — Prism is
-> the only optional one.
+> doesn't ship. Aurora and Lattice are each independently shippable — the Liquid
+> is the only optional one (tier C drops it to a static gradient).
 
 ### 06 — Theme parity for the 3D
 Light mode is where WebGL themes usually fall apart, so it gets its own pass
@@ -160,9 +161,11 @@ rather than being assumed.
 
 Per-layer palette work from [THEME.md](THEME.md#per-layer-adjustments): aurora
 switches from additive to multiply-style blending, lattice heat becomes
-saturation instead of brightness, and prism gains iridescence plus an
-attenuation tint so it doesn't vanish on a pale ground. Uniform cross-fade on
-theme change, no renderer teardown.
+saturation instead of brightness, and the liquid tints from the steel/forge
+tokens (translucent teal-on-paper in light, luminous in dark). Uniform cross-fade
+on theme change, no renderer teardown. **Note:** the owner's theme choice lives
+on `<body data-mode>` with a `MutationObserver` re-syncing the canvas when a host
+restamps `<html>` — a real bug found in the artifact viewer on 2026-09-06.
 
 > **Gate.** Both themes screenshotted side by side at every breakpoint. Neither
 > is allowed to look like the afterthought.
@@ -201,7 +204,7 @@ tier or doesn't ship:
 |---|---|---|
 | Aurora | ≤ 2 ms | One fullscreen shader. Should be nearly free |
 | Lattice | ≤ 3 ms | ~1,600 instances, one draw call |
-| Prism | ≤ 5 ms | Transmission costs an extra scene pass. The risky one |
+| Liquid | ≤ 5 ms | A raymarched SDF loop (~64 steps). The risky one; halve steps on mobile |
 | **Hero total** | **≤ 10 ms** | Leaves 6 ms of the 16.7 ms frame for everything else |
 
 - 3D never blocks first paint. The 1,000 ms artificial spinner does not come with us.
@@ -220,10 +223,12 @@ tier or doesn't ship:
 
 ## Open
 
+- [x] **Theme — LOCKED 2026-09-06.** "Instrument" direction; composite Aurora +
+      Lattice + zero-gravity Liquid; light/dark. See [THEME.md](THEME.md).
 - [ ] **Stack** — recommend Vite + React + TypeScript. Next.js only if you want
-      written case studies with real SEO; Astro if raw performance matters most
-- [ ] **Theme** — recommend Lattice, optionally with one Prism object on contact.
-      See the live previews in the brief
-- [ ] **LinkedIn export** — blocks phase 02 completion
+      written case studies with real SEO; Astro if raw performance matters most.
+      The one remaining decision before phase 04 starts.
 - [ ] **Employer-built projects** — four strong candidates name internal RapidData
-      systems. See [IDEAS.md](IDEAS.md#the-employer-question)
+      systems. See [IDEAS.md](IDEAS.md#the-employer-question). Gates phase 03 content.
+- [x] **LinkedIn data** — obtained via the Apify scrape (see phase 01); the export
+      route is no longer needed.

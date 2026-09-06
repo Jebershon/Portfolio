@@ -1,0 +1,847 @@
+<title>Forge Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,600;1,9..144,700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Light is the base palette. Dark overrides only the tokens; the WebGL reads them too. */
+:root {
+  --ground:#eef0f2; --surface:#ffffff;
+  --line:rgba(18,23,29,.14); --line-soft:rgba(18,23,29,.07);
+  --ink:#12171d; --ink-2:#1f272f; --muted:#4b555f;
+  --steel:#1d6b76; --forge:#a84a18;
+  --is-dark:0;
+  --serif:"Fraunces",Georgia,"Times New Roman",serif;
+  --sans:"Instrument Sans",system-ui,-apple-system,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,monospace;
+}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
+  --ground:#0a1017; --surface:#111820;
+  --line:rgba(230,235,240,.16); --line-soft:rgba(230,235,240,.07);
+  --ink:#e6ebf0; --ink-2:#b4c0cb; --muted:#7b8794;
+  --steel:#3f9fb0; --forge:#e3873f;
+  --is-dark:1;
+}}
+:root[data-theme="dark"]{
+  --ground:#0a1017; --surface:#111820;
+  --line:rgba(230,235,240,.16); --line-soft:rgba(230,235,240,.07);
+  --ink:#e6ebf0; --ink-2:#b4c0cb; --muted:#7b8794;
+  --steel:#3f9fb0; --forge:#e3873f;
+  --is-dark:1;
+}
+
+/* The owner's own choice lives on <body>, so an artifact host stamping <html> can't override it. */
+body[data-mode="light"]{
+  --ground:#eef0f2; --surface:#ffffff;
+  --line:rgba(18,23,29,.14); --line-soft:rgba(18,23,29,.07);
+  --ink:#12171d; --ink-2:#1f272f; --muted:#4b555f;
+  --steel:#1d6b76; --forge:#a84a18;
+  --is-dark:0;
+}
+body[data-mode="dark"]{
+  --ground:#0a1017; --surface:#111820;
+  --line:rgba(230,235,240,.16); --line-soft:rgba(230,235,240,.07);
+  --ink:#e6ebf0; --ink-2:#b4c0cb; --muted:#7b8794;
+  --steel:#3f9fb0; --forge:#e3873f;
+  --is-dark:1;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--ground); color:var(--ink-2);
+  font-family:var(--sans); font-size:16px; line-height:1.6;
+  transition:background .5s ease, color .5s ease;
+}
+::selection{background:var(--forge); color:#fff}
+:focus-visible{outline:2px solid var(--forge); outline-offset:3px}
+a{color:inherit}
+
+#bg{position:fixed; inset:0; width:100%; height:100%; z-index:0; display:block}
+.shell{position:relative; z-index:1}
+.wrap{width:min(1240px, 100% - 48px); margin-inline:auto}
+@media(max-width:640px){.wrap{width:calc(100% - 32px)}}
+
+/* ---------- mono label voice ---------- */
+.mono{font-family:var(--mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted)}
+.mono b{color:var(--ink); font-weight:500}
+
+/* ---------- nav ---------- */
+nav{position:fixed; top:0; left:0; right:0; z-index:20; mix-blend-mode:normal}
+.nav-in{display:flex; align-items:center; justify-content:space-between; height:64px}
+.brand{font-family:var(--mono); font-size:12px; color:var(--ink); letter-spacing:.04em; text-decoration:none}
+.brand b{color:var(--forge); font-weight:500}
+.nav-links{display:none; gap:28px}
+@media(min-width:800px){.nav-links{display:flex}}
+.nav-links a{font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color .2s}
+.nav-links a:hover{color:var(--forge)}
+.toggle{display:flex; gap:2px; padding:2px; border:1px solid var(--line); border-radius:3px; background:color-mix(in srgb, var(--ground) 70%, transparent); backdrop-filter:blur(10px)}
+.toggle button{font-family:var(--mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase; padding:5px 9px; border:0; border-radius:2px; background:transparent; color:var(--muted); cursor:pointer; transition:background .2s, color .2s}
+.toggle button:hover{color:var(--ink)}
+.toggle button[aria-pressed="true"]{background:var(--ink); color:var(--ground)}
+
+/* ---------- hero ---------- */
+.hero{min-height:100vh; display:grid; align-content:end; padding:120px 0 40px; position:relative}
+/* A soft pool of ground colour behind the hero copy, kept off the prism on the right. */
+.hero .wrap::before{content:""; position:absolute; inset:-40px -60px; z-index:-1; pointer-events:none;
+  background:radial-gradient(ellipse 66% 82% at 20% 56%, color-mix(in srgb, var(--ground) 88%, transparent) 0%, color-mix(in srgb, var(--ground) 55%, transparent) 52%, transparent 100%)}
+.spec-top{display:flex; flex-wrap:wrap; gap:8px 28px; margin-bottom:28px}
+.spec-top span::before{content:"\2014  "; color:var(--forge)}
+h1{
+  font-family:var(--serif); font-weight:600; font-variation-settings:"opsz" 144;
+  font-size:clamp(56px, 11.5vw, 168px); line-height:.9; letter-spacing:-.035em;
+  color:var(--ink); margin:0 0 34px; max-width:12ch; text-wrap:balance;
+}
+h1 em{font-style:italic; font-weight:600; color:var(--forge)}
+h1 .w{display:inline-block; opacity:0; transform:translateY(.35em); animation:rise .9s cubic-bezier(.2,.7,.1,1) forwards}
+h1 .w:nth-child(1){animation-delay:.05s} h1 .w:nth-child(2){animation-delay:.14s}
+h1 .w:nth-child(3){animation-delay:.23s} h1 .w:nth-child(4){animation-delay:.32s}
+h1 .w:nth-child(5){animation-delay:.41s} h1 .w:nth-child(6){animation-delay:.5s}
+@keyframes rise{to{opacity:1; transform:none}}
+.lede{font-size:clamp(17px,1.6vw,21px); line-height:1.55; color:var(--ink-2); max-width:44ch; margin:0 0 40px}
+
+.spec-strip{
+  display:grid; grid-template-columns:repeat(2,1fr); border-top:1px solid var(--line);
+  max-width:820px;
+}
+@media(min-width:720px){.spec-strip{grid-template-columns:repeat(4,1fr)}}
+.spec-strip div{padding:14px 18px 16px 0; border-bottom:1px solid var(--line-soft)}
+.spec-strip div+div{padding-left:18px; border-left:1px solid var(--line-soft)}
+@media(max-width:719px){.spec-strip div:nth-child(3){padding-left:0; border-left:0}}
+.spec-strip dt{font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin:0 0 6px}
+.spec-strip dd{margin:0; font-family:var(--serif); font-variation-settings:"opsz" 72; font-size:30px; line-height:1; color:var(--ink); font-weight:600; letter-spacing:-.02em}
+.scroll-cue{position:absolute; right:0; bottom:44px; display:none; align-items:center; gap:10px}
+@media(min-width:800px){.scroll-cue{display:flex}}
+.scroll-cue i{display:block; width:1px; height:44px; background:var(--line); position:relative; overflow:hidden}
+.scroll-cue i::after{content:""; position:absolute; left:0; top:-100%; width:100%; height:100%; background:var(--forge); animation:drip 2.2s ease-in-out infinite}
+@keyframes drip{to{top:100%}}
+
+/* ---------- sections ---------- */
+section{padding:140px 0; position:relative}
+/* Behind content the field is calmed by a soft veil of the ground colour: no cards, no hard edges. */
+section:not(.hero):not(.close)::before{content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+  background:linear-gradient(180deg, transparent 0%, color-mix(in srgb, var(--ground) 74%, transparent) 14%, color-mix(in srgb, var(--ground) 74%, transparent) 86%, transparent 100%)}
+section > .wrap{position:relative; z-index:1}
+.sec-head{display:grid; grid-template-columns:auto 1fr; gap:24px 40px; align-items:end; margin-bottom:56px; padding-bottom:22px; border-bottom:1px solid var(--line)}
+.sec-idx{
+  font-family:var(--serif); font-variation-settings:"opsz" 144; font-weight:600;
+  font-size:clamp(64px,9vw,120px); line-height:.8; color:transparent;
+  -webkit-text-stroke:1px var(--line); letter-spacing:-.04em;
+}
+h2{font-family:var(--serif); font-variation-settings:"opsz" 96; font-weight:600; font-size:clamp(30px,4vw,46px); line-height:1.02; letter-spacing:-.025em; color:var(--ink); margin:0 0 10px; text-wrap:balance}
+.sec-head p{margin:0; max-width:52ch; color:var(--ink-2)}
+
+/* Weight, not a blur, carries the body copy; the field is held back by the veils below so glyph edges stay crisp. */
+.lede,.sec-head p,.feature p,.ledger .desc,.log .m small{font-weight:500}
+
+/* ---------- reveal ---------- */
+[data-reveal]{opacity:0; transform:translateY(18px); transition:opacity .8s ease, transform .8s cubic-bezier(.2,.7,.1,1)}
+[data-reveal].in{opacity:1; transform:none}
+
+/* ---------- featured ---------- */
+.feature{display:grid; gap:28px; padding:34px 0 40px; border-bottom:1px solid var(--line); margin-bottom:8px}
+@media(min-width:900px){.feature{grid-template-columns:1.25fr 1fr; gap:56px; align-items:end}}
+.feature h3{font-family:var(--serif); font-variation-settings:"opsz" 120; font-weight:600; font-size:clamp(36px,5.2vw,64px); line-height:.98; letter-spacing:-.03em; color:var(--ink); margin:14px 0 18px}
+.feature p{margin:0 0 22px; max-width:48ch; font-size:17px}
+.feature .spec{display:grid; grid-template-columns:auto 1fr; gap:8px 22px; font-family:var(--mono); font-size:11.5px; letter-spacing:.04em; color:var(--muted); border-left:1px solid var(--line); padding-left:22px}
+.feature .spec b{color:var(--ink); font-weight:500; letter-spacing:.1em; text-transform:uppercase; font-size:10px; padding-top:2px}
+.cta{display:inline-flex; align-items:center; gap:10px; font-family:var(--mono); font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink); text-decoration:none; padding-bottom:4px; border-bottom:1px solid var(--ink); transition:color .2s, border-color .2s, gap .2s}
+.cta:hover{color:var(--forge); border-color:var(--forge); gap:16px}
+
+/* ---------- ledger ---------- */
+.ledger{list-style:none; margin:0; padding:0}
+.ledger li{
+  display:grid; grid-template-columns:52px 1fr; gap:6px 20px; align-items:baseline;
+  padding:24px 0; border-bottom:1px solid var(--line-soft); position:relative; cursor:default;
+  transition:padding-left .3s cubic-bezier(.2,.7,.1,1);
+}
+@media(min-width:900px){.ledger li{grid-template-columns:52px 1.1fr 1.4fr auto; gap:0 32px}}
+.ledger li::before{content:""; position:absolute; left:0; bottom:-1px; height:1px; width:0; background:var(--forge); transition:width .5s cubic-bezier(.2,.7,.1,1)}
+.ledger li:hover{padding-left:10px}
+.ledger li:hover::before{width:100%}
+.ledger .n{font-family:var(--mono); font-size:11px; color:var(--muted); letter-spacing:.06em}
+.ledger .name{font-family:var(--serif); font-variation-settings:"opsz" 72; font-weight:600; font-size:clamp(22px,2.4vw,30px); line-height:1.05; letter-spacing:-.02em; color:var(--ink); transition:color .2s}
+.ledger li:hover .name{color:var(--forge)}
+.ledger .desc{font-size:15px; color:var(--ink-2); max-width:46ch; grid-column:2}
+@media(min-width:900px){.ledger .desc{grid-column:auto}}
+.ledger .spec{font-family:var(--mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); grid-column:2; white-space:nowrap}
+@media(min-width:900px){.ledger .spec{grid-column:auto; text-align:right}}
+.ledger .spec i{font-style:normal; color:var(--line); margin:0 8px}
+
+/* ---------- build log ---------- */
+.log{font-family:var(--mono); font-size:13px; line-height:1.9; margin:0; padding:0; list-style:none; max-width:900px}
+.log li{display:grid; grid-template-columns:110px 84px 1fr; gap:0 22px; padding:14px 0; border-bottom:1px solid var(--line-soft); align-items:baseline}
+@media(max-width:640px){.log li{grid-template-columns:1fr; gap:2px}}
+.log .t{color:var(--muted)}
+.log .k{color:var(--forge); letter-spacing:.06em; text-transform:uppercase; font-size:10.5px}
+.log .m{color:var(--ink)}
+.log .m small{display:block; color:var(--muted); font-family:var(--sans); font-size:14px; line-height:1.55; margin-top:4px; letter-spacing:0; text-transform:none; max-width:60ch}
+
+/* ---------- close ---------- */
+.close{min-height:70vh; display:grid; align-content:center}
+.close h2{font-size:clamp(48px,9vw,140px); line-height:.9; letter-spacing:-.04em; max-width:9ch; margin-bottom:34px}
+.close h2 em{font-style:italic; color:var(--forge)}
+.close-row{display:flex; flex-wrap:wrap; gap:18px 40px; align-items:center}
+.avail{display:inline-flex; align-items:center; gap:10px}
+.avail::before{content:""; width:7px; height:7px; border-radius:50%; background:var(--forge); box-shadow:0 0 0 0 var(--forge); animation:pulse 2.4s ease-out infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 9px transparent}100%{box-shadow:0 0 0 0 transparent}}
+
+footer{padding:26px 0 70px; border-top:1px solid var(--line)}
+.foot-in{display:flex; flex-wrap:wrap; gap:8px 26px; justify-content:space-between}
+
+/* ---------- status line (the HUD, as design) ---------- */
+.status{
+  position:fixed; left:0; right:0; bottom:0; z-index:30; height:30px; display:flex; align-items:center;
+  gap:22px; padding:0 22px; font-family:var(--mono); font-size:10.5px; letter-spacing:.05em; color:var(--muted);
+  background:color-mix(in srgb, var(--ground) 82%, transparent); border-top:1px solid var(--line-soft);
+  backdrop-filter:blur(10px); pointer-events:none;
+}
+.status b{color:var(--ink); font-weight:500}
+.status .sp{margin-left:auto}
+.status .bar{display:inline-block; width:44px; height:3px; background:var(--line-soft); vertical-align:middle; margin-left:6px; position:relative}
+.status .bar i{position:absolute; left:0; top:0; bottom:0; background:var(--steel); width:0; transition:width .25s}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important; transition-duration:.01ms!important}
+  [data-reveal]{opacity:1; transform:none}
+  h1 .w{opacity:1; transform:none}
+}
+</style>
+
+<canvas id="bg" aria-hidden="true"></canvas>
+
+<div class="shell">
+<nav>
+  <div class="wrap nav-in">
+    <a class="brand" href="#top">lorem<b>/</b>ipsum</a>
+    <div class="nav-links">
+      <a href="#work">Work</a><a href="#path">Path</a><a href="#contact">Contact</a>
+    </div>
+    <div class="toggle" role="group" aria-label="Colour theme">
+      <button data-theme-set="system" aria-pressed="true">Auto</button>
+      <button data-theme-set="light" aria-pressed="false">Light</button>
+      <button data-theme-set="dark" aria-pressed="false">Dark</button>
+    </div>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="spec-top mono">
+      <span>Lorem ipsum engineer</span><span>Dolor, Sit Amet</span><span><b>Consectetur</b> adipiscing</span>
+    </div>
+    <h1>
+      <span class="w">Ut</span> <span class="w">enim</span> <span class="w">ad</span>
+      <span class="w"><em>minim</em></span> <span class="w">veniam</span> <span class="w">quis.</span>
+    </h1>
+    <p class="lede">Nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat, duis aute irure dolor in reprehenderit voluptate velit.</p>
+    <dl class="spec-strip">
+      <div><dt>Lorem</dt><dd>2+</dd></div>
+      <div><dt>Ipsum dolor</dt><dd>56</dd></div>
+      <div><dt>Sit amet</dt><dd>22</dd></div>
+      <div><dt>Consectetur</dt><dd>12</dd></div>
+    </dl>
+  </div>
+  <div class="scroll-cue mono"><span>Scroll</span><i></i></div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <div class="sec-idx">01</div>
+      <div><h2>Sed do eiusmod tempor</h2><p>Incididunt ut labore et dolore magna aliqua, ut enim ad minim veniam quis nostrud.</p></div>
+    </div>
+
+    <article class="feature" data-reveal>
+      <div>
+        <span class="mono"><b>Featured</b> &mdash; lorem ipsum</span>
+        <h3>Ipsum Dolor Sit Amet</h3>
+        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus.</p>
+        <a class="cta" href="#">Lorem ipsum <span>&rarr;</span></a>
+      </div>
+      <dl class="spec">
+        <b>Stack</b><span>Lorem &middot; Ipsum &middot; Dolor</span>
+        <b>Type</b><span>Sit amet consectetur</span>
+        <b>Year</b><span>2026</span>
+        <b>Status</b><span>Adipiscing elit</span>
+      </dl>
+    </article>
+
+    <ol class="ledger">
+      <li data-reveal><span class="n">02</span><span class="name">Amet Consectetur</span><span class="desc">Perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque.</span><span class="spec">Lorem<i>/</i>Ipsum<i>/</i>2026</span></li>
+      <li data-reveal><span class="n">03</span><span class="name">Adipiscing Elit</span><span class="desc">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.</span><span class="spec">Dolor<i>/</i>Sit<i>/</i>2026</span></li>
+      <li data-reveal><span class="n">04</span><span class="name">Eiusmod Tempor</span><span class="desc">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet consectetur.</span><span class="spec">Amet<i>/</i>Elit<i>/</i>2025</span></li>
+      <li data-reveal><span class="n">05</span><span class="name">Incididunt Labore</span><span class="desc">Ut enim ad minima veniam quis nostrum exercitationem ullam corporis suscipit.</span><span class="spec">Tempor<i>/</i>Labore<i>/</i>2025</span></li>
+      <li data-reveal><span class="n">06</span><span class="name">Magna Aliqua</span><span class="desc">Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil.</span><span class="spec">Magna<i>/</i>Aliqua<i>/</i>2024</span></li>
+    </ol>
+  </div>
+</section>
+
+<section id="path">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <div class="sec-idx">02</div>
+      <div><h2>Ut labore et dolore</h2><p>Magna aliqua, ut enim ad minim veniam &mdash; quis nostrud exercitation ullamco.</p></div>
+    </div>
+    <ol class="log" data-reveal>
+      <li><span class="t">2025-06 &rarr; now</span><span class="k">deploy</span><span class="m">Lorem Ipsum Dolor @ Sit Amet<small>Consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</small></span></li>
+      <li><span class="t">2024-07 &rarr; 2025-06</span><span class="k">build</span><span class="m">Consectetur Adipiscing @ Sit Amet<small>Veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</small></span></li>
+      <li><span class="t">2022-07 &rarr; 2023-08</span><span class="k">init</span><span class="m">Elit Sed Do @ Eiusmod<small>Reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</small></span></li>
+      <li><span class="t">2021 &rarr; 2025</span><span class="k">learn</span><span class="m">B.Tech Lorem Ipsum<small>Excepteur sint occaecat cupidatat non proident.</small></span></li>
+    </ol>
+  </div>
+</section>
+
+<section id="contact" class="close">
+  <div class="wrap">
+    <div data-reveal>
+      <h2>Duis aute <em>irure</em> dolor in reprehenderit.</h2>
+      <div class="close-row">
+        <a class="cta" href="#">lorem@ipsum.dev <span>&rarr;</span></a>
+        <span class="avail mono"><b>Available</b> &mdash; voluptate velit</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap foot-in mono">
+  <span>&copy; Lorem Ipsum 2026</span><span>Prototype &middot; placeholder copy</span><span>Built with intent</span>
+</div></footer>
+</div>
+
+<div class="status" id="hud" hidden>
+  <span>aurora <b id="h-a">0</b></span>
+  <span>lattice <b id="h-l">0</b></span>
+  <span>liquid <b id="h-p">0</b></span>
+  <span class="sp">tier <b id="h-t">A</b></span>
+  <span>fps <b id="h-f">&ndash;</b><span class="bar"><i id="h-bar"></i></span></span>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.159.0/three.min.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  const canvas = document.getElementById("bg");
+  const root = document.documentElement;
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------------- reveal on scroll ---------------- */
+
+  const revealer = new IntersectionObserver((entries) => {
+    for (const e of entries) if (e.isIntersecting) { e.target.classList.add("in"); revealer.unobserve(e.target); }
+  }, { rootMargin: "0px 0px -8% 0px" });
+  for (const el of document.querySelectorAll("[data-reveal]")) revealer.observe(el);
+
+  /* ---------------- theme ---------------- */
+
+  // The palette lives in CSS. JS reads it back so the shaders never hardcode a colour.
+  function readPalette() {
+    const s = getComputedStyle(document.body); // body carries the owner's choice; html may carry the host's
+    const get = (n) => new THREE.Color(s.getPropertyValue(n).trim() || "#000");
+    return {
+      ground: get("--ground"), steel: get("--steel"), forge: get("--forge"), ink: get("--ink"),
+      dark: parseFloat(s.getPropertyValue("--is-dark")) || 0,
+    };
+  }
+
+  function applyTheme(choice) {
+    if (choice === "system") document.body.removeAttribute("data-mode");
+    else document.body.setAttribute("data-mode", choice);
+    try { localStorage.setItem("theme", choice); } catch (e) {}
+    for (const b of document.querySelectorAll("[data-theme-set]")) {
+      b.setAttribute("aria-pressed", String(b.dataset.themeSet === choice));
+    }
+    schedulePaletteFade();
+  }
+
+  let saved = "system";
+  try { saved = localStorage.getItem("theme") || "system"; } catch (e) {}
+  applyTheme(saved);
+  for (const b of document.querySelectorAll("[data-theme-set]")) {
+    b.addEventListener("click", () => applyTheme(b.dataset.themeSet));
+  }
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", schedulePaletteFade);
+  // An artifact host may stamp its own theme on <html> at any time; keep the canvas in step with the CSS.
+  new MutationObserver(schedulePaletteFade).observe(root, { attributes: true, attributeFilter: ["data-theme"] });
+
+  if (typeof THREE === "undefined") return;
+
+  /* ---------------- renderer ---------------- */
+
+  let renderer;
+  try {
+    renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
+  } catch (e) {
+    return; // no WebGL: the page is complete without it
+  }
+  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.6));
+  // The transmission pass re-renders the scene; at half resolution it costs a quarter as much.
+  if ("transmissionResolutionScale" in renderer) renderer.transmissionResolutionScale = 0.5;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.05;
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 200);
+  camera.position.set(0, 0, 12);
+
+  // Live palette, plus the target we ease toward when the theme changes.
+  const pal = readPalette();
+  const cur = { ground: pal.ground.clone(), steel: pal.steel.clone(), forge: pal.forge.clone(), ink: pal.ink.clone(), dark: pal.dark };
+  let target = { ...pal };
+  let fading = 0;
+
+  function schedulePaletteFade() {
+    // Wait a frame so the CSS variables have actually swapped over.
+    requestAnimationFrame(() => { target = readPalette(); fading = 1; });
+  }
+
+  /* ---------------- layer 1: aurora ---------------- */
+
+  const auroraUniforms = {
+    uTime: { value: 0 }, uGround: { value: cur.ground }, uSteel: { value: cur.steel },
+    uForge: { value: cur.forge }, uDark: { value: cur.dark }, uIntensity: { value: 1 },
+    uMouse: { value: new THREE.Vector2(0.5, 0.5) },
+    uHover: { value: 0 },
+    uAspect: { value: 1.6 },
+  };
+
+  const aurora = new THREE.Mesh(
+    new THREE.PlaneGeometry(120, 70),
+    new THREE.ShaderMaterial({
+      uniforms: auroraUniforms, depthWrite: false,
+      vertexShader: `varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }`,
+      fragmentShader: `
+        precision highp float; varying vec2 vUv;
+        uniform float uTime, uDark, uIntensity, uHover, uAspect; uniform vec3 uGround, uSteel, uForge; uniform vec2 uMouse;
+        float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1,311.7))) * 43758.5453); }
+        float noise(vec2 p){ vec2 i=floor(p), f=fract(p); vec2 u=f*f*(3.0-2.0*f);
+          return mix(mix(hash(i),hash(i+vec2(1,0)),u.x), mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),u.x), u.y); }
+        float fbm(vec2 p){ float v=0.0,a=0.5; for(int i=0;i<5;i++){ v+=a*noise(p); p*=2.03; a*=0.5; } return v; }
+        void main(){
+          vec2 p = vUv * vec2(2.2, 1.3); float t = uTime * 0.05;
+          vec2 warp = vec2(fbm(p*1.7 + t), fbm(p*1.7 - t + 4.7));
+          vec2 md = vUv - uMouse; warp += md * 0.5 * exp(-dot(md, md) * 6.0);
+          float n = fbm(p*2.2 + warp*1.8 + vec2(0.0, t*1.5));
+          float band = fbm(p*0.95 - warp*0.7 - t*0.85);
+          // Dark mode adds light. Light mode lays pigment down instead.
+          vec3 lit = mix(uGround, uSteel*0.9, smoothstep(0.26,0.84,n));
+          lit += uForge * smoothstep(0.5,0.95, n*band*1.9) * 0.85;
+          vec3 pig = mix(uGround, uSteel, smoothstep(0.3,0.9,n) * 0.22);
+          pig = mix(pig, uForge, smoothstep(0.52,0.98, n*band*1.9) * 0.16);
+          vec3 col = mix(pig, lit, uDark);
+          // On hover, a soft forge glow follows the pointer so the aurora warms where the cursor is -
+          // additive on dark (emitted light), a gentler pigment tint on paper. md = vUv - uMouse from above.
+          vec2 hmd = vec2(md.x * uAspect, md.y);           // aspect-correct so it's a round pool, not a band
+          float hov = exp(-dot(hmd, hmd) * 55.0) * uHover; // tight: a small forge glow local to the cursor
+          col += uForge * hov * mix(0.3, 0.55, uDark);
+          col = mix(uGround, col, uIntensity);
+          gl_FragColor = vec4(col, 1.0);
+          #include <colorspace_fragment>
+        }`,
+    })
+  );
+  aurora.position.z = -22;
+  scene.add(aurora);
+
+  /* ---------------- layer 2: lattice ---------------- */
+
+  const GRID = 40, GAP = 0.6;
+  const latticeCount = GRID * GRID;
+  const lattice = new THREE.InstancedMesh(
+    new THREE.BoxGeometry(0.17, 0.17, 0.17),
+    // No vertexColors: it would make the shader expect a geometry colour attribute
+    // that BoxGeometry lacks, zeroing every instance to black.
+    new THREE.MeshBasicMaterial({ transparent: true, opacity: 0.74 }),
+    latticeCount
+  );
+  lattice.position.set(0, -3.4, -6);
+  lattice.rotation.x = -0.64;
+  scene.add(lattice);
+
+  const cells = [];
+  for (let i = 0; i < GRID; i++) for (let j = 0; j < GRID; j++) {
+    cells.push({ x: (i - GRID/2 + 0.5) * GAP, z: (j - GRID/2 + 0.5) * GAP });
+  }
+
+  const dummy = new THREE.Object3D();
+  const cellColor = new THREE.Color();
+  const pointer = { x: 0, z: 0, active: false };
+  let heat = 0, heatTarget = 0; // a gentle whole-field breath while a project row is hovered
+
+  function updateLattice(t, intensity, calm) {
+    heat += (heatTarget - heat) * 0.06;
+    for (let k = 0; k < latticeCount; k++) {
+      const c = cells[k];
+      // Rest state is a slow terrain of layered waves, not a bullseye ripple.
+      const terrain = Math.sin(c.x*0.55 + t*0.4) * Math.cos(c.z*0.5 - t*0.3) * 0.28
+                    + Math.sin((c.x + c.z)*0.32 + t*0.55) * 0.18;
+
+      let ripple = 0, local = 0;
+      if (pointer.active) {
+        const dx = c.x - pointer.x, dz = c.z - pointer.z;
+        const d = Math.sqrt(dx*dx + dz*dz);
+        const falloff = Math.max(0, 1 - d/4.6);
+        local = falloff * falloff;
+        ripple = local * Math.cos(d*1.5 - t*3.0) * 1.3;
+      }
+
+      const y = (terrain + ripple + heat * 0.12) * intensity;
+      dummy.position.set(c.x, y, c.z);
+      dummy.scale.set(1, 0.5 + Math.max(0, y)*1.6 + local*1.3 + heat*0.3, 1);
+      dummy.updateMatrix();
+      lattice.setMatrixAt(k, dummy.matrix);
+
+      // Light mode has no headroom to glow into, so heat raises saturation instead.
+      const lift = Math.min(1, Math.max(0, (y + 0.45) / 1.5));
+      // Warmth stays local to the cursor; hover only breathes a little colour into the whole field.
+      const warm = Math.min(1, lift*0.3 + local*1.1 + heat*0.18);
+      cellColor.copy(cur.steel).lerp(cur.forge, warm);
+      const gain = cur.dark > 0.5 ? (0.32 + lift*0.6 + local*0.9 + heat*0.15) : (0.55 + lift*0.28 + local*0.35 + heat*0.08);
+      cellColor.multiplyScalar(gain);
+      // On paper the cells must stay pale, and everywhere they calm down behind content.
+      cellColor.lerp(cur.ground, cur.dark > 0.5 ? 0.18 * calm : 0.38 + 0.3 * calm);
+      lattice.setColorAt(k, cellColor);
+    }
+    lattice.instanceMatrix.needsUpdate = true;
+    if (lattice.instanceColor) lattice.instanceColor.needsUpdate = true;
+  }
+
+  for (const row of document.querySelectorAll(".ledger li, .feature")) {
+    row.addEventListener("pointerenter", () => { heatTarget = 1; });
+    row.addEventListener("pointerleave", () => { heatTarget = 0; });
+  }
+
+  /* ---------------- layer 3: monogram + liquid ---------------- */
+
+  // The monogram is typography drawn into the scene so the glass can refract it.
+  const monoCanvas = document.createElement("canvas");
+  monoCanvas.width = 1024; monoCanvas.height = 512;
+  const monoTex = new THREE.CanvasTexture(monoCanvas);
+  monoTex.colorSpace = THREE.SRGBColorSpace;
+
+  function drawMonogram() {
+    const g = monoCanvas.getContext("2d");
+    g.clearRect(0, 0, 1024, 512);
+    g.fillStyle = "#fff";
+    g.textAlign = "center"; g.textBaseline = "middle";
+    g.font = "italic 600 380px Fraunces, Georgia, serif";
+    g.fillText("Li", 512, 276);
+    monoTex.needsUpdate = true;
+  }
+  drawMonogram();
+  if (document.fonts && document.fonts.load) {
+    document.fonts.load("italic 600 380px Fraunces").then(drawMonogram).catch(() => {});
+  }
+
+  const monogram = new THREE.Mesh(
+    new THREE.PlaneGeometry(11, 5.5),
+    new THREE.MeshBasicMaterial({ map: monoTex, transparent: true, color: cur.ink, opacity: 0.9, depthWrite: false })
+  );
+  monogram.position.set(2.4, 0.8, -1.6);
+  scene.add(monogram);
+
+  // The focus object is water floating with nothing to settle it: a few masses drift on slow orbits,
+  // the skin keeps rippling, and a click kicks the masses apart and sends a ring across the surface.
+  // Raymarched as a signed-distance field on a quad, translucent where it hits and clear where it misses.
+  const liquidUniforms = {
+    uTime: { value: 0 },
+    uClick: { value: new THREE.Vector2(0, 0) },
+    uClickTime: { value: -100 },
+    uPointer: { value: new THREE.Vector2(0, 0) },
+    uPntStr: { value: 0 },
+    uSteel: { value: cur.steel },
+    uForge: { value: cur.forge },
+    uGround: { value: cur.ground },
+    uDark: { value: cur.dark },
+    uIntensity: { value: 1 },
+    uSteps: { value: 64 },
+  };
+
+  const liquid = new THREE.Mesh(
+    new THREE.PlaneGeometry(8, 8),
+    new THREE.ShaderMaterial({
+      uniforms: liquidUniforms, transparent: true, depthWrite: false,
+      vertexShader: `varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }`,
+      fragmentShader: `
+        precision highp float; varying vec2 vUv;
+        uniform float uTime, uDark, uIntensity, uSteps, uClickTime; uniform vec2 uClick;
+        uniform vec2 uPointer; uniform float uPntStr;
+        uniform vec3 uSteel, uForge, uGround;
+
+        float smin(float a, float b, float k){ float h = clamp(0.5 + 0.5*(b-a)/k, 0.0, 1.0); return mix(b, a, h) - k*h*(1.0-h); }
+
+        // Each mass drifts slowly; a click shoves them away from the point, then the shove dies out.
+        vec3 centre(int i, float t, float age){
+          float f = float(i);
+          vec3 c = vec3(sin(t*0.32 + f*1.7)*0.7, cos(t*0.27 + f*2.3)*0.85, sin(t*0.23 + f*0.9)*0.6);
+          vec2 away = c.xy - uClick;
+          float kick = exp(-age*1.6) * sin(age*7.0) * 0.35 / (0.6 + length(away));
+          c.xy += normalize(away + 0.001) * kick;
+          return c;
+        }
+        float sdLiquid(vec3 p, float t, float age){
+          float d = 1e5;
+          for (int i = 0; i < 7; i++){
+            float r = (i < 4 ? 0.46 : 0.2) + 0.08*sin(t*0.5 + float(i)*1.3);
+            d = smin(d, length(p - centre(i, t, age)) - r, 0.75);
+          }
+          // Surface waves keep the skin moving, and a click sends a ring outward that fades.
+          d += 0.05 * sin(p.x*3.1 + t*1.1) * sin(p.y*2.6 - t*0.9) * sin(p.z*2.2 + t*0.7);
+          float rc = length(p.xy - uClick);
+          d += 0.06 * sin(rc*9.0 - age*9.0) * exp(-age*1.4) * exp(-rc*0.9);
+          // Meniscus: the skin nearest the pointer reaches toward it - bounded, and gated to the existing surface
+          // (smoothstep(0.5,0.0,d)) so it can only lift skin that is already there, never grow a limb into empty air.
+          vec2 toP = uPointer - p.xy;
+          float pull = uPntStr * exp(-dot(toP, toP) * 2.2) * (1.0 + 0.12 * sin(t * 6.0));
+          d -= 0.22 * pull * smoothstep(0.5, 0.0, d);
+          return d;
+        }
+        vec3 normalAt(vec3 p, float t, float age){
+          vec2 e = vec2(0.012, 0.0);
+          return normalize(vec3(sdLiquid(p+e.xyy,t,age) - sdLiquid(p-e.xyy,t,age),
+                                sdLiquid(p+e.yxy,t,age) - sdLiquid(p-e.yxy,t,age),
+                                sdLiquid(p+e.yyx,t,age) - sdLiquid(p-e.yyx,t,age)));
+        }
+        void main(){
+          float t = uTime, age = max(0.0, uTime - uClickTime);
+          vec3 ro = vec3((vUv - 0.5) * 4.0, 3.0);
+          vec3 rd = vec3(0.0, 0.0, -1.0);
+          float dist = 0.0, d = 1e5;
+          vec3 p = ro;
+          for (int i = 0; i < 96; i++){
+            if (float(i) >= uSteps) break;
+            p = ro + rd * dist;
+            d = sdLiquid(p, t, age);
+            if (d < 0.002 || dist > 6.0) break;
+            dist += d;
+          }
+          if (d > 0.02) discard;
+          vec3 n = normalAt(p, t, age);
+          vec3 l = normalize(vec3(0.6, 0.8, 1.0));
+          vec3 v = vec3(0.0, 0.0, 1.0);
+          float diff = max(dot(n, l), 0.0);
+          float spec = pow(max(dot(reflect(-l, n), v), 0.0), 64.0);
+          float spec2 = pow(max(dot(reflect(-normalize(vec3(-0.7, 0.3, 0.8)), n), v), 0.0), 24.0);
+          float fres = pow(1.0 - max(dot(n, v), 0.0), 2.5);
+          // Cursorlight: fine capillary ripples ride out from the pointer, shading-only.
+          vec2 sp = p.xy - uPointer; float pr = length(sp); vec2 pdir = sp / (pr + 1e-3);
+          float rip = sin(pr*26.0 - t*6.0) * exp(-pr*2.2);
+          n = normalize(n + vec3(pdir * rip * 0.14 * uPntStr, 0.0));
+          // Water: a translucent body in the theme's steel, clear in the middle and dense at the rim.
+          vec3 tint = mix(uSteel, mix(uSteel, vec3(1.0), 0.5), smoothstep(-0.2, 1.0, n.y) * 0.5);
+          vec3 col = tint * (0.55 + 0.45 * diff);
+          col = mix(col, uForge, fres * (0.08 + 0.35 * uDark));
+          col += vec3(1.0) * (spec * 0.95 + spec2 * 0.25);
+          float alpha = min(1.0, 0.32 + 0.6 * fres + spec * 0.4);
+          // A soft light hovers in front of the pointer: a glint slides across the bulge, and a warm caustic
+          // focuses through the clear belly. Shading only - it can brighten pixels inside the silhouette, never outside.
+          vec3 lp = vec3(uPointer, 1.6); vec3 ld = normalize(lp - p);
+          float ps = pow(max(dot(reflect(-ld, n), v), 0.0), 90.0);
+          vec2 cp = uPointer + n.xy * 0.35; float cr = length(p.xy - cp);
+          float caus = pow(max(exp(-cr*cr*3.5) * (0.6 + 0.4*sin(cr*14.0 - t*3.0)), 0.0), 1.5) * (1.0 - fres);
+          vec3 warm = mix(vec3(1.0), uForge, 0.35);
+          col += (ps * 0.9 + caus * 0.7) * uPntStr * warm;
+          col += max(dot(n, ld), 0.0) * 0.12 * uPntStr * uSteel;
+          alpha = min(1.0, alpha + (ps * 0.25 + caus * 0.12) * uPntStr);
+          col = mix(uGround, col, uIntensity);
+          float edge = 1.0 - smoothstep(0.0, 0.02, d);
+          gl_FragColor = vec4(col, alpha * edge * uIntensity);
+          #include <colorspace_fragment>
+        }`,
+    })
+  );
+  liquid.position.set(3.6, 0.5, 2);
+  scene.add(liquid);
+
+  // A click anywhere pokes the liquid at the matching point on its plane; it reacts, but stays where it is.
+  const ray = new THREE.Raycaster();
+  const liquidPlane = new THREE.Plane(new THREE.Vector3(0, 0, 1), -2);
+  const hit = new THREE.Vector3();
+  const ndc = new THREE.Vector2();
+  const latNdc = new THREE.Vector2();   // pointer in NDC, raycast onto the lattice each frame
+  const latPlane = new THREE.Plane(), latN = new THREE.Vector3(), latHit = new THREE.Vector3();
+  const ptrTarget = new THREE.Vector2(); // pointer in the blob's own plane units
+  let ptrNear = 0;                        // 1 over the blob, 0 out toward the headline; eased into uPntStr
+  let aurLastMove = -100;                 // last pointer-move time; the aurora bloom fades ~1s after the cursor stops
+
+  addEventListener("pointerdown", (e) => {
+    ndc.set((e.clientX / innerWidth) * 2 - 1, 1 - (e.clientY / innerHeight) * 2);
+    ray.setFromCamera(ndc, camera);
+    if (!ray.ray.intersectPlane(liquidPlane, hit)) return;
+    const size = liquid.scale.x || 1;
+    liquidUniforms.uClick.value.set((hit.x - liquid.position.x) / (2 * size), (hit.y - liquid.position.y) / (2 * size));
+    liquidUniforms.uClickTime.value = performance.now() / 1000;
+  });
+
+
+
+  /* ---------------- scroll staging ---------------- */
+
+  // Scroll sets a target per layer; the loop eases toward it, so layers cross-fade instead of snapping.
+  const stage = { aurora: 1, lattice: 1, prism: 1, heroOut: 1 };
+  const stageTarget = { aurora: 1, lattice: 1, prism: 1, heroOut: 1 };
+
+  function updateStaging() {
+    const y = scrollY;
+    const vh = innerHeight || 1; // guard: a 0-height frame during resize once poisoned this with NaN
+    const heroOut = clamp01(1 - y / (vh * 0.85));
+    const inWork = overlap(document.getElementById("work"), y, vh);
+    const inPath = overlap(document.getElementById("path"), y, vh);
+    const inContact = overlap(document.getElementById("contact"), y, vh);
+    stageTarget.heroOut = heroOut;
+    stageTarget.prism = heroOut;
+    stageTarget.lattice = Math.max(heroOut, inWork, inPath * 0.45); // lingers softly through the log
+    stageTarget.aurora = Math.max(0.34, heroOut, inContact);
+  }
+
+  function overlap(el, y, vh) {
+    if (!el) return 0;
+    const top = el.offsetTop, bottom = top + el.offsetHeight;
+    const visible = Math.min(bottom, y + vh) - Math.max(top, y);
+    return clamp01(visible / Math.max(1, vh * 0.5));
+  }
+
+  const clamp01 = (n) => Math.min(1, Math.max(0, n));
+
+  /* ---------------- quality tiers ---------------- */
+
+  // A: full glass. B: cheap glass, no transmission pass. C: no lattice or prism at all.
+  let tier = innerWidth < 760 ? "B" : "A";
+  if (reduced) tier = "C";
+
+  let slowFrames = 0;
+  function checkTier(fps) {
+    if (tier === "A" && fps < 38) { if (++slowFrames > 12) { tier = "B"; slowFrames = 0; } }
+    else if (tier === "B" && fps < 22) { if (++slowFrames > 12) { tier = "C"; } }
+    else slowFrames = 0;
+  }
+
+  /* ---------------- input ---------------- */
+
+  addEventListener("pointermove", (e) => {
+    const nx = e.clientX / innerWidth, ny = e.clientY / innerHeight;
+    auroraUniforms.uMouse.value.set(nx, 1 - ny);
+    aurLastMove = performance.now() / 1000; // for the aurora hover bloom
+    latNdc.set(nx * 2 - 1, 1 - ny * 2); // resolved to the tilted grid's own plane in the render loop
+    pointer.active = true;
+    // Where the pointer lands on the liquid's plane, and how near the blob it is (0 out over the headline).
+    ndc.set(nx * 2 - 1, 1 - ny * 2);
+    ray.setFromCamera(ndc, camera);
+    if (ray.ray.intersectPlane(liquidPlane, hit)) {
+      const s = liquid.scale.x || 1;
+      ptrTarget.set((hit.x - liquid.position.x) / (2 * s), (hit.y - liquid.position.y) / (2 * s));
+      const q = Math.min(1, Math.max(0, (Math.hypot(ptrTarget.x, ptrTarget.y) - 1.2) / 1.4));
+      ptrNear = 1 - q * q * (3 - 2 * q); // smoothstep envelope: full on the blob, off toward the text
+    }
+  }, { passive: true });
+  addEventListener("blur", () => { ptrNear = 0; aurLastMove = -100; });
+  addEventListener("pointerout", (e) => { if (!e.relatedTarget) { ptrNear = 0; aurLastMove = -100; } });
+
+  function resize() {
+    const w = innerWidth, h = innerHeight;
+    camera.aspect = w / h;
+    auroraUniforms.uAspect.value = w / h;
+    camera.updateProjectionMatrix();
+    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, w > 1400 ? 1.25 : 1.5)); // wide canvases pay per pixel
+    renderer.setSize(w, h, false);
+    // Pin the liquid at ~88% of the viewport so it stays clear of the headline; up top on narrow screens.
+    const halfW = Math.tan(camera.fov * Math.PI / 360) * 10 * camera.aspect; // frustum half-width at the liquid's depth
+    if (w > 900) liquid.position.set(0.72 * halfW, 0.5, 2);
+    else liquid.position.set(0, 2.8, 2);
+    liquid.userData.size = w > 1400 ? 1 : 0.82;
+    monogram.position.x = liquid.position.x - 1.0;
+  }
+  addEventListener("resize", () => { resize(); updateStaging(); });
+  addEventListener("scroll", updateStaging, { passive: true });
+  resize();
+  updateStaging();
+
+  /* ---------------- loop ---------------- */
+
+  const hud = document.getElementById("hud");
+  const hudA = document.getElementById("h-a"), hudL = document.getElementById("h-l"), hudP = document.getElementById("h-p");
+  const hudT = document.getElementById("h-t"), hudF = document.getElementById("h-f"), hudBar = document.getElementById("h-bar");
+  if (location.hash !== "#nohud") hud.hidden = false;
+
+  let last = performance.now(), fpsAvg = 60, frame = 0;
+
+  function tick(now) {
+    requestAnimationFrame(tick);
+    const dt = Math.min(0.1, (now - last) / 1000);
+    last = now;
+    const t = now / 1000;
+
+    // Ease the palette toward the new theme instead of rebuilding the renderer.
+    if (fading > 0) {
+      const k = Math.min(1, dt * 4);
+      cur.ground.lerp(target.ground, k); cur.steel.lerp(target.steel, k);
+      cur.forge.lerp(target.forge, k); cur.ink.lerp(target.ink, k);
+      cur.dark += (target.dark - cur.dark) * k;
+      if (Math.abs(target.dark - cur.dark) < 0.01) fading = 0;
+    }
+
+    // Ease each layer toward its scroll target: this is the cross-fade between prism, lattice and aurora.
+    const ease = Math.min(1, dt * 3.2);
+    for (const k in stageTarget) stage[k] += (stageTarget[k] - stage[k]) * ease;
+
+    auroraUniforms.uTime.value = t;
+    auroraUniforms.uDark.value = cur.dark;
+    auroraUniforms.uIntensity.value = stage.aurora;
+    const aurTarget = (t - aurLastMove) < 1.0 ? 1 : 0;
+    auroraUniforms.uHover.value += (aurTarget - auroraUniforms.uHover.value) * (1 - Math.exp(-dt * 3));
+    scene.background = cur.ground;
+
+    // The lattice is a feature in the hero and a quiet texture behind content, so it fades and settles.
+    const latticeAlpha = (0.34 + 0.4 * stage.heroOut) * stage.lattice;
+    lattice.material.opacity = latticeAlpha;
+    lattice.rotation.x = -0.64 - 0.28 * (1 - stage.heroOut);
+    lattice.position.y = -3.4 - 1.1 * (1 - stage.heroOut);
+
+    aurora.visible = stage.aurora > 0.01;
+    lattice.visible = tier !== "C" && latticeAlpha > 0.01;
+    liquid.visible = tier !== "C" && stage.prism > 0.01;
+    monogram.visible = liquid.visible;
+
+    if (lattice.visible && pointer.active) {
+      // Project the cursor onto the grid's real (tilted, scroll-settled) plane so the heat sits under it.
+      lattice.updateMatrixWorld();
+      latN.set(0, 1, 0).transformDirection(lattice.matrixWorld);
+      latPlane.setFromNormalAndCoplanarPoint(latN, lattice.position);
+      ray.setFromCamera(latNdc, camera);
+      if (ray.ray.intersectPlane(latPlane, latHit)) {
+        lattice.worldToLocal(latHit);
+        pointer.x = latHit.x; pointer.z = latHit.z;
+      }
+    }
+    if (lattice.visible) updateLattice(t, stage.lattice, 1 - stage.heroOut);
+
+    if (liquid.visible) {
+      liquidUniforms.uTime.value = t;
+      liquidUniforms.uPointer.value.lerp(ptrTarget, 1 - Math.exp(-dt * 6));
+      liquidUniforms.uPntStr.value += (ptrNear - liquidUniforms.uPntStr.value) * (1 - Math.exp(-dt * 4));
+      liquidUniforms.uIntensity.value = stage.prism;
+      liquidUniforms.uDark.value = cur.dark;
+      liquidUniforms.uSteps.value = tier === "A" ? 64 : 40;
+      liquid.scale.setScalar(liquid.userData.size * (0.5 + stage.prism * 0.5));
+      monogram.material.opacity = (0.9 - 0.35 * (1 - cur.dark)) * stage.prism; // quieter on paper
+      monogram.material.color.copy(cur.ink);
+    }
+
+    renderer.render(scene, camera);
+
+    if (++frame % 12 === 0) {
+      fpsAvg = fpsAvg * 0.8 + (1 / Math.max(dt, 0.001)) * 0.2;
+      checkTier(fpsAvg);
+      hudA.textContent = stage.aurora.toFixed(2);
+      hudL.textContent = (lattice.visible ? stage.lattice : 0).toFixed(2);
+      hudP.textContent = (liquid.visible ? stage.prism : 0).toFixed(2);
+      hudT.textContent = tier;
+      hudF.textContent = Math.round(fpsAvg);
+      hudBar.style.width = Math.min(100, fpsAvg / 60 * 100) + "%";
+    }
+  }
+
+  if (reduced) renderer.render(scene, camera);
+  else requestAnimationFrame(tick);
+})();
+</script>

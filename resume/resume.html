@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>J Jebershon Vetha Singh — Software Engineer</title>
+<style>
+/* Single-column A4. Single column is the key ATS choice — parsers read
+   left-to-right across the page, so two columns get interleaved into nonsense.
+   Print margins come from @page (every page, incl. the fold); .page padding
+   mirrors them on screen and is dropped in print so they don't stack. */
+@page { size: A4; margin: 15mm 16mm; }
+
+:root {
+  --ink: #16191d;
+  --body: #2f353b;
+  --muted: #626a72;
+  --rule: #c9cfd5;
+  --accent: #1d5f6a;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", -apple-system, Roboto, Helvetica, Arial, sans-serif;
+  font-size: 10pt;
+  line-height: 1.34;
+  color: var(--body);
+  background: #e7e9ec;
+}
+
+.page {
+  width: 210mm;
+  max-width: 100%;        /* shrink to fit a narrow preview instead of clipping */
+  margin: 12mm auto;
+  padding: 17mm 18mm;     /* this IS the page margin, in print too */
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,.08), 0 10px 30px -12px rgba(0,0,0,.18);
+}
+
+a { color: var(--accent); text-decoration: none; }
+
+/* ---------- header ---------- */
+.name {
+  font-size: 22pt; font-weight: 700; color: var(--ink);
+  letter-spacing: -.01em; margin: 0;
+}
+.role {
+  font-size: 11pt; color: var(--accent); font-weight: 600;
+  margin: 1mm 0 2.5mm;
+}
+.contact {
+  font-size: 8.8pt; color: var(--muted); line-height: 1.7;
+}
+.contact a { color: var(--body); }
+.contact span { color: var(--rule); margin: 0 2mm; }
+
+/* ---------- sections ---------- */
+h2 {
+  font-size: 9.5pt; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--accent); font-weight: 700;
+  margin: 4.5mm 0 2mm; padding-bottom: 1mm;
+  border-bottom: 1.5px solid var(--rule);
+}
+p { margin: 0; }
+.summary { margin-top: 3mm; }
+
+/* ---------- skills ---------- */
+.skills { display: block; }
+.skill-row { margin-bottom: 1.1mm; }
+.skill-row .cat {
+  display: inline-block; width: 34mm; vertical-align: top;
+  font-weight: 700; color: var(--ink); font-size: 9.2pt;
+}
+.skill-row .val {
+  display: inline-block; width: calc(100% - 35mm); vertical-align: top;
+  font-size: 9.4pt;
+}
+
+/* ---------- entries ---------- */
+.entry { margin-bottom: 2.6mm; page-break-inside: avoid; }
+.entry-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0 5mm; }
+.entry-title { font-size: 10.5pt; font-weight: 700; color: var(--ink); }
+.entry-when { font-size: 8.6pt; color: var(--muted); white-space: nowrap; }
+.entry-org { font-size: 9.5pt; color: var(--accent); font-weight: 600; margin-bottom: 1.5mm; }
+
+ul { margin: 1.5mm 0 0; padding-left: 5mm; }
+li { margin-bottom: 0.9mm; }
+li .lead { font-weight: 700; color: var(--ink); }
+
+.proj-list { margin: 2mm 0 0; padding-left: 5mm; }
+.proj-list li { margin-bottom: 1.3mm; page-break-inside: avoid; }
+
+/* Certifications flow as one wrapping list, not columns — a side-by-side
+   grid can interleave when an ATS extracts the PDF text. */
+.certs { margin: 2mm 0 0; font-size: 9.4pt; line-height: 1.55; }
+.certs span { color: var(--rule); margin: 0 1.5mm; }
+
+.edu-line { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0 5mm; margin-bottom: 1.5mm; }
+.edu-line .deg { color: var(--ink); font-weight: 600; }
+.edu-line .when { font-size: 8.6pt; color: var(--muted); white-space: nowrap; }
+
+@media print {
+  body { background: #fff; }
+  /* margins come from @page on every page; .page fills the printable width
+     (width:auto), with its screen padding/frame dropped so nothing doubles. */
+  .page { width: auto; max-width: none; margin: 0; padding: 0; box-shadow: none; }
+  a { color: var(--body); }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <h1 class="name">J Jebershon Vetha Singh</h1>
+    <p class="role">Software Engineer — Mendix, Full-Stack &amp; Mobile</p>
+    <p class="contact">
+      <a href="mailto:jebershon100@gmail.com">jebershon100@gmail.com</a><span>|</span>+91 93426 29075<span>|</span>Coimbatore, Tamil Nadu, India<br>
+      <a href="https://www.linkedin.com/in/jebershon-vetha-singh">linkedin.com/in/jebershon-vetha-singh</a><span>|</span><a href="https://github.com/Jebershon">github.com/Jebershon</a><span>|</span><a href="https://jebershonvethasingh.vercel.app/">jebershonvethasingh.vercel.app</a>
+    </p>
+  </header>
+
+  <section>
+    <h2>Summary</h2>
+    <p class="summary">
+      Software Engineer with 2+ years building enterprise web and mobile applications and
+      developer tooling on the Mendix low-code platform. Delivered government and
+      enterprise projects across the UAE, Saudi Arabia and India — HRMS, legal document
+      systems and API integration — on schedule. Experienced with GCP Apigee and
+      Application Integration, native and hybrid mobile deployment to the App Store and
+      Play Store, and AI-assisted developer tools. IEEE-published in IoT.
+    </p>
+  </section>
+
+  <section>
+    <h2>Technical Skills</h2>
+    <div class="skills">
+      <div class="skill-row"><span class="cat">Low-Code</span><span class="val">Mendix (microflows, nanoflows, pluggable widgets, native &amp; hybrid mobile, Java actions), Mendix Studio Pro</span></div>
+      <div class="skill-row"><span class="cat">Languages</span><span class="val">TypeScript, JavaScript, Java, Python, Kotlin, Swift, C#, SQL</span></div>
+      <div class="skill-row"><span class="cat">Frontend</span><span class="val">React, React Native, HTML5, CSS3, Bootstrap</span></div>
+      <div class="skill-row"><span class="cat">Backend</span><span class="val">Node.js, Express, Spring Boot, REST APIs, MongoDB, MySQL</span></div>
+      <div class="skill-row"><span class="cat">Cloud &amp; Integration</span><span class="val">Google Cloud Platform, Apigee, GCP Application Integration, Microsoft Azure, Jira API, Oracle Fusion API, Microsoft Graph API, OAuth/JWT</span></div>
+      <div class="skill-row"><span class="cat">Mobile &amp; DevOps</span><span class="val">iOS/Android deployment, Apple Wallet &amp; Google Wallet integration, push notifications, Apple Developer Portal (certificates &amp; provisioning profiles), Docker, Playwright, Git, CI pipelines</span></div>
+      <div class="skill-row"><span class="cat">AI &amp; Media</span><span class="val">MCP servers, LLM APIs (OpenAI, Gemini, Anthropic), FFmpeg, YOLOv5, WebGazer</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Professional Experience</h2>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">Software Engineer</span>
+        <span class="entry-when">Jun 2025 – Present</span>
+      </div>
+      <div class="entry-org">RapidData — Chennai, India</div>
+      <ul>
+        <li>Build enterprise web and mobile applications on Mendix for government and corporate clients across the UAE, Saudi Arabia and India, delivering each engagement on schedule.</li>
+        <li>Integrate third-party systems with Mendix — Jira, Oracle Fusion and Microsoft Graph — and design and secure API proxies and integration flows on GCP Apigee and Application Integration.</li>
+        <li>Develop custom Mendix pluggable widgets and high-performance Java actions, and build native and hybrid mobile apps published to the App Store and Play Store.</li>
+        <li>Automate document generation and transactional email with Node.js and Nodemailer.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">Trainee Software Engineer</span>
+        <span class="entry-when">Jul 2024 – Jun 2025</span>
+      </div>
+      <div class="entry-org">RapidData — Chennai, India</div>
+      <ul>
+        <li>Built full-stack features across Mendix, React and Java, focusing on reusable microflows and nanoflows for scalable applications.</li>
+        <li>Developed Java actions for high-performance data handling using lists and hash maps.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">Web Development Intern</span>
+        <span class="entry-when">Jul 2022 – Aug 2023</span>
+      </div>
+      <div class="entry-org">PG Softwares — Coimbatore, India</div>
+      <ul>
+        <li>Built responsive websites and web applications in HTML, CSS, JavaScript, Java and MySQL.</li>
+        <li>Customised e-commerce, live-support, FAQ, classifieds and blog portals.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Key Client Projects</h2>
+    <ul class="proj-list">
+      <li><span class="lead">Bahri — Employee Hub (HRMS):</span> Web and hybrid mobile HR platform deployed to the App Store and Play Store. Implemented Apple Wallet and Google Wallet employee passes (Java/JAR built in Eclipse), push notifications, and managed certificates and provisioning profiles in the Apple Developer Portal.</li>
+      <li><span class="lead">KHDA — Legal Document System:</span> Multi-level approval workflow with an in-browser document editor and annotation, built on the Apryse (PDFTron) document SDK.</li>
+      <li><span class="lead">Dubai Department of Finance — CHO:</span> Internal enterprise application supporting legal and governance workflows for a Dubai government entity.</li>
+      <li><span class="lead">Kirloskar (KPMG):</span> Enterprise mobile application delivered end to end.</li>
+      <li><span class="lead">Apigee &amp; GCP Application Integration:</span> Designed, secured and deployed API proxies and integration flows on Google Cloud connecting enterprise systems.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Developer Tooling &amp; Open-Source</h2>
+    <ul class="proj-list">
+      <li><span class="lead">WidgetForge:</span> Browser-based pipeline that generates a complete Mendix widget — TSX, XML and a deployable MPK — from a natural-language description. Multi-provider LLM support (OpenAI, Gemini, Anthropic), BYOK, live build-log streaming.</li>
+      <li><span class="lead">mxtest-cli:</span> Zero-config CLI to build, run and end-to-end test Mendix apps using Docker and Playwright.</li>
+      <li><span class="lead">mcp-redmine-rd:</span> MCP server bridging an issue tracker into AI coding agents, carrying tickets and screenshots through to verified fixes.</li>
+      <li><span class="lead">rapid-reporter:</span> Chrome/Edge extension for one-click developer bug reports capturing screenshot, console, network and DOM state. MIT-licensed.</li>
+      <li><span class="lead">react-native-airfob:</span> BLE tap-and-go access-credential module with native modules in Kotlin and Swift behind a single JavaScript API.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Proofs of Concept</h2>
+    <ul class="proj-list">
+      <li>RTSP video stream processing pipeline (Node.js, FFmpeg).</li>
+      <li>Real-time object detection (YOLOv5) and browser-based eye tracking (WebGazer).</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Publication</h2>
+    <p><em>ECO-Bot: Autonomous Agricultural Data Collection Robot</em> — IEEE Xplore, 9 March 2026. <a href="https://ieeexplore.ieee.org/document/11414537">ieeexplore.ieee.org/document/11414537</a></p>
+  </section>
+
+  <section>
+    <h2>Certifications</h2>
+    <p class="certs">
+      Mendix Intermediate Developer, Mendix (2026)<span>·</span>Mendix Rapid Developer, Mendix (2024)<span>·</span>Apigee API Platform, Google Cloud (2026)<span>·</span>Applied Skills: C#, Microsoft (2026)<span>·</span>Data Warehousing Workshop, Snowflake (2026)<span>·</span>Foundations of Prompt Engineering, AWS (2026)<span>·</span>Front-End Developer, Meta (2024)<span>·</span>Azure Fundamentals (AZ-900), Microsoft (2023)<span>·</span>SQL, React, JavaScript, Java &amp; CSS, HackerRank<span>·</span>Internet of Things, NPTEL (2024)
+    </p>
+  </section>
+
+  <section>
+    <h2>Education</h2>
+    <div class="edu-line">
+      <span class="deg">B.Tech, Information Technology — Karpagam College of Engineering</span>
+      <span class="when">Oct 2021 – May 2025</span>
+    </div>
+    <div class="edu-line">
+      <span class="deg">HSC (Computer Science) — Bharathi Matriculation Higher Secondary School</span>
+      <span class="when">Apr 2021</span>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
