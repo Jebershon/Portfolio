@@ -204,7 +204,7 @@ export function createForgeScene(canvas: HTMLCanvasElement) {
     opacity: 0.9,
     depthWrite: false,
   });
-  const monogram = new THREE.Mesh(new THREE.PlaneGeometry(11, 5.5), monogramMat);
+  const monogram = new THREE.Mesh(new THREE.PlaneGeometry(9, 4.5), monogramMat);
   monogram.position.set(2.4, 0.8, -1.6);
   scene.add(monogram);
 
@@ -408,7 +408,9 @@ export function createForgeScene(canvas: HTMLCanvasElement) {
     if (w > 900) liquid.position.set(0.72 * halfW, 0.5, 2);
     else liquid.position.set(0, 2.8, 2);
     liquid.userData.size = w > 1400 ? 1 : 0.82;
-    monogram.position.x = liquid.position.x - 1.0;
+    // Keep the monogram tucked behind the liquid wherever it sits, so it never lands on the headline.
+    monogram.position.x = liquid.position.x - 0.6;
+    monogram.position.y = liquid.position.y + 0.2;
   }
 
   const onResize = () => {
