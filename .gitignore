@@ -24,3 +24,7 @@ yarn-error.log*
 
 # raw profile source material (personal data — LinkedIn export, resume)
 /data/_raw
+
+# vite build output
+/dist
+*.tsbuildinfo
