@@ -95,8 +95,8 @@ export function createForgeScene(canvas: HTMLCanvasElement) {
           // Dark mode adds light; light mode lays pigment down instead.
           vec3 lit = mix(uGround, uSteel*0.9, smoothstep(0.26,0.84,n));
           lit += uForge * smoothstep(0.5,0.95, n*band*1.9) * 0.85;
-          vec3 pig = mix(uGround, uSteel, smoothstep(0.3,0.9,n) * 0.22);
-          pig = mix(pig, uForge, smoothstep(0.52,0.98, n*band*1.9) * 0.16);
+          vec3 pig = mix(uGround, uSteel, smoothstep(0.3,0.9,n) * 0.44);
+          pig = mix(pig, uForge, smoothstep(0.52,0.98, n*band*1.9) * 0.30);
           vec3 col = mix(pig, lit, uDark);
           // A tight forge glow follows the pointer on hover (aspect-corrected so it's a round pool).
           vec2 hmd = vec2(md.x * uAspect, md.y);
@@ -499,7 +499,9 @@ export function createForgeScene(canvas: HTMLCanvasElement) {
     auroraUniforms.uHover.value += (aurTarget - auroraUniforms.uHover.value) * (1 - Math.exp(-dt * 3));
     scene.background = cur.ground;
 
-    const latticeAlpha = (0.34 + 0.4 * stage.heroOut) * stage.lattice;
+    // Light mode: the lattice cells read as light-on-light and crowd the text, so calm them down.
+    const latThemeScale = 0.45 + 0.55 * cur.dark;
+    const latticeAlpha = (0.34 + 0.4 * stage.heroOut) * stage.lattice * latThemeScale;
     latticeMat.opacity = latticeAlpha;
     lattice.rotation.x = -0.64 - 0.28 * (1 - stage.heroOut);
     lattice.position.y = -3.4 - 1.1 * (1 - stage.heroOut);
