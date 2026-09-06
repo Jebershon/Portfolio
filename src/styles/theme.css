@@ -4,7 +4,7 @@
   --line:rgba(18,23,29,.14); --line-soft:rgba(18,23,29,.07);
   --ink:#12171d; --ink-2:#1f272f; --muted:#4b555f;
   --steel:#1d6b76; --forge:#a84a18;
-  --is-dark:0;
+  --is-dark:0; --wash:color-mix(in srgb, var(--forge) 6%, transparent);
   --serif:"Fraunces",Georgia,"Times New Roman",serif;
   --sans:"Instrument Sans",system-ui,-apple-system,sans-serif;
   --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,monospace;
@@ -14,14 +14,14 @@
   --line:rgba(230,235,240,.16); --line-soft:rgba(230,235,240,.07);
   --ink:#e6ebf0; --ink-2:#b4c0cb; --muted:#7b8794;
   --steel:#3f9fb0; --forge:#e3873f;
-  --is-dark:1;
+  --is-dark:1; --wash:color-mix(in srgb, var(--forge) 14%, transparent);
 }}
 :root[data-theme="dark"]{
   --ground:#0a1017; --surface:#111820;
   --line:rgba(230,235,240,.16); --line-soft:rgba(230,235,240,.07);
   --ink:#e6ebf0; --ink-2:#b4c0cb; --muted:#7b8794;
   --steel:#3f9fb0; --forge:#e3873f;
-  --is-dark:1;
+  --is-dark:1; --wash:color-mix(in srgb, var(--forge) 14%, transparent);
 }
 
 /* The owner's own choice lives on <body>, so an artifact host stamping <html> can't override it. */
@@ -30,14 +30,14 @@ body[data-mode="light"]{
   --line:rgba(18,23,29,.14); --line-soft:rgba(18,23,29,.07);
   --ink:#12171d; --ink-2:#1f272f; --muted:#4b555f;
   --steel:#1d6b76; --forge:#a84a18;
-  --is-dark:0;
+  --is-dark:0; --wash:color-mix(in srgb, var(--forge) 6%, transparent);
 }
 body[data-mode="dark"]{
   --ground:#0a1017; --surface:#111820;
   --line:rgba(230,235,240,.16); --line-soft:rgba(230,235,240,.07);
   --ink:#e6ebf0; --ink-2:#b4c0cb; --muted:#7b8794;
   --steel:#3f9fb0; --forge:#e3873f;
-  --is-dark:1;
+  --is-dark:1; --wash:color-mix(in srgb, var(--forge) 14%, transparent);
 }
 
 *{box-sizing:border-box}
@@ -207,7 +207,7 @@ footer{padding:64px 0 46px; border-top:1px solid var(--line); position:relative}
 /* ---------- Projects (client work): a forge->steel ink wash and a forge rail on hover ---------- */
 #work .ledger li > *{position:relative; z-index:1}
 #work .ledger li::before{content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
-  background:linear-gradient(90deg, color-mix(in srgb, var(--forge) 13%, transparent) 0%, color-mix(in srgb, var(--steel) 8%, transparent) 44%, transparent 80%);
+  background:linear-gradient(90deg, var(--wash) 0%, transparent 62%);
   transform:scaleX(0); transform-origin:left; transition:transform .55s cubic-bezier(.2,.7,.1,1)}
 #work .ledger li::after{content:""; position:absolute; left:0; right:0; bottom:-1px; height:1px; background:var(--forge); transform:scaleX(0); transform-origin:left; transition:transform .55s cubic-bezier(.2,.7,.1,1)}
 #work .ledger li:hover::before,#work .ledger li:focus-within::before{transform:scaleX(1)}
