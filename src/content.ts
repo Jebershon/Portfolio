@@ -18,7 +18,7 @@ function label(ym: string | null): string {
 export const brand = { left: "jebershon", right: "vs" };
 
 export const nav = [
-  { label: "Work", href: "#work" },
+  { label: "Projects", href: "#work" },
   { label: "Stack", href: "#stack" },
   { label: "Path", href: "#path" },
   { label: "Credentials", href: "#creds" },
@@ -43,7 +43,7 @@ const rest = projects.clients.filter((c) => c !== featured);
 
 export const work = {
   index: "01",
-  title: "Selected work",
+  title: "Projects",
   blurb: "Enterprise apps shipped end to end at RapidData — HR platforms, legal systems and government workflows on Mendix, React, Java and Node.",
   featured: {
     kicker: "Featured — enterprise HRMS",

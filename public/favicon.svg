@@ -1,4 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="J">
-  <rect width="32" height="32" rx="7" fill="#0a1017" />
-  <text x="16.5" y="24" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-weight="700" font-size="23" fill="#e3873f">J</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Jebershon Vetha Singh">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0" stop-color="#123a44" />
+      <stop offset="1" stop-color="#0a1017" />
+    </linearGradient>
+    <radialGradient id="aur" cx="0.72" cy="0.24" r="0.7">
+      <stop offset="0" stop-color="#3f9fb0" stop-opacity="0.55" />
+      <stop offset="1" stop-color="#3f9fb0" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="32" height="32" rx="7" fill="url(#bg)" />
+  <rect width="32" height="32" rx="7" fill="url(#aur)" />
+  <text x="15" y="24" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-weight="700" font-size="23" fill="#e3873f">J</text>
+  <circle cx="24" cy="9" r="1.7" fill="#e3873f" />
 </svg>
