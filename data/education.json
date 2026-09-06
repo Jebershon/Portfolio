@@ -1,0 +1,25 @@
+{
+  "_note": "Degrees + certifications from data/_generated/linkedin.json (22 certs; the highlights below are the strongest for the site).",
+  "degrees": [
+    {
+      "kind": "learn",
+      "school": "Karpagam College of Engineering",
+      "degree": "B.Tech, Information Technology",
+      "location": "Coimbatore, India",
+      "start": "2021-10",
+      "end": "2025-05"
+    }
+  ],
+  "certificationCount": 22,
+  "certifications": [
+    { "name": "Mendix Intermediate Developer", "issuer": "Mendix", "year": 2026 },
+    { "name": "Mendix Rapid Developer", "issuer": "Mendix", "year": 2024 },
+    { "name": "Apigee API Platform", "issuer": "Google Cloud", "year": 2026 },
+    { "name": "Applied Skills: C#", "issuer": "Microsoft", "year": 2026 },
+    { "name": "Data Warehousing Workshop", "issuer": "Snowflake", "year": 2026 },
+    { "name": "Foundations of Prompt Engineering", "issuer": "AWS", "year": 2026 },
+    { "name": "Front-End Developer", "issuer": "Meta", "year": 2024 },
+    { "name": "Azure Fundamentals (AZ-900)", "issuer": "Microsoft", "year": 2023 },
+    { "name": "Internet of Things", "issuer": "NPTEL", "year": 2024 }
+  ]
+}

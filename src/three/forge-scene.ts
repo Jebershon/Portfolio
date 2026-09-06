@@ -190,8 +190,8 @@ export function createForgeScene(canvas: HTMLCanvasElement) {
     g.fillStyle = "#fff";
     g.textAlign = "center";
     g.textBaseline = "middle";
-    g.font = "italic 600 380px Fraunces, Georgia, serif";
-    g.fillText("Li", 512, 276);
+    g.font = "italic 600 340px Fraunces, Georgia, serif";
+    g.fillText("JVS", 512, 286);
     monoTex.needsUpdate = true;
   }
   drawMonogram();

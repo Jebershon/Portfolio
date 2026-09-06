@@ -11,6 +11,8 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": { "@data/*": ["data/*"] },
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,

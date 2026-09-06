@@ -1,0 +1,99 @@
+{
+  "_note": "Featured projects (ranked) + a collection entry. Live facts (stars, language, pushedAt) come from data/_generated/github.json; the prose here is hand-authored. Items marked \"employer\": true were built at RapidData — descriptions are kept generic (no internal hostnames). Rich problem/approach/outcome write-ups land in phase 03.",
+  "featured": [
+    {
+      "slug": "widgetforge",
+      "name": "WidgetForge",
+      "tier": 1,
+      "oneLiner": "Describe a Mendix widget in plain English and it generates the TSX, XML and a deployable package — with multi-provider AI, BYOK, and live build logs.",
+      "stack": ["TypeScript", "Node", "LLM APIs"],
+      "type": "AI-assisted widget generator",
+      "year": 2026,
+      "status": "Live",
+      "links": { "demo": "https://widgetforge-frontend.vercel.app", "repo": "https://github.com/Jebershon/widgetforge-frontend" },
+      "employer": true,
+      "confidential": false
+    },
+    {
+      "slug": "react-native-airfob",
+      "name": "react-native-airfob",
+      "tier": 2,
+      "oneLiner": "BLE tap-and-go access credentials behind one JavaScript API, with native modules on both platforms and a working mock so the chain runs before the SDK licence lands.",
+      "stack": ["Kotlin", "Swift", "React Native"],
+      "type": "Native mobile module",
+      "year": 2026,
+      "status": "Library",
+      "links": { "repo": "https://github.com/Jebershon/react-native-airfob" },
+      "employer": true,
+      "confidential": false
+    },
+    {
+      "slug": "mcp-redmine-rd",
+      "name": "mcp-redmine-rd",
+      "tier": 1,
+      "oneLiner": "An MCP server that pulls tracker tickets — screenshots included as viewable images — into an AI coding agent, plus a skill that carries an issue from ticket to verified fix.",
+      "stack": ["Python", "MCP"],
+      "type": "AI-native tooling",
+      "year": 2026,
+      "status": "Server",
+      "links": { "repo": "https://github.com/Jebershon/mcp-redmine-rd" },
+      "employer": true,
+      "confidential": false
+    },
+    {
+      "slug": "mxtest-cli",
+      "name": "mxtest-cli",
+      "tier": 1,
+      "oneLiner": "Zero-config CLI to build, run and end-to-end test Mendix apps using Docker and Playwright.",
+      "stack": ["Node", "Docker", "Playwright"],
+      "type": "Developer CLI",
+      "year": 2026,
+      "status": "CLI",
+      "links": { "repo": "https://github.com/Jebershon/mxtest-cli" },
+      "employer": true,
+      "confidential": false
+    },
+    {
+      "slug": "eco-bot",
+      "name": "ECO-Bot",
+      "tier": 2,
+      "oneLiner": "An IoT-powered automated tractor for land analysis, ploughing and irrigation — peer-reviewed and published in IEEE Xplore.",
+      "stack": ["JavaScript", "IoT"],
+      "type": "IoT · IEEE publication",
+      "year": 2026,
+      "status": "Published",
+      "links": {
+        "demo": "https://env-monitor.vercel.app",
+        "repo": "https://github.com/Jebershon/Env_Monitor",
+        "paper": "https://ieeexplore.ieee.org/document/11414537"
+      },
+      "employer": false,
+      "confidential": false
+    },
+    {
+      "slug": "rapid-reporter",
+      "name": "rapid-reporter",
+      "tier": 1,
+      "oneLiner": "A one-click bug-report browser extension that captures screenshot, console, network and DOM state into a developer-ready ticket. MIT-licensed.",
+      "stack": ["JavaScript", "Chrome/Edge MV3"],
+      "type": "Browser extension",
+      "year": 2026,
+      "status": "Extension",
+      "links": { "repo": "https://github.com/Jebershon/rapid-reporter" },
+      "employer": true,
+      "confidential": false
+    }
+  ],
+  "collection": {
+    "name": "Mendix widget library",
+    "oneLiner": "Twelve production pluggable widgets shipped for enterprise Mendix apps.",
+    "count": 12,
+    "examples": ["Apryse WebViewer", "Carousel Container", "PagetoPDF", "BarCode", "CompactText", "FileUpload", "NativeImageViewer", "PWA SwipeRefresh"]
+  },
+  "publication": {
+    "title": "ECO-Bot: Autonomous Agricultural Data Collection Robot",
+    "venue": "IEEE Xplore",
+    "date": "2026-03-09",
+    "url": "https://ieeexplore.ieee.org/document/11414537"
+  }
+}

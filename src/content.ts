@@ -1,10 +1,21 @@
 /**
- * All page copy in one place. Components read from here so the markup stays clean,
- * and this is the seam the real data layer (data/*.json) plugs into in phase 02.
- * Placeholder lorem for now, matching the approved prototype.
+ * The view model: it turns the facts in /data (via src/data.ts) into the exact
+ * shapes the components render, and holds the presentation-only copy (the headline,
+ * section labels, footer). Components read from here and never touch the raw data.
  */
+import { profile, experience, education, projects } from "./data";
 
-export const brand = { left: "lorem", right: "ipsum" };
+const monthNames = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+/** "2025-06" → "Jun 2025"; a null end → "now". */
+function label(ym: string | null): string {
+  if (!ym) return "now";
+  const [year, month] = ym.split("-");
+  return month ? `${monthNames[+month]} ${year}` : year;
+}
+
+// ── brand + nav (presentation) ──
+export const brand = { left: "jebershon", right: "vs" };
 
 export const nav = [
   { label: "Work", href: "#work" },
@@ -12,70 +23,78 @@ export const nav = [
   { label: "Contact", href: "#contact" },
 ];
 
+// ── hero ──
 export const hero = {
-  specTop: ["Lorem ipsum engineer", "Dolor, Sit Amet", "Consectetur adipiscing"],
-  // The headline is split into words so each can animate in; `em` italicises the accent word.
+  specTop: [profile.headline, "Mendix · Full-Stack · Mobile", profile.location],
+  // Presentation copy; `em` italicises the forge accent word.
   headline: [
-    { text: "Ut" },
-    { text: "enim" },
-    { text: "ad" },
-    { text: "minim", em: true },
-    { text: "veniam" },
-    { text: "quis." },
+    { text: "I" },
+    { text: "build" },
+    { text: "the" },
+    { text: "tools", em: true },
+    { text: "developers" },
+    { text: "use." },
   ] as { text: string; em?: boolean }[],
-  lede: "Nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat, duis aute irure dolor in reprehenderit voluptate velit.",
-  stats: [
-    { label: "Lorem", value: "2+" },
-    { label: "Ipsum dolor", value: "56" },
-    { label: "Sit amet", value: "22" },
-    { label: "Consectetur", value: "12" },
-  ],
+  lede: profile.summary,
+  stats: profile.stats,
 };
+
+// ── work: the lead project is featured, the rest form the ledger ──
+const [lead, ...rest] = projects.featured;
 
 export const work = {
   index: "01",
-  title: "Sed do eiusmod tempor",
-  blurb: "Incididunt ut labore et dolore magna aliqua, ut enim ad minim veniam quis nostrud.",
+  title: "Selected work",
+  blurb: "Developer tooling first — the tools other engineers use — plus the enterprise apps behind them.",
   featured: {
-    kicker: "Featured — lorem ipsum",
-    name: "Ipsum Dolor Sit Amet",
-    blurb:
-      "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus.",
-    ctaLabel: "Lorem ipsum",
-    ctaHref: "#",
+    kicker: "Featured — developer tooling",
+    name: lead.name,
+    blurb: lead.oneLiner,
+    ctaLabel: lead.links.demo ? "View live" : "View on GitHub",
+    ctaHref: lead.links.demo ?? lead.links.repo ?? "#",
     spec: [
-      { label: "Stack", value: "Lorem · Ipsum · Dolor" },
-      { label: "Type", value: "Sit amet consectetur" },
-      { label: "Year", value: "2026" },
-      { label: "Status", value: "Adipiscing elit" },
+      { label: "Stack", value: lead.stack.join(" · ") },
+      { label: "Type", value: lead.type },
+      { label: "Year", value: String(lead.year) },
+      { label: "Status", value: lead.status },
     ],
   },
-  ledger: [
-    { n: "02", name: "Amet Consectetur", desc: "Perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque.", spec: ["Lorem", "Ipsum", "2026"] },
-    { n: "03", name: "Adipiscing Elit", desc: "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.", spec: ["Dolor", "Sit", "2026"] },
-    { n: "04", name: "Eiusmod Tempor", desc: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet consectetur.", spec: ["Amet", "Elit", "2025"] },
-    { n: "05", name: "Incididunt Labore", desc: "Ut enim ad minima veniam quis nostrum exercitationem ullam corporis suscipit.", spec: ["Tempor", "Labore", "2025"] },
-  ],
+  ledger: rest.map((p, i) => ({
+    n: String(i + 2).padStart(2, "0"),
+    name: p.name,
+    desc: p.oneLiner,
+    spec: [p.stack[0], p.type, String(p.year)],
+  })),
 };
 
+// ── path: experience then education, as a build log ──
 export const path = {
   index: "02",
-  title: "Ut labore et dolore",
-  blurb: "Magna aliqua, ut enim ad minim veniam — quis nostrud exercitation ullamco.",
+  title: "The path",
+  blurb: "Two years of shipping, from a first internship to building developer tooling in production.",
   log: [
-    { when: "2025-06 → now", kind: "deploy", title: "Lorem Ipsum Dolor @ Sit Amet", detail: "Consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." },
-    { when: "2024-07 → 2025-06", kind: "build", title: "Consectetur Adipiscing @ Sit Amet", detail: "Veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo." },
-    { when: "2022-07 → 2023-08", kind: "init", title: "Elit Sed Do @ Eiusmod", detail: "Reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur." },
-    { when: "2021 → 2025", kind: "learn", title: "B.Tech Lorem Ipsum", detail: "Excepteur sint occaecat cupidatat non proident." },
+    ...experience.roles.map((r) => ({
+      when: `${label(r.start)} → ${label(r.end)}`,
+      kind: r.kind,
+      title: `${r.title} @ ${r.company}`,
+      detail: r.summary,
+    })),
+    ...education.degrees.map((d) => ({
+      when: `${d.start.slice(0, 4)} → ${d.end.slice(0, 4)}`,
+      kind: d.kind,
+      title: `${d.degree} @ ${d.school}`,
+      detail: `${education.certificationCount} certifications, incl. 2× Mendix Certified Developer.`,
+    })),
   ],
 };
 
+// ── contact ──
 export const contact = {
-  // The headline splits around the accent word so it can be italicised in forge.
-  lead: { before: "Duis aute ", em: "irure", after: " dolor in reprehenderit." },
-  email: "lorem@ipsum.dev",
-  emailHref: "#",
-  availability: "Available — voluptate velit",
+  lead: { before: "Let's ", em: "build", after: " something." },
+  email: profile.email,
+  emailHref: `mailto:${profile.email}`,
+  availability: `${profile.location} — open to interesting problems`,
 };
 
-export const footer = ["© Lorem Ipsum 2026", "Prototype · placeholder copy", "Built with intent"];
+// ── footer ──
+export const footer = [`© ${profile.name} 2026`, "Built with React + Three.js", profile.location];

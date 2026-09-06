@@ -1,0 +1,32 @@
+{
+  "_note": "Roles from data/_generated/linkedin.json; the PG Softwares title comes from data/overrides.json. Kinds map to the build-log labels on the site.",
+  "roles": [
+    {
+      "kind": "deploy",
+      "company": "RapidData",
+      "title": "Software Engineer",
+      "location": "Chennai, India",
+      "start": "2025-06",
+      "end": null,
+      "summary": "Build enterprise web and mobile apps on Mendix for government and corporate clients across the UAE, Saudi Arabia and India, plus the internal tooling that speeds the team up."
+    },
+    {
+      "kind": "build",
+      "company": "RapidData",
+      "title": "Trainee Software Engineer",
+      "location": "Chennai, India",
+      "start": "2024-07",
+      "end": "2025-06",
+      "summary": "Built full-stack features across Mendix, React and Java — reusable microflows and nanoflows, and high-performance Java actions."
+    },
+    {
+      "kind": "init",
+      "company": "PG Softwares",
+      "title": "Web Development Intern",
+      "location": "Coimbatore, India",
+      "start": "2022-07",
+      "end": "2023-08",
+      "summary": "Built responsive websites and web apps in HTML, CSS, JavaScript, Java and MySQL; customised e-commerce and portal sites."
+    }
+  ]
+}

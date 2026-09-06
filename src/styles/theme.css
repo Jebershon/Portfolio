@@ -41,11 +41,12 @@ body[data-mode="dark"]{
 }
 
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth; overflow-x:clip}
 body{
   margin:0; background:var(--ground); color:var(--ink-2);
   font-family:var(--sans); font-size:16px; line-height:1.6;
   transition:background .5s ease, color .5s ease;
+  overflow-x:clip; /* decorative glows (e.g. the hero pool) may bleed past the wrap; never scroll sideways */
 }
 ::selection{background:var(--forge); color:#fff}
 :focus-visible{outline:2px solid var(--forge); outline-offset:3px}

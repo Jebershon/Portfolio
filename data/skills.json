@@ -1,0 +1,30 @@
+{
+  "_note": "Grouped skills. 'evidence' points at a repo or project that proves it, rather than a self-assessed level.",
+  "groups": [
+    {
+      "name": "Low-Code",
+      "items": ["Mendix", "Microflows & nanoflows", "Pluggable widgets", "Native & hybrid mobile", "Java actions"]
+    },
+    {
+      "name": "Languages",
+      "items": ["TypeScript", "JavaScript", "Java", "Python", "Kotlin", "Swift", "C#", "SQL"]
+    },
+    {
+      "name": "Frontend",
+      "items": ["React", "React Native", "HTML5", "CSS3", "Three.js"]
+    },
+    {
+      "name": "Backend",
+      "items": ["Node.js", "Express", "Spring Boot", "REST APIs", "MongoDB", "MySQL"]
+    },
+    {
+      "name": "Cloud & Integration",
+      "items": ["Google Cloud", "Apigee", "GCP Application Integration", "Azure", "Jira API", "Oracle Fusion API", "Microsoft Graph"]
+    },
+    {
+      "name": "AI & Tooling",
+      "items": ["MCP servers", "LLM APIs (OpenAI, Gemini, Anthropic)", "Docker", "Playwright", "Git", "CI pipelines"]
+    }
+  ],
+  "top": ["Mendix", "React", "Node.js", "Apigee", "Java"]
+}

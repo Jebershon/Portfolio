@@ -1,0 +1,22 @@
+{
+  "_note": "Hand-authored identity facts. Sourced from data/_generated/linkedin.json; edit here, not there.",
+  "name": "J Jebershon Vetha Singh",
+  "shortName": "Jebershon",
+  "initials": "JVS",
+  "role": "Software Engineer",
+  "headline": "Software Engineer @ RapidData",
+  "location": "Coimbatore, India",
+  "email": "jebershon100@gmail.com",
+  "socials": {
+    "github": "https://github.com/Jebershon",
+    "linkedin": "https://www.linkedin.com/in/jebershon-vetha-singh",
+    "portfolio": "https://jebershonvethasingh.vercel.app"
+  },
+  "summary": "I build enterprise applications and the internal tooling that speeds up the teams around them — Mendix widgets, a browser-based widget generator, test CLIs, and AI-assisted developer tools. IEEE-published in IoT.",
+  "stats": [
+    { "label": "Experience", "value": "2+ yrs" },
+    { "label": "Public repos", "value": "56" },
+    { "label": "Certifications", "value": "22" },
+    { "label": "Mendix widgets", "value": "12" }
+  ]
+}
