@@ -78,10 +78,10 @@ a{color:inherit}
 /* ---------- hero ---------- */
 .hero{min-height:100vh; display:grid; align-content:end; padding:120px 0 40px; position:relative}
 /* The field is vivid at the top of the hero (headline + liquid), then fades straight down
-   into the same 58% ground veil the sections use, reaching it by the hero's bottom edge. So
+   into the same 50% ground veil the sections use, reaching it by the hero's bottom edge. So
    the hero merges into the page below with no visible seam — the fade happens within the hero. */
 .hero::before{content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
-  background:linear-gradient(180deg, transparent 0%, transparent 28%, color-mix(in srgb, var(--ground) 58%, transparent) 80%, color-mix(in srgb, var(--ground) 58%, transparent) 100%)}
+  background:linear-gradient(180deg, transparent 0%, transparent 28%, color-mix(in srgb, var(--ground) 50%, transparent) 80%, color-mix(in srgb, var(--ground) 50%, transparent) 100%)}
 .spec-top{display:flex; flex-wrap:wrap; gap:8px 28px; margin-bottom:28px}
 .spec-top span::before{content:"\2014  "; color:var(--forge)}
 h1{
@@ -118,9 +118,9 @@ section{padding:118px 0; position:relative}
 /* Everything below the hero carries a uniform veil of the ground colour — every section plus
    the footer — so the whole lower page is one calm, continuous ground with no bright bands at
    the joins. The single fade from vivid field to veil happens inside the hero (.hero::before),
-   which ends at this same 58% level, so the hero joins seamlessly and the field never re-emerges. */
+   which ends at this same 50% level, so the hero joins seamlessly and the field never re-emerges. */
 section:not(.hero)::before, footer::before{content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
-  background:color-mix(in srgb, var(--ground) 58%, transparent)}
+  background:color-mix(in srgb, var(--ground) 50%, transparent)}
 section > .wrap{position:relative; z-index:1}
 .sec-head{display:grid; grid-template-columns:auto 1fr; gap:24px 40px; align-items:end; margin-bottom:56px; padding-bottom:22px; border-bottom:1px solid var(--line)}
 .sec-idx{

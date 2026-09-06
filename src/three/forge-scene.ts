@@ -95,8 +95,8 @@ export function createForgeScene(canvas: HTMLCanvasElement) {
           // Dark mode adds light; light mode lays pigment down instead.
           vec3 lit = mix(uGround, uSteel*0.9, smoothstep(0.26,0.84,n));
           lit += uForge * smoothstep(0.5,0.95, n*band*1.9) * 0.85;
-          vec3 pig = mix(uGround, uSteel, smoothstep(0.3,0.9,n) * 0.44);
-          pig = mix(pig, uForge, smoothstep(0.52,0.98, n*band*1.9) * 0.30);
+          vec3 pig = mix(uGround, uSteel, smoothstep(0.3,0.9,n) * 0.80);
+          pig = mix(pig, uForge, smoothstep(0.52,0.98, n*band*1.9) * 0.52);
           vec3 col = mix(pig, lit, uDark);
           // A tight forge glow follows the pointer on hover (aspect-corrected so it's a round pool).
           vec2 hmd = vec2(md.x * uAspect, md.y);
@@ -170,7 +170,7 @@ export function createForgeScene(canvas: HTMLCanvasElement) {
         cur.dark > 0.5 ? 0.32 + lift * 0.6 + local * 0.9 + heat * 0.15 : 0.55 + lift * 0.28 + local * 0.35 + heat * 0.08;
       cellColor.multiplyScalar(gain);
       // On paper the cells stay pale; everywhere they calm down behind content.
-      cellColor.lerp(cur.ground, cur.dark > 0.5 ? 0.18 * calm : 0.38 + 0.3 * calm);
+      cellColor.lerp(cur.ground, cur.dark > 0.5 ? 0.3 * calm : 0.42 + 0.3 * calm);
       lattice.setColorAt(k, cellColor);
     }
     lattice.instanceMatrix.needsUpdate = true;
@@ -496,11 +496,11 @@ export function createForgeScene(canvas: HTMLCanvasElement) {
     auroraUniforms.uDark.value = cur.dark;
     auroraUniforms.uIntensity.value = stage.aurora;
     const aurTarget = t - aurLastMove < 1.0 ? 1 : 0;
-    auroraUniforms.uHover.value += (aurTarget - auroraUniforms.uHover.value) * (1 - Math.exp(-dt * 3));
+    auroraUniforms.uHover.value += (aurTarget - auroraUniforms.uHover.value) * (1 - Math.exp(-dt * 1.8));
     scene.background = cur.ground;
 
-    // Light mode: the lattice cells read as light-on-light and crowd the text, so calm them down.
-    const latThemeScale = 0.45 + 0.55 * cur.dark;
+    // Keep the lattice quiet so it never competes with the text (extra calm on paper).
+    const latThemeScale = 0.38 + 0.24 * cur.dark;
     const latticeAlpha = (0.34 + 0.4 * stage.heroOut) * stage.lattice * latThemeScale;
     latticeMat.opacity = latticeAlpha;
     lattice.rotation.x = -0.64 - 0.28 * (1 - stage.heroOut);
@@ -516,13 +516,13 @@ export function createForgeScene(canvas: HTMLCanvasElement) {
 
     if (liquid.visible) {
       liquidUniforms.uTime.value = t;
-      liquidUniforms.uPointer.value.lerp(ptrTarget, 1 - Math.exp(-dt * 6));
-      liquidUniforms.uPntStr.value += (ptrNear - liquidUniforms.uPntStr.value) * (1 - Math.exp(-dt * 4));
+      liquidUniforms.uPointer.value.lerp(ptrTarget, 1 - Math.exp(-dt * 3.2));
+      liquidUniforms.uPntStr.value += (ptrNear - liquidUniforms.uPntStr.value) * (1 - Math.exp(-dt * 2.4));
       liquidUniforms.uIntensity.value = stage.liquid;
       liquidUniforms.uDark.value = cur.dark;
       liquidUniforms.uSteps.value = tier === "A" ? 64 : 40;
       liquid.scale.setScalar(liquid.userData.size * (0.5 + stage.liquid * 0.5));
-      monogramMat.opacity = (0.9 - 0.35 * (1 - cur.dark)) * stage.liquid; // quieter on paper
+      monogramMat.opacity = (0.9 - 0.2 * (1 - cur.dark)) * stage.liquid; // firmer so the lattice does not read through it
       monogramMat.color.copy(cur.ink);
     }
 
