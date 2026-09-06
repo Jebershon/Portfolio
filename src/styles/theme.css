@@ -209,7 +209,7 @@ footer{padding:64px 0 46px; border-top:1px solid var(--line); position:relative}
 #work .ledger li::before{content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
   background:linear-gradient(90deg, color-mix(in srgb, var(--forge) 13%, transparent) 0%, color-mix(in srgb, var(--steel) 8%, transparent) 44%, transparent 80%);
   transform:scaleX(0); transform-origin:left; transition:transform .55s cubic-bezier(.2,.7,.1,1)}
-#work .ledger li::after{content:""; position:absolute; left:-1px; top:14%; width:2px; height:0; background:var(--forge); transition:height .55s cubic-bezier(.2,.7,.1,1)}
+#work .ledger li::after{content:""; position:absolute; left:-14px; top:14%; width:2px; height:0; background:var(--forge); transition:height .55s cubic-bezier(.2,.7,.1,1)}
 #work .ledger li:hover::before,#work .ledger li:focus-within::before{transform:scaleX(1)}
 #work .ledger li:hover::after,#work .ledger li:focus-within::after{height:72%}
 #work .ledger li:hover .name,#work .ledger li:focus-within .name{color:var(--forge); transform:translateX(8px)}
@@ -222,9 +222,9 @@ footer{padding:64px 0 46px; border-top:1px solid var(--line); position:relative}
 .ledger a.go::after{content:""; position:absolute; inset:0} /* the whole row is the link */
 .ledger .go .arrow{display:inline-block}
 /* the leading number swaps for a forge arrow */
-#tools .ledger .n::before{content:"\2192"; position:absolute; left:0; color:var(--forge); opacity:0; transform:translateX(-5px); transition:opacity .4s cubic-bezier(.2,.7,.1,1), transform .4s cubic-bezier(.2,.7,.1,1)}
+#tools .ledger .n::before{content:"\2192"; position:absolute; left:0; top:50%; font-size:17px; line-height:1; color:var(--forge); opacity:0; transform:translate(-5px,-50%); transition:opacity .4s cubic-bezier(.2,.7,.1,1), transform .4s cubic-bezier(.2,.7,.1,1)}
 #tools .ledger li:hover .n,#tools .ledger li:focus-within .n{color:transparent}
-#tools .ledger li:hover .n::before,#tools .ledger li:focus-within .n::before{opacity:1; transform:translateX(0)}
+#tools .ledger li:hover .n::before,#tools .ledger li:focus-within .n::before{opacity:1; transform:translate(0,-50%)}
 #tools .ledger li:hover .name,#tools .ledger li:focus-within .name{color:var(--forge); transform:translateX(12px)}
 /* the GitHub label rests faint, then glides in */
 #tools .ledger .go{opacity:.4; transform:translateX(-8px)}
