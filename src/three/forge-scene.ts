@@ -3,7 +3,6 @@ import * as THREE from "three";
 /**
  * The hero's background scene: three layers on one canvas, one render loop.
  *   aurora  — a full-screen noise field that carries the palette + a cursor glow
- *   lattice — a tilted grid of cells that ripples and warms under the pointer
  *   liquid  — a raymarched zero-gravity water blob that reaches toward the pointer
  *
  * Colours are read from CSS custom properties on <body>, so the theme stays the
@@ -111,72 +110,6 @@ export function createForgeScene(canvas: HTMLCanvasElement) {
   aurora.position.z = -22;
   scene.add(aurora);
 
-  // ── layer 2: lattice ──
-  const GRID = 40;
-  const GAP = 0.6;
-  const latticeCount = GRID * GRID;
-  const latticeMat = new THREE.MeshBasicMaterial({ transparent: true, opacity: 0.74 });
-  // No vertexColors: that expects a geometry colour attribute BoxGeometry lacks and
-  // would zero every instance to black. InstancedMesh applies setColorAt() on its own.
-  const lattice = new THREE.InstancedMesh(new THREE.BoxGeometry(0.17, 0.17, 0.17), latticeMat, latticeCount);
-  lattice.position.set(0, -3.4, -6);
-  lattice.rotation.x = -0.64;
-  scene.add(lattice);
-
-  const cells: { x: number; z: number }[] = [];
-  for (let i = 0; i < GRID; i++) {
-    for (let j = 0; j < GRID; j++) {
-      cells.push({ x: (i - GRID / 2 + 0.5) * GAP, z: (j - GRID / 2 + 0.5) * GAP });
-    }
-  }
-
-  const dummy = new THREE.Object3D();
-  const cellColor = new THREE.Color();
-  const pointer = { x: 0, z: 0, active: false };
-  let heat = 0;
-  let heatTarget = 0; // a gentle whole-field breath while a project row is hovered
-
-  function updateLattice(t: number, intensity: number, calm: number) {
-    heat += (heatTarget - heat) * 0.06;
-    for (let k = 0; k < latticeCount; k++) {
-      const c = cells[k];
-      // Rest state is a slow terrain of layered waves, not a bullseye ripple.
-      const terrain =
-        Math.sin(c.x * 0.55 + t * 0.4) * Math.cos(c.z * 0.5 - t * 0.3) * 0.28 +
-        Math.sin((c.x + c.z) * 0.32 + t * 0.55) * 0.18;
-
-      let ripple = 0;
-      let local = 0;
-      if (pointer.active) {
-        const dx = c.x - pointer.x;
-        const dz = c.z - pointer.z;
-        const d = Math.sqrt(dx * dx + dz * dz);
-        const falloff = Math.max(0, 1 - d / 4.6);
-        local = falloff * falloff;
-        ripple = local * Math.cos(d * 1.5 - t * 3.0) * 1.3;
-      }
-
-      const y = (terrain + ripple + heat * 0.12) * intensity;
-      dummy.position.set(c.x, y, c.z);
-      dummy.scale.set(1, 0.5 + Math.max(0, y) * 1.6 + local * 1.3 + heat * 0.3, 1);
-      dummy.updateMatrix();
-      lattice.setMatrixAt(k, dummy.matrix);
-
-      const lift = Math.min(1, Math.max(0, (y + 0.45) / 1.5));
-      // Warmth stays local to the cursor; hover only breathes a little colour into the whole field.
-      const warm = Math.min(1, lift * 0.3 + local * 1.1 + heat * 0.18);
-      cellColor.copy(cur.steel).lerp(cur.forge, warm);
-      const gain =
-        cur.dark > 0.5 ? 0.32 + lift * 0.6 + local * 0.9 + heat * 0.15 : 0.55 + lift * 0.28 + local * 0.35 + heat * 0.08;
-      cellColor.multiplyScalar(gain);
-      // On paper the cells stay pale; everywhere they calm down behind content.
-      cellColor.lerp(cur.ground, cur.dark > 0.5 ? 0.3 * calm : 0.42 + 0.3 * calm);
-      lattice.setColorAt(k, cellColor);
-    }
-    lattice.instanceMatrix.needsUpdate = true;
-    if (lattice.instanceColor) lattice.instanceColor.needsUpdate = true;
-  }
-
   // ── layer 3: monogram + liquid ──
   const monoCanvas = document.createElement("canvas");
   monoCanvas.width = 1024;
@@ -203,11 +136,11 @@ export function createForgeScene(canvas: HTMLCanvasElement) {
     color: cur.ink,
     opacity: 0.9,
     depthWrite: false,
-    depthTest: false, // the tilted lattice pokes in front of it; draw the monogram over it regardless
+    depthTest: false, // draw the monogram over the field regardless of depth
   });
   const monogram = new THREE.Mesh(new THREE.PlaneGeometry(9, 4.5), monogramMat);
   monogram.position.set(2.4, 0.8, -1.6);
-  monogram.renderOrder = 1; // above the lattice, below the liquid
+  monogram.renderOrder = 1; // over the aurora, below the liquid
   scene.add(monogram);
 
   const liquidUniforms = {
@@ -328,10 +261,6 @@ export function createForgeScene(canvas: HTMLCanvasElement) {
   const liquidPlane = new THREE.Plane(new THREE.Vector3(0, 0, 1), -2);
   const hit = new THREE.Vector3();
   const ndc = new THREE.Vector2();
-  const latNdc = new THREE.Vector2();
-  const latPlane = new THREE.Plane();
-  const latN = new THREE.Vector3();
-  const latHit = new THREE.Vector3();
   const ptrTarget = new THREE.Vector2();
   let ptrNear = 0; // 1 over the blob, 0 out toward the headline
   let aurLastMove = -100; // the aurora glow fades ~1s after the cursor stops
@@ -347,19 +276,16 @@ export function createForgeScene(canvas: HTMLCanvasElement) {
   }
 
   // Scroll sets a target per layer; the loop eases toward it, so layers cross-fade.
-  const stage = { aurora: 1, lattice: 1, liquid: 1, heroOut: 1 };
-  const stageTarget = { aurora: 1, lattice: 1, liquid: 1, heroOut: 1 };
+  const stage = { aurora: 1, liquid: 1, heroOut: 1 };
+  const stageTarget = { aurora: 1, liquid: 1, heroOut: 1 };
 
   function updateStaging() {
     const y = scrollY;
     const vh = innerHeight || 1;
     const heroOut = clamp01(1 - y / (vh * 0.85));
-    const inWork = overlap(document.getElementById("work"), y, vh);
-    const inPath = overlap(document.getElementById("path"), y, vh);
     const inContact = overlap(document.getElementById("contact"), y, vh);
     stageTarget.heroOut = heroOut;
     stageTarget.liquid = heroOut;
-    stageTarget.lattice = Math.max(heroOut, inWork, inPath * 0.45);
     stageTarget.aurora = Math.max(0.34, heroOut, inContact);
   }
 
@@ -368,8 +294,6 @@ export function createForgeScene(canvas: HTMLCanvasElement) {
     const ny = e.clientY / innerHeight;
     auroraUniforms.uMouse.value.set(nx, 1 - ny);
     aurLastMove = performance.now() / 1000;
-    latNdc.set(nx * 2 - 1, 1 - ny * 2);
-    pointer.active = true;
     // Where the pointer lands on the liquid's plane, and how near the blob it is.
     ndc.set(nx * 2 - 1, 1 - ny * 2);
     ray.setFromCamera(ndc, camera);
@@ -421,28 +345,6 @@ export function createForgeScene(canvas: HTMLCanvasElement) {
     updateStaging();
   };
 
-  // Project the cursor onto the lattice's real (tilted, scroll-settled) plane so the heat sits under it.
-  function projectPointerToLattice() {
-    lattice.updateMatrixWorld();
-    latN.set(0, 1, 0).transformDirection(lattice.matrixWorld);
-    latPlane.setFromNormalAndCoplanarPoint(latN, lattice.position);
-    ray.setFromCamera(latNdc, camera);
-    if (ray.ray.intersectPlane(latPlane, latHit)) {
-      lattice.worldToLocal(latHit);
-      pointer.x = latHit.x;
-      pointer.z = latHit.z;
-    }
-  }
-
-  // Project rows warm the whole field a little while hovered.
-  const rows = [...document.querySelectorAll<HTMLElement>(".ledger li, .feature")];
-  const onRowEnter = () => (heatTarget = 1);
-  const onRowLeave = () => (heatTarget = 0);
-  for (const row of rows) {
-    row.addEventListener("pointerenter", onRowEnter);
-    row.addEventListener("pointerleave", onRowLeave);
-  }
-
   addEventListener("pointermove", onPointerMove, { passive: true });
   addEventListener("pointerdown", onPointerDown);
   addEventListener("blur", clearPointer);
@@ -452,7 +354,7 @@ export function createForgeScene(canvas: HTMLCanvasElement) {
   resize();
   updateStaging();
 
-  // ── quality tiers: A full, B lighter lattice/liquid, C static (no 3D motion) ──
+  // ── quality tiers: A full, B lighter liquid, C static (no 3D motion) ──
   let tier = innerWidth < 760 ? "B" : "A";
   if (reduced) tier = "C";
   let slowFrames = 0;
@@ -493,7 +395,6 @@ export function createForgeScene(canvas: HTMLCanvasElement) {
 
     const ease = Math.min(1, dt * 3.2);
     stage.aurora += (stageTarget.aurora - stage.aurora) * ease;
-    stage.lattice += (stageTarget.lattice - stage.lattice) * ease;
     stage.liquid += (stageTarget.liquid - stage.liquid) * ease;
     stage.heroOut += (stageTarget.heroOut - stage.heroOut) * ease;
 
@@ -504,20 +405,9 @@ export function createForgeScene(canvas: HTMLCanvasElement) {
     auroraUniforms.uHover.value += (aurTarget - auroraUniforms.uHover.value) * (1 - Math.exp(-dt * 1.1));
     scene.background = cur.ground;
 
-    // Keep the lattice quiet so it never competes with the text (extra calm on paper).
-    const latThemeScale = 0.38 + 0.24 * cur.dark;
-    const latticeAlpha = (0.34 + 0.4 * stage.heroOut) * stage.lattice * latThemeScale;
-    latticeMat.opacity = latticeAlpha;
-    lattice.rotation.x = -0.64 - 0.28 * (1 - stage.heroOut);
-    lattice.position.y = -3.4 - 1.1 * (1 - stage.heroOut);
-
     aurora.visible = stage.aurora > 0.01;
-    lattice.visible = tier !== "C" && latticeAlpha > 0.01;
     liquid.visible = tier !== "C" && stage.liquid > 0.01;
     monogram.visible = liquid.visible;
-
-    if (lattice.visible && pointer.active) projectPointerToLattice();
-    if (lattice.visible) updateLattice(t, stage.lattice, 1 - stage.heroOut);
 
     if (liquid.visible) {
       liquidUniforms.uTime.value = t;
@@ -527,7 +417,7 @@ export function createForgeScene(canvas: HTMLCanvasElement) {
       liquidUniforms.uDark.value = cur.dark;
       liquidUniforms.uSteps.value = tier === "A" ? 64 : 40;
       liquid.scale.setScalar(liquid.userData.size * (0.5 + stage.liquid * 0.5));
-      monogramMat.opacity = (0.97 - 0.07 * (1 - cur.dark)) * stage.liquid; // opaque enough that the lattice does not read through the letters
+      monogramMat.opacity = (0.97 - 0.07 * (1 - cur.dark)) * stage.liquid; // keep the letters fairly opaque
       monogramMat.color.copy(cur.ink);
     }
 
@@ -551,10 +441,6 @@ export function createForgeScene(canvas: HTMLCanvasElement) {
     removeEventListener("pointerout", onPointerOut);
     removeEventListener("resize", onResize);
     removeEventListener("scroll", updateStaging);
-    for (const row of rows) {
-      row.removeEventListener("pointerenter", onRowEnter);
-      row.removeEventListener("pointerleave", onRowLeave);
-    }
     scene.traverse((obj) => {
       const mesh = obj as THREE.Mesh;
       mesh.geometry?.dispose();
