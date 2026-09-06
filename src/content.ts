@@ -30,13 +30,8 @@ export const hero = {
   specTop: [profile.headline, "Mendix · Full-Stack · Mobile", profile.location],
   // Presentation copy; `em` italicises the forge accent word.
   headline: [
-    { text: "I" },
-    { text: "build" },
-    { text: "enterprise", em: true },
-    { text: "apps" },
-    { text: "end" },
-    { text: "to" },
-    { text: "end." },
+    { text: "Full-stack", em: true },
+    { text: "developer." },
   ] as { text: string; em?: boolean }[],
   lede: profile.summary,
   stats: profile.stats,
@@ -82,7 +77,7 @@ export const stack = {
 // ── tools: secondary open-source work, each row linking to its GitHub repo ──
 export const tools = {
   index: "03",
-  title: "Tools & open source",
+  title: "Side projects",
   blurb: "Open-source projects I build on the side — Mendix tooling and CLIs, an MCP server, a bug-report extension, and a couple of experiments beyond client work.",
   items: projects.tools.map((t, i) => ({
     n: String(i + 1).padStart(2, "0"),
