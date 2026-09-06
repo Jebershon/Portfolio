@@ -112,10 +112,12 @@ h1 .w:nth-child(5){animation-delay:.41s} h1 .w:nth-child(6){animation-delay:.5s}
 @keyframes drip{to{top:100%}}
 
 /* ---------- sections ---------- */
-section{padding:140px 0; position:relative}
-/* Behind content the field is calmed by a soft veil of the ground colour: no cards, no hard edges. */
+section{padding:118px 0; position:relative}
+/* Behind content the field is calmed by a soft veil of the ground colour. The veil holds
+   almost to the section edges (short 4% fades) so neighbouring sections join seamlessly
+   instead of exposing a bright band of the field between them. */
 section:not(.hero):not(.close)::before{content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
-  background:linear-gradient(180deg, transparent 0%, color-mix(in srgb, var(--ground) 74%, transparent) 14%, color-mix(in srgb, var(--ground) 74%, transparent) 86%, transparent 100%)}
+  background:linear-gradient(180deg, transparent 0%, color-mix(in srgb, var(--ground) 74%, transparent) 4%, color-mix(in srgb, var(--ground) 74%, transparent) 96%, transparent 100%)}
 section > .wrap{position:relative; z-index:1}
 .sec-head{display:grid; grid-template-columns:auto 1fr; gap:24px 40px; align-items:end; margin-bottom:56px; padding-bottom:22px; border-bottom:1px solid var(--line)}
 .sec-idx{
