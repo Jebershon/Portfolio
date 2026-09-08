@@ -4,19 +4,19 @@
     {
       "kind": "deploy",
       "company": "RapidData",
-      "title": "Software Engineer",
+      "title": "Senior Software Engineer",
       "location": "Chennai, India",
-      "start": "2025-06",
+      "start": "2025-07",
       "end": null,
-      "summary": "Build enterprise web and mobile apps on Mendix for government and corporate clients across the UAE, Saudi Arabia and India, plus the internal tooling that speeds the team up."
+      "summary": "Lead delivery of enterprise Mendix apps for government and corporate clients across the UAE, Saudi Arabia and India — owning the core modules and workflow logic, guiding the team on Mendix standards, and building the internal tooling that speeds everyone up."
     },
     {
       "kind": "build",
       "company": "RapidData",
-      "title": "Trainee Software Engineer",
+      "title": "Software Engineer",
       "location": "Chennai, India",
       "start": "2024-07",
-      "end": "2025-06",
+      "end": "2025-07",
       "summary": "Built full-stack features across Mendix, React and Java — reusable microflows and nanoflows, and high-performance Java actions."
     },
     {

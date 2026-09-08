@@ -101,7 +101,7 @@ export const path = {
       detail: r.summary,
     })),
     ...education.degrees.map((d) => ({
-      when: `${d.start.slice(0, 4)} → ${d.end.slice(0, 4)}`,
+      when: d.start.slice(0, 4),
       kind: d.kind,
       title: `${d.degree} @ ${d.school}`,
       detail: "Final-year IoT project (ECO-Bot) peer-reviewed and published in IEEE Xplore.",
