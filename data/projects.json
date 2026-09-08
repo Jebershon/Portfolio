@@ -23,7 +23,7 @@
     {
       "slug": "dof-cho",
       "name": "Governance Platform",
-      "client": "Dubai Dept. of Finance (CHO)",
+      "client": "DOF",
       "oneLiner": "An internal enterprise application supporting legal and governance workflows for a Dubai government entity.",
       "stack": ["Mendix", "Java", "REST APIs"],
       "type": "Governance",
@@ -32,7 +32,7 @@
     {
       "slug": "kirloskar",
       "name": "Enterprise Mobile App",
-      "client": "Kirloskar (KPMG)",
+      "client": "KPMG",
       "oneLiner": "An enterprise mobile application taken end to end, from the Mendix native build through to store deployment.",
       "stack": ["Mendix", "Native mobile"],
       "type": "Enterprise mobile",
@@ -41,7 +41,7 @@
     {
       "slug": "apigee",
       "name": "API Integration Layer",
-      "client": "GCP · Apigee",
+      "client": "Bahri",
       "oneLiner": "Designed, secured and deployed API proxies and Application Integration flows on Google Cloud, connecting Jira, Oracle Fusion and Microsoft Graph.",
       "stack": ["Apigee", "GCP App Integration", "OAuth/JWT"],
       "type": "Cloud integration",

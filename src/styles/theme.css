@@ -156,7 +156,12 @@ h2{font-family:var(--serif); font-variation-settings:"opsz" 96; font-weight:600;
   display:grid; grid-template-columns:52px 1fr; gap:6px 20px; align-items:baseline;
   padding:30px 0; border-bottom:1px solid var(--line-soft); position:relative;
 }
-@media(min-width:900px){.ledger li{grid-template-columns:52px 1.1fr 1.4fr auto; gap:0 32px}}
+/* One shared set of column tracks across all rows (subgrid) so the name/desc/tag
+   columns line up even when a tag is much shorter than its neighbours. */
+@media(min-width:900px){
+  .ledger{display:grid; grid-template-columns:52px 1.1fr 1.4fr auto; column-gap:32px}
+  .ledger li{grid-column:1/-1; grid-template-columns:subgrid; gap:0 32px}
+}
 .ledger .n{font-family:var(--mono); font-size:11px; color:var(--muted); letter-spacing:.06em; position:relative; transition:color .4s cubic-bezier(.2,.7,.1,1)}
 .ledger .name{font-family:var(--serif); font-variation-settings:"opsz" 72; font-weight:600; font-size:clamp(22px,2.4vw,30px); line-height:1.05; letter-spacing:-.02em; color:var(--ink); justify-self:start; transition:color .45s cubic-bezier(.2,.7,.1,1), transform .45s cubic-bezier(.2,.7,.1,1)}
 .ledger .desc{font-size:15px; color:var(--ink-2); max-width:46ch; grid-column:2; transition:color .45s cubic-bezier(.2,.7,.1,1)}
